@@ -1,0 +1,24 @@
+en:
+  shared:
+    admin:
+      image_picker:
+        image: image
+  plugins:
+    memberships:
+      title: Memberships
+  admin:
+    memberships:
+      index:
+        title: Memberships
+        create_new: Add New Membership
+        reorder: Reorder Memberships
+        reorder_done: Done Reordering Memberships
+        sorry_no_results: Sorry! There are no results found.
+        no_items_yet: There are no Memberships yet. Click "Add New Membership" to add your first membership.
+      membership:
+        view_live_html: View this membership live <br/><em>(opens in a new window)</em>
+        edit: Edit this membership
+        delete: Remove this membership forever
+  memberships:
+    show:
+      other: Other Memberships

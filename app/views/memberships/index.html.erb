@@ -1,0 +1,11 @@
+<% content_for :body_content_left do %>
+  <ul id="memberships">
+    <% @memberships.each do |membership| %>
+      <li>
+        <%= link_to membership.title, membership_url(membership) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render :partial => "/shared/content_page" %>

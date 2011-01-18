@@ -1,0 +1,20 @@
+nl:
+  plugins:
+    memberships:
+      title: Memberships
+  admin:
+    memberships:
+      index:
+        title: Memberships
+        create_new: Maak een nieuwe Membership
+        reorder: Wijzig de volgorde van de Memberships
+        reorder_done: Klaar met het wijzingen van de volgorde van de Memberships
+        sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+        no_items_yet: Er zijn nog geen Memberships. Druk op 'Maak een nieuwe Membership' om de eerste aan te maken.
+      membership:
+        view_live_html: Bekijk deze membership op de website <br/><em>(opent een nieuw venster)</em>
+        edit: Bewerk deze membership
+        delete: Verwijder deze membership voor eeuwig
+  memberships:
+    show:
+      other: Andere Memberships

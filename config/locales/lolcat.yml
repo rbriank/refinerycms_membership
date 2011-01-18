@@ -1,0 +1,24 @@
+lolcat:
+  shared:
+    admin:
+      image_picker:
+        image: IMAGE
+  plugins:
+    memberships:
+      title: Memberships
+  admin:
+    memberships:
+      index:
+        title: Memberships
+        create_new: CREATE NEW Membership
+        reorder: REORDR Memberships
+        reorder_done: DUN REORDERIN Memberships
+        sorry_no_results: SRY! THAR R NO RESULTS FINDZ.
+        no_items_yet: THAR R NO Memberships YET. CLICK "CREATE NEW Membership" 2 ADD UR FURST membership.
+      membership:
+        view_live_html: VIEW DIS membership LIV <BR/><EM>(OPENS IN NEW WINDOW)</EM>
+        edit: EDIT DIS membership
+        delete: REMOOV DIS membership FOREVR
+  memberships:
+    show:
+      other: OTHR Memberships

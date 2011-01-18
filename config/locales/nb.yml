@@ -1,0 +1,20 @@
+nb:
+  plugins:
+    memberships:
+      title: Memberships
+  admin:
+    memberships:
+      index:
+        title: Memberships
+        create_new: Lag en ny Membership
+        reorder: Endre rekkefølgen på Memberships
+        reorder_done: Ferdig å endre rekkefølgen Memberships
+        sorry_no_results: Beklager! Vi fant ikke noen resultater.
+        no_items_yet: Det er ingen Memberships enda. Klikk på "Lag en ny Membership" for å legge til din første membership.
+      membership:
+        view_live_html: Vis hvordan denne membership ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+        edit: Rediger denne membership
+        delete: Fjern denne membership permanent
+  memberships:
+    show:
+      other: Andre Memberships

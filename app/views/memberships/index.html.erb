@@ -1,11 +1,14 @@
 <% content_for :body_content_left do %>
-  <ul id="memberships">
-    <% @memberships.each do |membership| %>
-      <li>
-        <%= link_to membership.title, membership_url(membership) %>
-      </li>
+  <% Page.all.each do |page| %>
+    <% current_role_ids = page.role_ids %>
+    <% form_for page do |f| %>
+      <label><%= page.title %></label>
+      <% Role.all.each do |role| %>
+        <label><%= role.title %>
+          <%= check_box_tag "page[role_ids][]", role.id, current_role_ids.include?(role.id) %>
+        </label>
+      <% end %>
     <% end %>
-  </ul>
+  <% end %>
 <% end %>
-
 <%= render :partial => "/shared/content_page" %>

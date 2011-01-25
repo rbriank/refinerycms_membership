@@ -1,6 +1,4 @@
 require 'refinery'
-#require 'refinery/pages'
-#require 'refinery/pages_controller'
 
 module Refinery
   module Memberships
@@ -13,8 +11,9 @@ module Refinery
         Refinery::Plugin.register do |plugin|
           plugin.name = "memberships"
           plugin.activity = {:class => Membership}
+          plugin.menu_match = /(refinery|admin)\/(memberships)?(page_roles)?(user_roles)?$/
         end
-      end
+      end # config.after_initialize
 
       config.to_prepare do
         Role.class_eval{ has_and_belongs_to_many :pages }
@@ -23,7 +22,23 @@ module Refinery
           has_and_belongs_to_many :roles
           
           def user_allowed?(user)
-            roles.blank? ? true : user.nil? ? false : roles.blank? || (roles & user.roles).any?
+            # if a page has no roles assigned, let everyone see it
+            if roles.blank?
+              true
+
+            else
+              # if a page has roles, but the user doesn't or is nil
+              if user.nil? || user.roles.blank?
+                false
+
+              # otherwise, check user vs. page roles
+              else
+                (roles & user.roles).any?
+                
+              end
+            end
+
+            # roles.blank? ? true : user.nil? ? false : roles.blank? || (roles & user.roles).any?
           end
         end
 
@@ -45,9 +60,9 @@ module Refinery
             end
 
           end
-        end
+        end # PagesController.class_eval
+      end # config.to_prepare
 
-      end
-    end
-  end
-end
+    end # Engine < Rails::Engine
+  end # Memberships
+end # Refinery

@@ -1,56 +1,15 @@
-<div id='records'>
-  <% if searching? %>
-    <h2><%= t('shared.admin.search.results_for', :query => params[:search]) %></h2>
-  <% end %>
-  <% if @memberships.any? %>
-    <%= will_paginate @memberships %>
-
-    <%= render :partial => "sortable_list" %>
-
-    <%= will_paginate @memberships %>
-  <% else %>
-    <p>
-      <% unless searching? %>
-        <strong>
-          <%= t('.no_items_yet') %>
-        </strong>
-      <% else %>
-        <%= t('shared.admin.search.no_results') %>
-      <% end %>
-    </p>
-  <% end %>
-</div>
-<div id='actions'>
+<%
+  content_for :javascripts do
+    javascript_include_tag 'membership.jquery.js'
+  end
+  
+  content_for :stylesheets do
+    stylesheet_link_tag 'membership'
+  end
+%>
+<div id="memberships">
   <ul>
-    <% if Admin::MembershipsController.searchable? %>
-      <li>
-        <%= render :partial => "/shared/admin/search",
-                    :locals => {
-                      :url => admin_memberships_url
-                    } %>
-      </li>
-    <% end %>
-    <li>
-      <%= link_to t('.create_new'), new_admin_membership_url,
-                   :class => "add_icon" %>
-    </li>
-  <% if !searching? and Membership.count > 1 and Admin::MembershipsController.sortable? %>
-    <li>
-      <%= link_to t('.reorder', :what => "Memberships"),
-                   admin_memberships_url,
-                   :id => "reorder_action",
-                   :class => "reorder_icon" %>
-
-      <%= link_to t('.reorder_done', :what => "Memberships"),
-                   admin_memberships_url,
-                   :id => "reorder_action_done",
-                   :style => "display: none;",
-                   :class => "reorder_icon" %>
-    </li>
-  <% end %>
+    <li><a href="/refinery/page_roles"><span>Pages</span></a></li>
+    <li><a href="/refinery/user_roles"><span>Users</span></a></li>
   </ul>
 </div>
-<%= render :partial => "/shared/admin/make_sortable",
-            :locals => {
-              :tree => false
-            } if !searching? and Membership.count > 1 %>

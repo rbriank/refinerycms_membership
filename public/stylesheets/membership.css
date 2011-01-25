@@ -1,0 +1,17 @@
+/* 
+    Document   : membership
+    Created on : Jan 23, 2011, 2:43:18 PM
+    Author     : briankierstead
+*/
+
+#memberships table tr td{
+  padding: 8px;
+}
+#memberships table tr.even td{
+	background-color:#CCC;
+}
+
+#memberships table tr.odd td{
+	background-color:#EEE;
+}
+

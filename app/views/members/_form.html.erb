@@ -1,0 +1,36 @@
+<%= form_for @member, :as => :member, :url => url do |f| %>
+  <%= render :partial => "error_messages",
+    :locals => {
+    :object => @member,
+    :include_object_name => true
+  } %>
+
+  <%= render :partial => "form_account", :locals => {:f => f} %>
+  <%= render :partial => "form_profile", :locals => {:f => f} %>
+  <%= render :partial => "form_organization", :locals => {:f => f} %>
+
+  <% if @is_admin && !@member.is_member? %>
+    <fieldset>
+      <legend>Admin</legend>
+      <ol>
+        <li>
+          <label for="admin_action_approve">Approve application</label>
+          <%= radio_button 'admin', 'action', 'approve' %>
+        </li>
+        <li>
+          <label for="admin_action_reject">Reject application</label>
+          <%= radio_button 'admin', 'action', 'reject' %>
+        </li>
+      </ol>
+    </fieldset>
+  <% end %>
+  <fieldset class="submit">
+    <%= render :partial => "form_actions",
+      :locals => {
+      :f => f,
+      :continue_editing => false,
+      :hide_delete => true
+    }%>
+
+  </fieldset>
+<% end %>

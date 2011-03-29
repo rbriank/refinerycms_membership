@@ -1,1 +1,0 @@
-require File.expand_path('../refinerycms-memberships', __FILE__)

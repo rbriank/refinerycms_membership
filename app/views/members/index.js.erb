@@ -1,0 +1,19 @@
+<%
+objects = []
+@objects.each do |member|
+  if member
+    objects <<
+      "[\"#{link_to("#{member.first_name} #{member.last_name}", member).gsub(/"/, "'")}\",
+      \"#{member.organization || "--"}\",
+      \"#{member.city || "--"}\",
+      \"#{member.province || "--"}\",
+      \"#{member.phone || "--"}\",
+      \"#{mail_to(member.email).gsub(/"/, "'")}\"]"
+    
+  end unless !(member.role_ids & [REFINERY_ROLE_ID, SUPERUSER_ROLE_ID]).empty?
+end
+%>
+{"sEcho": <%= params[:sEcho] || -1 %>,
+"iTotalRecords": <%= @total_objects %>,
+"iTotalDisplayRecords": <%= @total_objects %>,
+"aaData":[<%= objects.join(",").html_safe %>]}

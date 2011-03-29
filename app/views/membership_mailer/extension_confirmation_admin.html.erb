@@ -1,0 +1,16 @@
+<h1>Member Extension</h1>
+<ul>
+  <li>Approve the extension, giving them another year!</li>
+</ul>
+<h2>Member Details</h2>
+<p>
+  <% @member.attributes.each do |k, v|
+    unless v.blank? || k =~ /password|username|updated/%>
+      <b><%= "#{k.humanize}:"%></b><%=v%><br/>
+  <%end
+  end %>
+</p>
+
+<p>
+Edit Profile: <%= edit_member_url(:id => @member.id) %>
+</p>

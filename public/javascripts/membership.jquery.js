@@ -1,13 +1,10 @@
 if(!jQuery){
   alert("jQuery is missing.  Your changes won't be saved!");
 } else {
-
-  // wire up the tabs
-  $('#memberships').tabs();
-
+  
   // wire up check boxes
-  $('#memberships :checkbox').live('change', function(){
-    var controller = $(this).closest('table')[0].id;
+  $('#page-roles-table :checkbox').live('change', function(){
+    var controller = 'page_roles' //$(this).closest('table')[0].id;
     var values = this.value.split('_');
     var action = this.checked ? '/create_multiple' : '/destroy_multiple'
     

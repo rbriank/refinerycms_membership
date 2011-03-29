@@ -1,0 +1,18 @@
+<fieldset>
+  <legend><%=t('members.shared.account')%></legend>
+  <ol>
+    <li>
+      <%= f.label :email %>
+      <%= f.text_field :email %>&nbsp;
+    </li>
+    <%= "<li><span class='preview'>#{t('admin.users.form.blank_password_keeps_current')}</span></li>".html_safe if @member.persisted? %>
+    <li>
+      <%= f.label :password %>
+      <%= f.password_field :password, :autocomplete => 'off' %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :autocomplete => 'off' %>&nbsp;
+    </li>
+  </ol>
+</fieldset>

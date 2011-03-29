@@ -1,0 +1,19 @@
+<h1>Member Canceled</h1>
+
+<p>
+  This Member was canceled by <%= @admin.username %>
+</p>
+
+<p>
+  Canceled Member's Profile: <%= edit_member_url(:id => @member.id) %>
+</p>
+
+<h2>Member Details</h2>
+<p>
+  <% @member.attributes.each do |k, v|
+    unless v.blank? || k =~ /password|username|updated/%>
+      <b><%= "#{k.humanize}:"%></b><%=v%><br/>
+  <%end
+  end %>
+</p>
+

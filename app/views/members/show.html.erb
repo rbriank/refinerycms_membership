@@ -1,0 +1,16 @@
+<div id="left_col">
+  <%= render :partial => "/shared/menu" -%>
+</div>
+<div id="right_col">
+  <%=raw @page[:right_body] if @page %>
+</div>
+<div id="page_content">
+  <%=raw @page[:middle_body] if @page %>
+  <div id="member">
+    <%= form_for @member, :as => :member do |f| %>
+        <%= render :partial => "static_account", :locals => {:f => f} %>
+        <%= render :partial => "static_profile", :locals => {:f => f} %>
+        <%= render :partial => "static_organization", :locals => {:f => f} %>    
+    <% end %>
+  </div>
+</div>

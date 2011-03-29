@@ -6,5 +6,5 @@ Gem::Specification.new do |s|
   s.date              = '2011-01-14'
   s.summary           = 'Memberships engine for Refinery CMS'
   s.require_paths     = %w(lib)
-  s.files             = Dir['**/*'] - ["refinerycms-memberships.gemspec"]
+  s.files             = Dir['lib/**/*', 'config/**/*', 'app/**/*']
 end

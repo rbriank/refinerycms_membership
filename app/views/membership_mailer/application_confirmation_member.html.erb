@@ -1,0 +1,12 @@
+<h1>Hi <%= @member.first_name %></h1>
+
+<p>
+Thank you for registering!
+</p>
+
+<p>
+Once you've paid your membership fee and been approved by EDAC,
+you'll be able to log in and edit your profile.<br/>
+<br/>
+Edit Profile: <%= edit_member_url(:id => @member.id) %>
+</p>

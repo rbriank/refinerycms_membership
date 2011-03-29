@@ -1,0 +1,18 @@
+<div id="left_col">
+  <%= render :partial => "/shared/menu" -%>
+</div>
+<div id="right_col">
+  <%=raw @page[:right_body] if @page %>
+</div>
+<div id="page_content">
+  <%=raw @page[:middle_body] if @page %>
+  <div id="edit-member-form">
+    <%= render :partial => 'form',
+      :locals => {
+      :url => {
+        :action=>"update",
+        :controller=>"members",
+        :id => @member.id
+      }}%>
+  </div>
+</div>

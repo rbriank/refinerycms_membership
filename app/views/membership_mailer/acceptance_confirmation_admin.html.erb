@@ -1,0 +1,19 @@
+<h1>New Member Approved</h1>
+
+<p>
+  This Member was approved by <%= @admin.username %>
+</p>
+
+<p>
+  New Member's Profile: <%= edit_member_url(:id => @member.id) %>
+</p>
+
+<h2>Member Details</h2>
+<p>
+  <% @member.attributes.each do |k, v|
+    unless v.blank? || k =~ /password|username|updated/%>
+      <b><%= "#{k.humanize}:"%></b><%=v%><br/>
+  <%end
+  end %>
+</p>
+

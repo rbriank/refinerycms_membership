@@ -1,0 +1,29 @@
+<fieldset>
+  <legend><%=t('members.shared.organization')%></legend>
+  <ol>
+    <li>
+      <%= f.label :organization %>
+      <%= f.text_field :organization %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :street_address %>
+      <%= f.text_field :street_address %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :city %>
+      <%= f.text_field :city %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :province %>
+      <%= f.select :province, options_for_select(Provinces::CODES) %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :postal_code %>
+      <%= f.text_field :postal_code %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :website %>
+      <%= f.text_field :website %>&nbsp;
+    </li>
+  </ol>
+</fieldset>

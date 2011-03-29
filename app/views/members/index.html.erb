@@ -1,0 +1,40 @@
+<%content_for :stylesheets do
+  stylesheet_link_tag ['membership', 'demo_table', 'demo_page']
+end%>
+<div id="left_col">
+  <%= render :partial => "/shared/menu" -%>
+</div>
+
+<div id="page_content_2">
+  <%=raw @page[:middle_body] if @page %>
+  <div id="membership-wrapper" style="display:none">
+    <table id="members" style="display: inline" class="datatable">
+      <thead>
+        <tr>
+          <th width="150">Name</th>
+          <th width="150">Organization</th>
+          <th width="75">City</th>
+          <th>Prov</th>
+          <th>Telephone</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render :partial => "member", :collection => @members if @members %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%content_for :javascripts do
+  javascript_include_tag ['jquery.dataTables.min.js']
+end%>
+
+<%content_for :javascripts do%>
+  <% columns = [{}, {}, {}, {}, {}, {}] %>
+  <%= datatable(columns, :per_page=> 25, :ajax_source => members_path, :auto_width => false ).html_safe %>
+  <script type="text/javascript">
+    $(function() {
+      $('#membership-wrapper').show();
+    });
+  </script>
+<%end%>

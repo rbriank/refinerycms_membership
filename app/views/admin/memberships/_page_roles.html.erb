@@ -1,0 +1,20 @@
+<div id="content" class="clearfix"></div>
+<table id="page-roles-table" cellpadding="5" cellspacing="5">
+  <thead>
+    <tr><th>Page</th></tr>
+    <tr align="center"><th>Visible to<br/>Members Only</th></tr>
+  </thead>
+  <tbody>
+    <% pages.each do |page|%>
+      <tr class="<%= cycle("even", "odd") %>">
+        <td><%= page.title %></td>
+        <% roles.each do |role| %>
+          <td align="center">
+              <%= check_box_tag "page[role_ids][]", "page_#{page.id}_role_#{role.id}",
+                page.role_ids.include?(role.id) %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,30 @@
+<fieldset>
+  <legend><%=t('members.shared.profile')%></legend>
+  <ol>
+    <li>
+      <%= f.label :first_name %>
+      <%= @member.first_name %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :last_name %>
+      <%= @member.last_name %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :title %>
+      <%= @member.title %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :phone %>
+      <%= @member.phone %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :fax %>
+      <%= @member.fax %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :membership_level %>
+      <%= @member.membership_level %>&nbsp;
+    </li>
+    
+  </ol>
+</fieldset>

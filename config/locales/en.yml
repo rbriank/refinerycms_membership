@@ -22,3 +22,28 @@ en:
   memberships:
     show:
       other: Other Memberships
+  members:
+    shared:
+      account: Account
+      profile: Profile
+      organization: Organization
+    error_messages:
+      problems_in_following_fields: There were problems with the following fields
+    form_actions:
+      save: Save
+      cancel: Cancel
+    form:
+      blank_password_keeps_current: Leaving password blank keeps the current password
+    new:
+      title: Membership Application Form
+      instructions: Please complete information. You will be notified
+        of your acceptance upon approval.
+      submit_application: Submit Application
+    shared:
+      account: Account
+      profile: Profile
+      organization: Organization
+  activerecord:
+    attributes:
+     user:
+      membership_level: Membership level

@@ -2,22 +2,23 @@
   stylesheet_link_tag ['membership', 'demo_table', 'demo_page']
 end%>
 <div id="membership-wrapper" style="display:none">
-  <div id="tabs" class="clearfix">
-    <ul>
+  <div id="tabs">
+    <ul class="clearfix">
       <li><a href="#user_roles"><span>Members</span></a></li>
       <li><a href="#page_roles"><span>Pages</span></a></li>
     </ul>
-  </div>
-  <div id="user_roles"><%= render :partial => 'user_roles',
+
+    <div id="user_roles"><%= render :partial => 'user_roles',
         :locals => {:members => @members} %></div>
-  <div id="page_roles">
-    <%=  render :partial => 'page_roles',
-            :layout => false,
-            :locals => {
-              :pages => @pages,
-              :roles => @roles
-            }
+    <div id="page_roles">
+      <%=  render :partial => 'page_roles',
+        :layout => false,
+        :locals => {
+        :pages => @pages,
+        :roles => @roles
+      }
     %>
+    </div>
   </div>
 </div>
 

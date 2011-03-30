@@ -73,7 +73,7 @@ module Refinery
                 redirect_to first_live_child.url
               end
             else
-              redirect_to new_user_session_path
+              redirect_to login_members_path(:redirect => request.request_uri)
             end
           end
         end # PagesController.class_eval

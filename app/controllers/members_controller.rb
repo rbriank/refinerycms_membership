@@ -97,6 +97,9 @@ class MembersController < ApplicationController
     end
   end
 
+	def login
+	end
+
   private
 
   def current_objects(params={})

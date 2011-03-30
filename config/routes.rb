@@ -15,5 +15,9 @@ Refinery::Application.routes.draw do
     end
   end
 
-  resources :members, :except => [:destroy] 
+  resources :members, :except => [:destroy] do
+		collection do
+			get :login
+		end
+	end	
 end

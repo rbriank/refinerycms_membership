@@ -51,7 +51,7 @@ module Refinery
 
               # otherwise, check user vs. page roles
               else
-                (roles & user.roles).any?
+                (roles & user.roles).any? || user.has_role?('Refinery') || user.has_role?('Superuser')
 
               end
             end

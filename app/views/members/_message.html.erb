@@ -1,0 +1,12 @@
+<% content_for :javascripts do %>
+<script>
+$(document).ready(function(){
+  $('#flash').hide().css({visibility:''}).fadeIn();
+  $('#flash_close').click(function(ev){
+    ev.preventDefault();
+    $('#flash').fadeOut();  
+  });
+});
+</script>
+<% end %>
+<%= render :partial => '/shared/message' %>

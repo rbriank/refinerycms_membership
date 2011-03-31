@@ -1,0 +1,7 @@
+<% content_for :body_content_left do %>
+  <%=raw @page['body_above'.to_sym] if @page %>
+  <%= render :partial => 'login_form' %>
+  <%=raw @page['body_below'.to_sym]  if @page %>
+<% end %>
+
+<%= render :partial => "/shared/content_page" %>

@@ -35,6 +35,28 @@ module Refinery
         Role.class_eval do
           has_and_belongs_to_many :pages
         end
+        
+        ApplicationController.class_eval do
+          protected
+          def after_sign_in_path_for(resource_or_scope)
+            
+            if resource_or_scope.class.superclass.name == 'User' || 
+              resource_or_scope.class.name == 'User' ||
+              resource_or_scope.to_s == 'user'
+              if params[:redirect].present?
+                params[:redirect]
+              else
+                if !resource_or_scope.is_a?(Symbol) && (resource_or_scope.has_role?('Superuser')||resource_or_scope.has_role?('Refinery'))
+                  super
+                else
+                  '/'
+                end
+              end
+            else
+              super
+            end
+          end
+        end
 
         Page.class_eval do
           has_and_belongs_to_many :roles

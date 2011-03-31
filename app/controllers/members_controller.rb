@@ -3,7 +3,9 @@ class MembersController < ApplicationController
   crudify :member
   
   # Protect these actions behind member login - do we need to check out not signing up when signed in?
-  before_filter :redirect?, :except => [:new, :create]
+  before_filter :redirect?, :except => [:new, :create, :login, :index]
+
+  before_filter :find_page
 
   # GET /member/:id
   def show
@@ -85,16 +87,7 @@ class MembersController < ApplicationController
   end
 
   def index
-    respond_to do |format|
-      format.html{
-        @page = Page.find_by_link_url('/members')
-      }
-      format.js{
-        @objects = current_objects(params)
-        @total_objects = total_objects(params)
-        render :layout => false
-      }
-    end
+    redirect_to login_members_path
   end
 
 	def login
@@ -176,5 +169,11 @@ protected
 
   def is_admin?
     !(current_user.role_ids & [REFINERY_ROLE_ID, SUPERUSER_ROLE_ID]).empty?
+  end
+  
+  def find_page
+    uri = request.request_uri
+    uri.gsub!(/\?.*/, '')
+    @page = Page.find_by_link_url(uri, :include => [:parts, :slugs])
   end
 end

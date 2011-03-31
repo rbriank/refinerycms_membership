@@ -80,8 +80,10 @@ protected
   end
 
   def find_page
-    uri = request.request_uri
+    uri = request.fullpath
     uri.gsub!(/\?.*/, '')
+    # devise login failure...
+    uri = '/members/login' if uri == '/registrations/login'
     @page = Page.find_by_link_url(uri, :include => [:parts, :slugs])
   end
 end

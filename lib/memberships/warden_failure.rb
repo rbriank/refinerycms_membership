@@ -1,21 +1,10 @@
 module Refinery
   module Memberships
     class WardenFailure < Devise::FailureApp
-      def redirect_url
-        params[:member_login].present? ? 
-          login_members_path(:redirect => params[:redirect]) :
-          super
-      end
-
-      # You need to override respond to eliminate recall
-      def respond
-        if http_auth?
-          http_auth
-        elsif warden_options[:recall] && params[:member_login].blank?
-          recall
-        else
-          redirect
-        end
+      def recall_app(app)
+        controller, action = app.split("#")
+        return "MembersController".constantize.action('login') unless params[:member_login].blank?
+        return "#{controller.camelize}Controller".constantize.action(action) if params[:member_login].blank?
       end
     end
   end

@@ -2,22 +2,25 @@
   stylesheet_link_tag ['membership', 'demo_table', 'demo_page']
 end%>
 <div id="membership-wrapper" style="display:none">
-  <div id="tabs">
-    <ul class="clearfix">
-      <li><a href="#user_roles"><span>Members</span></a></li>
-      <li><a href="#page_roles"><span>Pages</span></a></li>
+  <div id="page-tabs" class="clearfix ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul id="page_parts" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+      <li><a href="#user_roles"><span><%= t('.members') %></span></a></li>
+      <li><a href="#page_roles"><span><%= t('.pages') %></span></a></li>
     </ul>
-
-    <div id="user_roles"><%= render :partial => 'user_roles',
-        :locals => {:members => @members} %></div>
-    <div id="page_roles">
-      <%=  render :partial => 'page_roles',
+    
+    <div id="page_part_editors">
+      <div id="user_roles" class="page_part ui-tabs-panel ui-widget-content ui-corner-bottom wym_box wym_skin_refinery">
+        <%= render :partial => 'user_roles', :locals => {:members => @members} %>
+      </div>
+      <div id="page_roles" class="page_part ui-tabs-panel ui-widget-content ui-corner-bottom wym_box wym_skin_refinery">
+        <%=  render :partial => 'page_roles',
         :layout => false,
         :locals => {
-        :pages => @pages,
-        :roles => @roles
-      }
-    %>
+          :pages => @pages,
+          :roles => @roles
+        }
+        %>
+      </div>
     </div>
   </div>
 </div>
@@ -29,7 +32,8 @@ end%>
 <%content_for :javascripts do%>
   <script type="text/javascript">
     $(function() {
-      $("#tabs").tabs();
+      $("#page-tabs").tabs();
+      $(".wym_box").css({opacity: 1});
     });
   </script>
   <% columns = [{}, {}, {}, {}, {}, {:sortable => false}, {:sortable => false}, {:sortable => false}] %>

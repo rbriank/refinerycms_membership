@@ -1,8 +1,7 @@
 <div id="content" class="clearfix"></div>
 <table id="page-roles-table" cellpadding="5" cellspacing="5">
   <thead>
-    <tr><th>Page</th></tr>
-    <tr align="center"><th>Visible to<br/>Members Only</th></tr>
+  <tr><th><Page><%= t('.page')%></th><th><%= t('.members_only')%></th></tr>
   </thead>
   <tbody>
     <% pages.each do |page|%>

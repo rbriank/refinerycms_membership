@@ -9,8 +9,9 @@ objects = []
       "\"#{link_to('Approve', admin_user_role_path(:id => member.id, :switch=>'approve'), :method => :put, :remote => :true).gsub(/"/, "'")}\",
       \"#{link_to('Reject', admin_user_role_path(:id => member.id, :switch=>'reject'), :method => :put, :remote => :true).gsub(/"/, "'")}\""
     end
+      #, edit_member_path(:id => member.id)
     objects <<
-      "[\"#{link_to("#{member.first_name} #{member.last_name}", edit_member_path(:id => member.id)).gsub(/"/, "'")}\",
+      "[\"#{link_to("#{member.first_name} #{member.last_name}", '#').gsub(/"/, "'")}\",
     \"#{member.organization || "--"}\",
     \"#{mail_to(member.email).gsub(/"/, "'")}\",
     \"#{member.created_at.strftime('%d/%m/%Y')}\",

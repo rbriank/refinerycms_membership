@@ -100,6 +100,14 @@ module Refinery
           end
         end # PagesController.class_eval
         
+        require 'memberships/warden_failure'
+        
+        ::Devise.setup do |config|
+          config.warden do |manager|
+            manager.failure_app = Refinery::Memberships::WardenFailure
+          end
+        end
+        
       end # config.to_prepare
     end # Engine < Rails::Engine
   end # Memberships

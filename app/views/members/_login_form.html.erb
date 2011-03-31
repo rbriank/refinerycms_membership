@@ -10,5 +10,6 @@
 <p>
   <%= f.submit t('.login')%>
 </p>
-<%= hidden_field_tag :redirect, params[:redirect]%>
+<%= hidden_field_tag :redirect, params[:redirect] %>
+<%= hidden_field_tag :member_login, true %>
 <% end %>

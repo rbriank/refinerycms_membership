@@ -21,6 +21,7 @@
       <%= f.label :fax %>
       <%= f.text_field :fax %>&nbsp;
     </li>
+    <% if !f.object.new_record? %>
     <li>
       <%= f.label :membership_level %>
       <% if @is_admin %>
@@ -29,5 +30,6 @@
         <%= @member.membership_level %>&nbsp;
       <% end %>
     </li>
+    <% end %>
   </ol>
 </fieldset>

@@ -5,7 +5,9 @@ class CreatePagesRoles < ActiveRecord::Migration
       t.references :page
       t.references :role
     end
-
+    if (seed_file = Rails.root.join('db', 'seeds', 'refinerycms_memberships.rb')).file?
+      load seed_file.to_s unless Page.where(:link_url => '/members').any?
+    end
   end
 
   def self.down

@@ -1,0 +1,18 @@
+<tr class="record <%= cycle("on", "on-hover") %>">
+  <td><%= member.first_name %> <%= member.last_name %></td>
+  <td><%= member.organization %></td>
+  <td><%= member.email %></td>
+  <td><%= member.created_at.strftime('%d/%m/%Y') %></td>
+  <td><%= member.member_until.nil? ? '--' : member.member_until.strftime('%d/%m/%Y') %></td>
+  <td><%= member.active? ? 'member' : '--' %></td>
+  <td>    
+          <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_member_path(member),
+                      :title => t('edit', :scope => 'admin.members'), 
+                      :dialog => true, :width => 300, :height => 200 %>
+          <%= link_to refinery_icon_tag('delete.png'), admin_member_path(member),
+                      :class => "cancel confirm-delete",
+                      :title => t('delete', :scope => 'admin.members'),
+                      :confirm => t('message', :scope => 'shared.admin.delete', :title => member.title),
+                      :method => :delete %>
+  </td>
+</tr>

@@ -1,40 +1,10 @@
-<%content_for :stylesheets do
-  stylesheet_link_tag ['membership', 'demo_table', 'demo_page']
-end%>
-<div id="membership-wrapper" style="display:none">
-  <div id="page-tabs" class="clearfix ui-tabs ui-widget ui-widget-content ui-corner-all">
-    <ul id="page_parts" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-      <li><a href="#user_roles"><span><%= t('.members') %></span></a></li>
-      <li><a href="#roles"><span><%= t('.roles') %></span></a></li>
-    </ul>
-    
-    <div id="page_part_editors">
-      <div id="user_roles" class="page_part ui-tabs-panel ui-widget-content ui-corner-bottom wym_box wym_skin_refinery">
-        <%= render :partial => 'user_roles', :locals => {:members => @members} %>
-      </div>
-      <div id="roles" class="page_part ui-tabs-panel ui-widget-content ui-corner-bottom wym_box wym_skin_refinery">
-        <%=  render :partial => 'roles' %>
-      </div>
-    </div>
-  </div>
+<div id='records'>
+  <%= render :partial => 'members' %>
+</div>
+<div id='actions'>
+  <%= render :partial => 'actions' %>
 </div>
 
-<%content_for :javascripts do
-  javascript_include_tag ['jquery.dataTables.min.js', 'membership.jquery.js']
-end%>
-
-<%content_for :javascripts do%>
-  <script type="text/javascript">
-    $(function() {
-      $("#page-tabs").tabs();
-      $(".wym_box").css({opacity: 1});
-    });
-  </script>
-  <% columns = [{}, {}, {}, {}, {}, {:sortable => false}, {:sortable => false}, {:sortable => false}] %>
-  <%= datatable(columns, :per_page=> 25, :ajax_source => admin_memberships_path, :auto_width => false ).html_safe %>
-  <script type="text/javascript">
-    $(function() {
-      $('#membership-wrapper').show();
-    });
-  </script>
-<%end%>
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag ['membership'] %>
+<% end %>

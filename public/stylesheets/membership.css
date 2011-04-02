@@ -1,17 +1,14 @@
-/* 
-    Document   : membership
-    Created on : Jan 23, 2011, 2:43:18 PM
-    Author     : briankierstead
-*/
+#records table {
+  width: 67.7%;
+}
 
-#memberships table tr td{
+#records th{
+  background: #ccc;
+}
+
+#records th, 
+#records td{
+  text-align: center;
   padding: 8px;
-}
-#memberships table tr.even td{
-	background-color:#CCC;
-}
-
-#memberships table tr.odd td{
-	background-color:#EEE;
 }
 

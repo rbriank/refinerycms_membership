@@ -11,12 +11,7 @@ module Refinery
       config.after_initialize do
         Refinery::Plugin.register do |plugin|
           plugin.name = "memberships"
-          plugin.menu_match = /(refinery|admin)\/(memberships|user_roles)$/
-        end
-        
-        Refinery::Plugin.register do |plugin|
-          plugin.name = "roles"
-          plugin.menu_match = /(refinery|admin)\/(roles)$/
+          plugin.menu_match = /(refinery|admin)\/(memberships|members|membership_emails|roles)$/
         end
         
         ::Refinery::Pages::Tab.register do |tab|

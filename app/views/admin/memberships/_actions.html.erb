@@ -1,0 +1,11 @@
+<ul>
+  <li>
+    <%= render :partial => "/shared/admin/search", :locals => {:url => admin_roles_url} %>
+  </li>
+  <li>
+    <%= link_to t('.roles_administration'), admin_roles_path %>
+  </li>
+  <li>
+    <%= link_to t('.emails_administration'), admin_membership_emails_path %>
+  </li>
+</ul>

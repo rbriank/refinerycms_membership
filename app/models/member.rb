@@ -1,4 +1,11 @@
 class Member < User
+  
+  def self.per_page
+    12
+  end
+  
+  acts_as_indexed :fields => [:first_name, :last_name]
+  
   validates :membership_level, :first_name, :last_name, :province, :presence => true
   attr_accessible :membership_level, :first_name, :last_name, :title, :organization,
     :street_address, :city, :province, :postal_code, :phone, :fax, :website

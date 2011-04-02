@@ -1,4 +1,5 @@
-<table width="100%" id="members" cellpadding="5" cellspacing="5" style="display: inline" class="datatable">
+<%= will_paginate @members %>
+<table id="members" cellpadding="0" cellspacing="0" style="display: inline" class="datatable ">
   <thead>
     <tr>
       <th align="center">Name</th>
@@ -7,11 +8,10 @@
       <th align="center">Added</th>
       <th align="center">Expires</th>
       <th align="center">Status</th>
-      <th align="center">Promote</th>
-      <th align="center">Revoke</th>
+      <th align="center"></th>
     </tr>
   </thead>
   <tbody>
-    <%= render members if members %>
+    <%= render :partial => 'member', :collection => @members if @members %>
   </tbody>
 </table>

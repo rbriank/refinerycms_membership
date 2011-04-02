@@ -1,0 +1,17 @@
+#page_roles {
+  height: 438px;
+}
+#page_roles label {
+  display: inline-block;
+}
+#page_roles input {
+}
+
+#page_roles .role {
+  float: left;
+  width: 20%;
+}
+
+#page_roles .role label {
+  width: 155px
+}

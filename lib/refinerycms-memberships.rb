@@ -11,7 +11,12 @@ module Refinery
       config.after_initialize do
         Refinery::Plugin.register do |plugin|
           plugin.name = "memberships"
-          plugin.menu_match = /(refinery|admin)\/(memberships)?(page_roles)?(user_roles)?$/
+          plugin.menu_match = /(refinery|admin)\/(memberships|members|page_roles|user_roles)$/
+        end
+        
+        ::Refinery::Pages::Tab.register do |tab|
+          tab.name = "Access restrictions"
+          tab.partial = "/admin/pages/tabs/roles"
         end
 
         # this broke as part of config.to_prepare

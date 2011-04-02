@@ -1,0 +1,15 @@
+      <li class='clearfix record <%= cycle("on", "on-hover") %>'>
+        <span class='title'>
+          <%= role.title %>
+        </span>
+        <span class='actions'>
+          <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_role_path(role),
+                      :title => t('edit', :scope => 'admin.roles'), 
+                      :dialog => true, :width => 300, :height => 200 %>
+          <%= link_to refinery_icon_tag('delete.png'), admin_role_path(role),
+                      :class => "cancel confirm-delete",
+                      :title => t('delete', :scope => 'admin.roles'),
+                      :confirm => t('message', :scope => 'shared.admin.delete', :title => role.title),
+                      :method => :delete %>
+        </span>
+      </li>

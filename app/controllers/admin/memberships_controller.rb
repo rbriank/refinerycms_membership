@@ -17,8 +17,7 @@ class Admin::MembershipsController < Admin::BaseController
   def index
     respond_to do |format|
       format.html { 
-        @pages = Page.all
-        @roles = Role.find_all_by_id(MEMBER_ROLE_ID)
+       
       }
       format.js{ 
         @objects = current_objects(params)

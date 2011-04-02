@@ -11,7 +11,12 @@ module Refinery
       config.after_initialize do
         Refinery::Plugin.register do |plugin|
           plugin.name = "memberships"
-          plugin.menu_match = /(refinery|admin)\/(memberships|members|page_roles|user_roles)$/
+          plugin.menu_match = /(refinery|admin)\/(memberships|user_roles)$/
+        end
+        
+        Refinery::Plugin.register do |plugin|
+          plugin.name = "roles"
+          plugin.menu_match = /(refinery|admin)\/(roles)$/
         end
         
         ::Refinery::Pages::Tab.register do |tab|
@@ -84,6 +89,15 @@ module Refinery
             end
           end
         end # Page.class_eval
+        
+        Role.class_eval do          
+          validates_presence_of :title
+          acts_as_indexed :fields => [:title]
+          # Number of settings to show per page when using will_paginate
+          def self.per_page
+            12
+          end
+        end
 
         PagesController.class_eval do
           def show

@@ -56,6 +56,7 @@
     grid.setSortColumn(columns[sort[0]||0].id, sort[1] == 'asc');
     
     $(this).parent().show();
+
     init_tooltips();
 
     return $(this);
@@ -103,7 +104,7 @@
   $.fn._getUrlParams = function(){
     var url = window.location.toString();
     var params = {};
-    var args = url.split('?')[1].split('&');
+    var args = (url.split('?')[1]||'').split('&');
     for(var n = 0; n < args.length; n++){
       var arg = args[n].split('=');
       params[arg[0]] = arg[1];

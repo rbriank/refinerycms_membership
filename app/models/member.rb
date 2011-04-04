@@ -10,6 +10,8 @@ class Member < User
   attr_accessible :membership_level, :first_name, :last_name, :title, :organization,
     :street_address, :city, :province, :postal_code, :phone, :fax, :website
 
+  set_inheritance_column :membership_level
+
   def is_member?
     role_ids.include?(MEMBER_ROLE_ID)
   end

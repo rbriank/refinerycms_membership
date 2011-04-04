@@ -8,14 +8,14 @@
   <td>
     <span style="white-space:nowrap">
     <% if member.active? %>
-      <%= link_to refinery_icon_tag('date_add.png'), extend_admin_membership_path(member),
+      <%= link_to refinery_icon_tag('date_add.png'), extend_admin_member_path(member),
         :title => t('edit', :scope => 'admin.members') %>
-      <%= link_to refinery_icon_tag('thumb_down.png'), cancel_admin_membership_path(member),
+      <%= link_to refinery_icon_tag('thumb_down.png'), cancel_admin_member_path(member),
         :title => t('edit', :scope => 'admin.members') %>
     <% else %>
-      <%= link_to refinery_icon_tag('thumb_up.png'), accept_admin_membership_path(member),
+      <%= link_to refinery_icon_tag('thumb_up.png'), accept_admin_member_path(member),
         :title => t('edit', :scope => 'admin.members') %>
-      <%= link_to refinery_icon_tag('thumb_down.png'), reject_admin_membership_path(member),
+      <%= link_to refinery_icon_tag('thumb_down.png'), reject_admin_member_path(member),
         :title => t('edit', :scope => 'admin.members') %>
     <% end %>
     <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_member_path(member),

@@ -12,7 +12,10 @@
   };
 
   $.fn.slickGrid = function(o){
-    var table = this;
+    var table = this[0];
+    
+    if(!table) return false;
+    
     var columns = this.columns = [];
     var widths = this._loadColumnsWidths();
     $(table).find('thead th').each(function(idx, th){
@@ -44,9 +47,9 @@
       rowHeight: 35,
       headerRowHeight: 35
     };
-    $(this).wrap('<div></div>');
-    $(this).parent().addClass('slick-grid').css({width: $(this).width()});
-    var grid = new Slick.Grid($(this).parent().get(0), data, columns, opts);
+    $(table).wrap('<div></div>');
+    $(table).parent().addClass('slick-grid').css({width: $(table).width()});
+    var grid = new Slick.Grid($(table).parent().get(0), data, columns, opts);
     var self = this;
     grid.onSort.subscribe(function(){self._onSort.apply(self, arguments)});
     grid.onColumnsResized.subscribe(function(){self._onColumnsResize.apply(self, arguments)});
@@ -55,11 +58,12 @@
 
     grid.setSortColumn(columns[sort[0]||0].id, sort[1] == 'asc');
     
-    $(this).parent().show();
+    $(table).parent().show();
 
     init_tooltips();
+    this._initActions();
 
-    return $(this);
+    return $(table);
   };
   
   $.fn._onColumnsResize = function(ev, grid){
@@ -120,5 +124,15 @@
       params[k] = new_params[k];
     }
     return url + '?' + $.param(params);
+  };
+  
+  $.fn._initActions = function(){
+    $('.slick-grid').find('a.accept, a.reject, a.extend, a.disable, a.enable').click(function(ev){
+      ev.preventDefault();
+      $.ajax($(this).attr('href'), {type: 'PUT'}).complete(function(){
+        $(document).paginateTo(window.location);
+      });
+      return false;
+    });
   };
 })(jQuery);

@@ -12,50 +12,103 @@ class Member < User
 
   set_inheritance_column :membership_level
 
+  def add_to_member_until
+    ''
+  end
+  
+  def add_to_member_until=(n)
+    
+  end
+  
+  def email=(e)
+    write_attribute(:email, e)
+    write_attribute(:username, e)
+  end
+  
+  def enabled=(e)
+    write_attribute(:enabled, e)
+    write_attribute(:is_new, fale) if e && self.is_new
+    e ? ensure_member_role : remove_member_role
+    e
+  end
+  
   def is_member?
     role_ids.include?(MEMBER_ROLE_ID)
   end
 
-  def active?
-    if member_until.nil?
-      false
-    else
-      member_until.future? && role_ids.include?(MEMBER_ROLE_ID)
+  def active_for_authentication?
+    a = self.enabled && role_ids.include?(MEMBER_ROLE_ID)
+    if RefinerySetting::find_or_set('memberships_timed_accounts', true)
+      if member_until.nil?
+        a = false
+      else
+        a = a && member_until.future?
+      end
     end
+    a
+  end
+  
+  def active?
+    active_for_authentication?
   end
 
   def lapsed?
-    if member_until.nil?
-      false
+    if RefinerySetting::find_or_set('memberships_timed_accounts', true)
+      if member_until.nil?
+        false
+      else
+        member_until.past?
+      end
     else
-      member_until.past? && role_ids.include?(MEMBER_ROLE_ID)
+      false
     end
   end
 
   # multiple calls extends the membership life
   def activate
-    add_year_to_member_until_until
+    self.is_new = false
+    self.enabled = true
+    add_year_to_member_until_until if RefinerySetting::find_or_set('memberships_timed_accounts', true) && member_until.nil?
     ensure_member_role
+    save
   end
 
   def deactivate
-    nil_paid_until
+    self.enabled = false
+    self.is_new = false
     remove_member_role
+    save
   end
+  
+  def extend
+    self.is_new = false
+    self.enabled = true
+    nil_paid_until if lapsed? && RefinerySetting::find_or_set('memberships_timed_accounts', true)
+    add_year_to_member_until_until if RefinerySetting::find_or_set('memberships_timed_accounts', true)
+    ensure_member_role
+    save
+  end
+  
+  def inactive_message
+    self.is_new ? super : I18n.translate('devise.failure.locked')
+  end
+    
+  
+  protected
 
   def add_year_to_member_until_until
-    update_attribute(:member_until, member_until.nil? ? 1.year.from_now : member_until + 1.year)
+    self.member_until = member_until.nil? ? 1.year.from_now : member_until + 1.year
   end
 
   def ensure_member_role
-    roles << Role.find(MEMBER_ROLE_ID) unless role_ids.include?(MEMBER_ROLE_ID)
+    self.roles << Role.find(MEMBER_ROLE_ID) unless role_ids.include?(MEMBER_ROLE_ID)
   end
 
   def remove_member_role
-    roles.delete(Role.find(MEMBER_ROLE_ID)) if role_ids.include?(MEMBER_ROLE_ID)
+    self.roles.delete(Role.find(MEMBER_ROLE_ID))
   end
 
   def nil_paid_until
-    update_attribute(:member_until, nil)
+    self.member_until = nil
   end
 end

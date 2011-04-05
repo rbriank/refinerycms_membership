@@ -28,8 +28,7 @@ class MembersController < ApplicationController
       params[:member].delete(:password_confirmation)
     end
 
-    # keep these the same
-    params[:member][:username] = params[:member][:email]
+    
 
     if @member.update_attributes(params[:member])
       flash[:notice] = t('successful', :scope => 'members.update', :email => @member.email)
@@ -43,8 +42,6 @@ class MembersController < ApplicationController
 
   def create
     @member = Member.new(params[:member])
-    @member.username = @member.email
-    @member.membership_level = 'Member'
 
     if @member.save
       MembershipMailer.application_confirmation_member(@member).deliver

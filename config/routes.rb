@@ -8,6 +8,7 @@ Refinery::Application.routes.draw do
         put :accept
         put :cancel
         put :extend
+        put :enable
       end
     end
     resources :membership_emails

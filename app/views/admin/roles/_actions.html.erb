@@ -10,9 +10,13 @@
   </li>
   
   <li>
-    <%= link_to t('.members_administration'), admin_memberships_path %>
+    <%= link_to t('new_members', :scope => 'admin.memberships'), admin_memberships_path %>
+  </li>
+  
+  <li>
+    <%= link_to t('members_administration', :scope => 'admin.memberships'), admin_memberships_path %>
   </li>
   <li>
-    <%= link_to t('.emails_administration'), admin_membership_emails_path %>
+    <%= link_to t('emails_administration', :scope => 'admin.memberships'), admin_membership_emails_path %>
   </li>
 </ul>

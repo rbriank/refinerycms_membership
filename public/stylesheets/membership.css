@@ -172,3 +172,8 @@ classes should alter those!
 #content .slick-grid a {
   border:  0;
 }
+
+.slick-grid span.row_actions {
+  display: block;
+  text-align: right;
+}

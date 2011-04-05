@@ -1,6 +1,6 @@
 class Admin::MembershipsController < Admin::BaseController
   crudify :member,
-    :conditions => ['member_until IS NULL || member_until = \'\''],
+    :conditions => {:is_new => true},
     :xhr_paging => true
   
   before_filter do
@@ -18,7 +18,7 @@ class Admin::MembershipsController < Admin::BaseController
   
   private
   
-  def find_all_members(conditions = ['member_until IS NULL || member_until = \'\''])
+  def find_all_members(conditions = {:is_new => true})
     @members = Member.where(conditions).order(@order||'')
   end
 end

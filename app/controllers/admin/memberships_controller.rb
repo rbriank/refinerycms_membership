@@ -1,6 +1,7 @@
 class Admin::MembershipsController < Admin::BaseController
   crudify :member,
     :conditions => {:is_new => true},
+    :title_attribute => :full_name,
     :xhr_paging => true
   
   before_filter do

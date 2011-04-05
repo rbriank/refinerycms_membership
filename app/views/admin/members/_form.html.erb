@@ -1,15 +1,18 @@
-<%= form_for [:admin, @member], :url => @url_override || @url do |f| -%>
 
 <%= render :partial => "/shared/admin/error_messages",
 :locals => {
   :object => @member,
   :include_object_name => false
 } %>
+<%= form_for [:admin, @member], :url => @url_override || @url do |f| -%>
 
 <%= render :partial => 'form_account', :locals => {:f => f} %>
 <%= render :partial => 'form_profile', :locals => {:f => f} %>
 <%= render :partial => 'form_organization', :locals => {:f => f} %>
+<%= render :partial => 'form_activation', :locals => {:f => f} %>
 <%= render :partial => 'form_roles', :locals => {:f => f} %>
+
+<%= hidden_field_tag :redirect_to_url, request.referrer %>
 
 <%= render :partial => "/shared/admin/form_actions",
 :locals => {
@@ -43,6 +46,8 @@ fieldset legend {
   top: 0;
   right: 0;
 }
+
+#member_activation_form,
 #member_roles_form {
   width: 100%;
 }
@@ -54,5 +59,8 @@ p.role label,
 p.role input {
   display: inline-block;
 } 
+label[for="member_enabled"] {
+  display: inline;
+}
 </style>
 <% end %>

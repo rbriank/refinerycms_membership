@@ -8,16 +8,22 @@ class Member < User
   
   validates :membership_level, :first_name, :last_name, :province, :presence => true
   attr_accessible :membership_level, :first_name, :last_name, :title, :organization,
-    :street_address, :city, :province, :postal_code, :phone, :fax, :website
+    :street_address, :city, :province, :postal_code, :phone, :fax, :website, 
+    :enabled, :add_to_member_until, :role_ids
 
   set_inheritance_column :membership_level
+  
+  def full_name
+    "#{self.first_name} #{last_name}"
+  end
 
   def add_to_member_until
-    ''
+    @add_to_member_until || ''
   end
   
   def add_to_member_until=(n)
-    
+    @add_to_member_until = n
+    add_year_to_member_until n.to_i if n && n.to_i > 0
   end
   
   def email=(e)
@@ -27,7 +33,8 @@ class Member < User
   
   def enabled=(e)
     write_attribute(:enabled, e)
-    write_attribute(:is_new, fale) if e && self.is_new
+    e = read_attribute(:enabled)
+    write_attribute(:is_new, false) if e && self.is_new
     e ? ensure_member_role : remove_member_role
     e
   end
@@ -68,25 +75,25 @@ class Member < User
   def activate
     self.is_new = false
     self.enabled = true
-    add_year_to_member_until_until if RefinerySetting::find_or_set('memberships_timed_accounts', true) && member_until.nil?
+    add_year_to_member_until if RefinerySetting::find_or_set('memberships_timed_accounts', true) && member_until.nil?
     ensure_member_role
-    save
+    save!
   end
 
   def deactivate
     self.enabled = false
     self.is_new = false
     remove_member_role
-    save
+    save!
   end
   
   def extend
     self.is_new = false
     self.enabled = true
     nil_paid_until if lapsed? && RefinerySetting::find_or_set('memberships_timed_accounts', true)
-    add_year_to_member_until_until if RefinerySetting::find_or_set('memberships_timed_accounts', true)
+    add_year_to_member_until if RefinerySetting::find_or_set('memberships_timed_accounts', true)
     ensure_member_role
-    save
+    save!
   end
   
   def inactive_message
@@ -96,8 +103,10 @@ class Member < User
   
   protected
 
-  def add_year_to_member_until_until
-    self.member_until = member_until.nil? ? 1.year.from_now : member_until + 1.year
+  def add_year_to_member_until(amount = 1)
+    if amount && amount > 0
+      self.member_until = member_until.nil? || lapsed? ? amount.year.from_now : member_until + amount.year
+    end
   end
 
   def ensure_member_role

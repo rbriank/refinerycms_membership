@@ -20,17 +20,18 @@
     var widths = this._loadColumnsWidths();
     $(table).find('thead th').each(function(idx, th){
       var id = null;
+      var w = $(th).widthFromClass();
+      console.log(w)
       columns.push({
         name: $(th).html(), 
         field: (id = Math.round(Math.random()*100000).toString()), 
         id: id,
-        width: widths[idx],
-        sortable: true
+        width: w || widths[idx],
+        resizable: w === null,
+        sortable: $(th).hasClass('sortable')
       });
     });
-    columns[columns.length - 1].resizable = false;
-    delete columns[columns.length - 1].width;
-    delete columns[columns.length - 1].sortable;
+    console.log(columns)
     var data = []
     $(table).find('tbody tr').each(function(idx, tr){
       var row = {};
@@ -94,6 +95,7 @@
       window.history.pushState({
         path: current_state_location
       }, '', url);
+      $('.slick-grid').loading();
       $(document).paginateTo(url);
     } else {
       window.location = url;
@@ -108,7 +110,9 @@
   $.fn._getUrlParams = function(){
     var url = window.location.toString();
     var params = {};
-    var args = (url.split('?')[1]||'').split('&');
+    var args = url.split('?')[1];
+    if(!args) return {}
+    args = args.split('&');
     for(var n = 0; n < args.length; n++){
       var arg = args[n].split('=');
       params[arg[0]] = arg[1];
@@ -120,19 +124,39 @@
     var url = window.location.toString().replace(/\?.*$/, '');
     var params = this._getUrlParams();
     new_params = new_params || {};
+    var c = 0;
     for(k in new_params){
+      c++;
       params[k] = new_params[k];
     }
-    return url + '?' + $.param(params);
+    return c > 0 ? url + '?' + $.param(params) : c;
+  };
+  
+  $.fn.loading = function(){
+    $(this).find('.slick-header-column:last-child').css({'background-image':  'url(/images/refinery/icons/ajax-loader.gif)', 'background-position': 'right center', 'background-repeat': 'no-repeat'});
   };
   
   $.fn._initActions = function(){
     $('.slick-grid').find('a.accept, a.reject, a.extend, a.disable, a.enable').click(function(ev){
       ev.preventDefault();
+      $('.slick-grid').loading();
       $.ajax($(this).attr('href'), {type: 'PUT'}).complete(function(){
         $(document).paginateTo(window.location);
       });
       return false;
     });
+  };
+  
+  $.fn.widthFromClass = function(){
+    var el = this[0];
+    if(!el) return null;
+    var classes = el.className.split(' ');
+    for(var n = 0; n < classes.length; n++){
+      var c = classes[n];
+      if(/^width_\d\d$/.exec(c)) {
+        return parseInt(c.replace('width_', ''));
+      }
+    }
+    return null;
   };
 })(jQuery);

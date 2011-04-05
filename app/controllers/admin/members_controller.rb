@@ -1,9 +1,10 @@
 class Admin::MembersController < Admin::BaseController
   crudify :member,
+    :title_attribute => :full_name,
     :xhr_paging => true
   
   before_filter do
-    columns = [[:last_name, :first_name], [:organization], [:email], [:created_at]]
+    columns = [[:last_name, :first_name], [:organization], [:email], [:created_at], [:member_until], [:is_new, :member_until, :enabled]]
     params[:order_by] ||= 0
     params[:order_dir] ||= 'asc'
     unless columns[params[:order_by].to_i]
@@ -15,6 +16,16 @@ class Admin::MembersController < Admin::BaseController
     end
   end
   
+  before_filter(:only => :update) do
+    if params[:member][:password].blank? and params[:member][:password_confirmation].blank?
+      params[:member].delete(:password)
+      params[:member].delete(:password_confirmation)
+    end
+  end
+  
+  def redirect_back_or_default(default)
+    params[:redirect_to_url].present? ? redirect_to(params[:redirect_to_url]) : super 
+  end
   
   def extend
     find_member    

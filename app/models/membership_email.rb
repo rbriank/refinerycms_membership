@@ -1,7 +1,7 @@
 class MembershipEmail < ActiveRecord::Base
-  translates :subject, :text
+  translates :subject, :body
   
   validates_uniqueness_of :title
   
-  validates_presence_of :subject, :text
+  validates_presence_of :subject, :body
 end

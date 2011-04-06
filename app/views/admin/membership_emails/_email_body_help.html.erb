@@ -1,0 +1,19 @@
+<div id='more_options_field'>
+  <p>
+    <%= link_to t('toggle_email_body_help', :scope => 'admin.membership_emails'), "#",
+                :id => 'toggle_advanced_options',
+                :style => 'background-image: url(/images/refinery/icons/information.png)',
+                :title => t('email_body_help', :scope => 'admin.membership_emails') %>
+  </p>
+</div>
+<div id='more_options' style="display:none;">
+  aaaaaaaaaaaaa
+</div>
+
+<% content_for :javascripts do %>
+  <script> 
+    $(document).ready(function(){
+      page_options.show_options();
+    });
+  </script> 
+<% end %>

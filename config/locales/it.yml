@@ -30,6 +30,8 @@ it:
       membership_email:
         subject: Oggetto
         body: Corpo del messaggio
+      membership_email_part:
+        body: Testo
   years:
     one: '1 anno'
     other: '%{count} anni'
@@ -90,6 +92,9 @@ it:
       emails_administration: Amministrazione email
       membership_email:
       email_settings: Preferenze email
+      toggle_email_body_help: Mostra/nascondi documentazione
+      email_body_help: Documentazione su 'Corpo del messaggio'
+      shared_email_parts: Parti comuni alle email
       settings:
         deliver_notifications_on: Spedire le seguenti notifiche agli utenti
         deliver_admin_notifications_to: Spedire le notifiche amministrative a

@@ -1,4 +1,4 @@
-<h2><%= MembershipEmailPart.model_name.human %>: <%= t(@membership_email_part.title, :scope => 'membership_email_parts') %></h2>
+<h2><%= MembershipEmailPart.model_name.human %>: <%= t(@membership_email_part.title, :scope => 'admin.membership_email_parts') %></h2>
 <%= form_for [:admin, @membership_email_part], :url => @url_override || @url do |f| -%>
 
   <%= render :partial => "/shared/admin/error_messages",

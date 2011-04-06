@@ -2,20 +2,9 @@
   <h2><%= t('results_for', :scope => 'shared.admin.search', :query => params[:search]) %></h2>
 <% end %>
 <% if @membership_emails.any? %>
-<% members = @membership_emails.reject{|e| /^admin_/.match(e.title)} %>
-<% admin   = @membership_emails.select{|e| /^admin_/.match(e.title)} %>
-<% if members.any? %>
-<h3><%= t('emails_for_members', :scope => 'admin.membership_emails', :query => params[:search]) %></h3>
-<div id='membership_emails' class="pagination_container">
-  <%= render :partial => 'emails', :locals => {:membership_emails => members } %>
-</div>
-<% end %>
-<% if admin.any? %>
-<h3><%= t('emails_for_admins', :scope => 'admin.membership_emails', :query => params[:search]) %></h3>
 <div id='admin_membership_emails' class="pagination_container">
-  <%= render :partial => 'emails', :locals => {:membership_emails => admin } %>
+  <%= render :partial => 'emails' %>
 </div>
-<% end %>
 <% else %>
   <p>
     <% unless searching? %>

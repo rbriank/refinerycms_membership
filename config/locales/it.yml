@@ -4,6 +4,7 @@ it:
       member: Utente registrato
       role: Gruppo utente
       membership_email: Email notifica utente
+      membership_email_part: Parti comuni email
     attributes:
       role:
         title: Nome gruppo
@@ -75,6 +76,9 @@ it:
       user_can_login: "L'utente può accedere alle pagine riservate"
       extend: Rinnova iscrizione
       extend_membership_for: Rinnova iscrizione per
+    membership_email_parts:
+      email_header: Intestazione messaggio
+      email_footer: Firma messaggio
     membership_emails:
       member_accepted: Iscrizione accettata
       member_created: Nuova iscrizione

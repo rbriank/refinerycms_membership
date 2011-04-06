@@ -11,7 +11,7 @@ module Refinery
       config.after_initialize do
         Refinery::Plugin.register do |plugin|
           plugin.name = "memberships"
-          plugin.menu_match = /(refinery|admin)\/(memberships|members|membership_emails|roles)$/
+          plugin.menu_match = /(refinery|admin)\/(memberships|members|membership_emails|membership_email_parts|roles)$/
         end
         
         # permissions tap on page editor

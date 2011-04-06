@@ -17,6 +17,7 @@ Refinery::Application.routes.draw do
         put :save_settings
       end
     end
+    resources :membership_email_parts, :except => :index
   end
 
   resource :members, :except => [:destroy] do

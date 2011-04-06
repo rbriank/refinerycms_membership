@@ -7,13 +7,13 @@
   <td><%= member.member_until.nil? ? '--' : member.member_until.strftime('%d/%m/%Y') %></td>
   <td>
     <% if member.active? %>
-      <%= image_tag 'refinery/icons/tick.png', :tooltip => t('.account_active') %>
+      <%= image_tag 'refinery/icons/tick.png', :tooltip => t('account_active', :scope => 'admin.members') %>
     <% elsif member.is_new %>
-      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('.new_account') %>
+      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('new_account', :scope => 'admin.members') %>
     <% elsif !member.enabled %>
-      <%= image_tag 'refinery/icons/cross.png', :tooltip => t('.account_disabled') %>
+      <%= image_tag 'refinery/icons/cross.png', :tooltip => t('account_disabled', :scope => 'admin.members') %>
     <% elsif member.lapsed? %>
-      <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('.account_expired') %>
+      <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('account_expired', :scope => 'admin.members') %>
     <% end %>
   </td>
   <% end %>
@@ -40,7 +40,7 @@
     <%= link_to refinery_icon_tag('delete.png'), admin_member_path(member),
       :class => "cancel confirm-delete",
       :title => t('delete', :scope => 'admin.members'),
-      :confirm => t('message', :scope => 'shared.admin.delete', :title => member.title),
+      :confirm => t('message', :scope => 'shared.admin.delete', :title => member.full_name),
       :method => :delete %>
     </span>
   </td>

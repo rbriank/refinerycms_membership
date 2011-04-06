@@ -19,9 +19,9 @@
   :f => f,
   :continue_editing => false,
   :hide_cancel => (@app_dialog or action_name == "insert" or from_dialog?),
-  :delete_title => t('delete', :scope => 'admin.roles'),
+  :delete_title => t('delete', :scope => 'admin.members'),
   :delete_confirmation => (t('message', :scope => 'shared.admin.delete',
-  :title => @member.title) if @member.persisted?)
+  :title => @member.full_name) if @member.persisted?)
 } %>
 <% end -%>
 

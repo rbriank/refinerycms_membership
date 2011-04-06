@@ -8,7 +8,7 @@
 <% else %>
   <p>
     <% unless searching? %>
-      <strong><%= t('.no_files_yet') %></strong>
+      <strong><%= t('no_emails_yet', :scope => 'admin.membership_emails') %></strong>
     <% else %>
       <%= t('no_results', :scope => 'shared.admin.search') %>
     <% end %>

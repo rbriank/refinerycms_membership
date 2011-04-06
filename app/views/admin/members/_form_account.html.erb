@@ -1,5 +1,5 @@
 <fieldset id="member_account_form">
-  <legend><%=t('members.shared.account')%></legend>
+  <legend><%=t('account', :scope => 'admin.members')%></legend>
   <p class="field">
       <%= f.label :email %>
       <%= f.text_field :email, :class => 'widest'%>

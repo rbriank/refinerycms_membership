@@ -11,7 +11,12 @@ Refinery::Application.routes.draw do
         put :enable
       end
     end
-    resources :membership_emails
+    resources :membership_emails, :except => :show do
+      collection do
+        get :settings
+        put :save_settings
+      end
+    end
   end
 
   resource :members, :except => [:destroy] do

@@ -1,0 +1,34 @@
+<div class='clearfix dialog_email_settings'>
+  <div id="dialog_menu_left">
+    <span id="email_delivery_radio" class="radio">
+      <input type="radio" name="settings_page" value="email_delivery" id="page_email_delivery" checked="true">
+      <label for="page_email_delivery" class="stripped"><%= t('email_delivery', :scope => 'admin.membership_emails.settings') %></label>
+    </span>
+    <span id="admin_notifications_radio" class="radio">
+      <input type="radio" name="settings_page" value="admin_notifications" id="page_admin_notifications">
+      <label for="page_admin_notifications" class="stripped"><%= t('admin_notifications', :scope => 'admin.membership_emails.settings') %></label>
+    </span>
+  </div>
+  
+<%= form_tag save_settings_admin_membership_emails_path, :method => 'put' do %>
+  <div id="dialog_main">
+    <%= render :partial => 'settings_email_delivery' %>
+    <%= render :partial => 'settings_admin_notification' %>
+  </div>
+  
+
+  <%= render :partial => "/shared/admin/form_actions",
+    :locals => {
+      :continue_editing => false,
+      :hide_cancel => false,
+      :hide_delete => true 
+  } %>
+<% end %>
+</div>
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'settings_dialog'%>
+<% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'settings_dialog'%>
+<% end %>

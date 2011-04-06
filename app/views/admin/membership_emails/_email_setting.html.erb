@@ -1,0 +1,5 @@
+<p class="field checkbox">
+  <%= hidden_field_tag "settings[deliver_mail_on_#{email_setting}]", false, :id => '' %>
+  <%= check_box_tag "settings[deliver_mail_on_#{email_setting}]", true, RefinerySetting.find_or_set("deliver_mail_on_#{email_setting}", true) %>
+  <label for="<%= "settings_deliver_mail_on_#{email_setting}" %>"><%= t(email_setting, :scope => 'admin.membership_emails') %></label>
+</p>

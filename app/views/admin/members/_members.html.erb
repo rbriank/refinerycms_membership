@@ -9,7 +9,7 @@
       <th align="center" class="sortable"><%= Member.human_attribute_name :created_at %></th>
       <% if RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
       <th align="center" class="sortable"><%= Member.human_attribute_name :member_until %></th>
-      <th align="center" class="sortable width_35"><%= Member.human_attribute_name :active %></th>
+      <th align="center" class="sortable width_35"><%= Member.human_attribute_name :status %></th>
       <% end %>
       <th align="center" class="width_80"></th>
     </tr>

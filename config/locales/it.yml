@@ -13,7 +13,7 @@ it:
         email: Email
         created_at: Data iscrizione
         member_until: Scadenza iscrizione
-        active: Stato
+        status: Stato
         password: Password
         password_confirmation: Ripeti password
         first_name: Nome

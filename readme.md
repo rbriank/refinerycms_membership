@@ -14,6 +14,18 @@ __A role based membership engine for [refinerycms](http://refinerycms.com)__
 * Via the rails console, add a membership role:
 * Role.create!(:id => 3, :title => 'Member')
 
+ * set up actionmailer in your environment file(s) the plugin will fail without it
+
+*  config.action_mailer.raise_delivery_errors = false
+*  config.action_mailer.delivery_method = :sendmail
+*  config.action_mailer.perform_deliveries = true
+*  config.action_mailer.raise_delivery_errors = true
+*  config.action_mailer.default_url_options = { :host => "some.host.com" }
+
+* Define ADMIN_EMAIL constant. This will be the "from" when users get email.
+
+
+
 ## Notes
 
 * You're a member or not, there are currently no different levels of membership

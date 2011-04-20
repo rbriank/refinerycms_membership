@@ -1,5 +1,5 @@
 class Member < User
-  validates :membership_level, :first_name, :last_name, :province, :presence => true
+  validates :membership_level, :first_name, :last_name,  :presence => true     #:province,
   attr_accessible :membership_level, :first_name, :last_name, :title, :organization,
     :street_address, :city, :province, :postal_code, :phone, :fax, :website
 

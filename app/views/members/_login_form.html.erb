@@ -1,0 +1,15 @@
+<%= form_for User.new, :url => new_user_session_path do | f | %>
+<p>
+  <%= f.label :login, t('.login') %>
+  <%= f.text_field :login %>
+</p>
+<p>
+  <%= f.label :password, t('.password') %>
+  <%= f.password_field :password %>
+</p>
+<p>
+  <%= f.submit t('.login')%>
+</p>
+<%= hidden_field_tag :redirect, params[:redirect] %>
+<%= hidden_field_tag :member_login, true %>
+<% end %>

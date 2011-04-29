@@ -1,0 +1,15 @@
+.new_members_icon {  
+  background-image: url('/images/refinery/icons/new_account.png');
+}
+.members_icon {  
+  background-image: url('/images/refinery/icons/user.png');
+}
+.email_icon {  
+  background-image: url('/images/refinery/icons/email.png');
+}
+.roles_icon {  
+  background-image: url('/images/refinery/icons/group.png');
+}
+.options_icon {  
+  background-image: url('/images/refinery/icons/cog_edit.png');
+}

@@ -1,19 +1,28 @@
 Refinery::Application.routes.draw do
   scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
-    resources :memberships, :only => :index 
-    resources :page_roles, :only => [] do
-      collection do
-        post 'destroy_multiple'
-        post 'create_multiple'
+    resources :memberships, :only => :index
+    resources :roles 
+    resources :members do
+      member do
+        put :reject
+        put :accept
+        put :cancel
+        put :extend
+        put :enable
       end
     end
-    resources :user_roles, :only => [:update] do
+    resources :membership_emails, :except => :show do
       collection do
-        post 'destroy_multiple'
-        post 'create_multiple'
+        get :settings
+        put :save_settings
       end
     end
+    resources :membership_email_parts, :except => :index
   end
 
-  resources :members, :except => [:destroy] 
+  resource :members, :except => [:destroy] do
+    get :login
+    get :thank_you
+    get :profile
+	end	
 end

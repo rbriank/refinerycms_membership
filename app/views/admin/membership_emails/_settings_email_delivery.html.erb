@@ -1,0 +1,6 @@
+<div id="email_delivery" class="dialog_area">
+  <h3><%= t('deliver_notifications_on', :scope => 'admin.membership_emails.settings')%>:</h3>
+  <% if @membership_emails.any? %>
+  <%= render :partial => 'email_setting', :collection => @membership_emails.collect{|m| m.title} %>
+  <% end %>
+</div>

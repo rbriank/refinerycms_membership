@@ -1,0 +1,47 @@
+<tr class="record <%= cycle("on", "on-hover") %>">
+  <td><%= member.first_name %> <%= member.last_name %></td>
+  <td><%= member.organization %></td>
+  <td><%= member.email %></td>
+  <td><%= member.created_at.strftime('%d/%m/%Y') %></td>
+  <% if RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+  <td><%= member.member_until.nil? ? '--' : member.member_until.strftime('%d/%m/%Y') %></td>
+  <td>
+    <% if member.active? %>
+      <%= image_tag 'refinery/icons/tick.png', :tooltip => t('account_active', :scope => 'admin.members') %>
+    <% elsif member.is_new %>
+      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('new_account', :scope => 'admin.members') %>
+    <% elsif !member.enabled %>
+      <%= image_tag 'refinery/icons/cross.png', :tooltip => t('account_disabled', :scope => 'admin.members') %>
+    <% elsif member.lapsed? %>
+      <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('account_expired', :scope => 'admin.members') %>
+    <% end %>
+  </td>
+  <% end %>
+  <td>
+    <span style="white-space:nowrap" class="row_actions">
+    <% if member.enabled %>
+      <%= link_to refinery_icon_tag('date_add.png'), extend_admin_member_path(member),
+        :title => t('extend', :scope => 'admin.members'), :class => 'extend' if RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+      <%= link_to refinery_icon_tag('thumb_down.png'), cancel_admin_member_path(member.id),
+        :title => t('cancel', :scope => 'admin.members'), :class => 'disable' %>
+    <% else %>
+    <% if member.is_new %>
+      <%= link_to refinery_icon_tag('thumb_up.png'), accept_admin_member_path(member),
+        :title => t('accept', :scope => 'admin.members'), :class => 'accept' %>
+      <%= link_to refinery_icon_tag('thumb_down.png'), reject_admin_member_path(member),
+        :title => t('reject', :scope => 'admin.members'), :class => 'reject' %>
+      <% else %>
+        <%= link_to refinery_icon_tag('thumb_up.png'), enable_admin_member_path(member),
+          :title => t('enable', :scope => 'admin.members'), :class => 'enable' %>
+      <% end %>  
+    <% end %>
+    <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_member_path(member),
+      :title => t('edit', :scope => 'admin.members') %>
+    <%= link_to refinery_icon_tag('delete.png'), admin_member_path(member),
+      :class => "cancel confirm-delete",
+      :title => t('delete', :scope => 'admin.members'),
+      :confirm => t('message', :scope => 'shared.admin.delete', :title => member.full_name),
+      :method => :delete %>
+    </span>
+  </td>
+</tr>

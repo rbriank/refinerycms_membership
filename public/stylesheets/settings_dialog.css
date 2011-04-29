@@ -1,0 +1,28 @@
+.checkbox label {
+  display: inline;
+}
+
+.dialog form {
+  margin-bottom: 0;
+}
+
+.dialog #dialog_menu_left {
+  width: 180px;
+}
+
+.dialog #dialog_main {
+  margin-left: 180px;
+  width: 430px;
+  min-height: 320px;
+}
+
+.dialog .dialog_area {
+  background: white;
+  z-index: 100;
+  position: relative;
+  min-height: 200px;
+}
+
+.dialog .dialog_area h3 {
+  margin-top: 5px;
+}

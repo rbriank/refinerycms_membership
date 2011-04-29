@@ -1,0 +1,20 @@
+<h2><%= t('members_administration', :scope => 'admin.members')%></h2>
+<div id='records' class="pagination_container">
+  <%= render :partial => 'members' %>
+</div>
+<div id='actions'>
+  <%= render :partial => '/admin/shared/memberships_actions' %>
+</div>
+
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag ['members_grid'] %>
+<% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag ['jquery.cookie.js', 'membership.jquery.js','jquery.event.drag-2.0.min.js', 'slick.core.js', 'slick.grid.js'] %>
+  <script>
+  $(function(){
+    $("#members").slickGrid();
+  });
+</script>
+<% end %>

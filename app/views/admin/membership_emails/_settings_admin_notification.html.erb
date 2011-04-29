@@ -1,0 +1,7 @@
+<div id="admin_notifications" style="display: none;" class="dialog_area">
+  <h3><%= t('deliver_admin_notifications_to', :scope => 'admin.membership_emails.settings')%>:</h3>
+  <%= hidden_field_tag "settings[deliver_notification_to_users][]" %>
+  <% if @users.any? %>
+    <%= render :partial => 'user_entry', :collection => @users %>
+  <% end %>
+</div>

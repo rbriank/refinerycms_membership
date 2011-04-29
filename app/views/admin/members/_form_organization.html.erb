@@ -1,0 +1,34 @@
+<fieldset id="member_organization_form">
+  <legend><%=t('organization', :scope => 'admin.members')%></legend>
+  
+  <p class="field">
+      <%= f.label :organization %>
+      <%= f.text_field :organization, :class => 'widest' %>  
+  </p>
+ 
+  <p class="field">    
+      <%= f.label :street_address %>
+      <%= f.text_field :street_address, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :city %>
+      <%= f.text_field :city, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :province %>
+      <%= f.select :province, options_for_select(Provinces::CODES), :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :postal_code %>
+      <%= f.text_field :postal_code, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :website %>
+      <%= f.text_field :website, :class => 'widest' %>
+  </p>
+ 
+</fieldset>

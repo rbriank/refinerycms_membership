@@ -1,0 +1,7 @@
+<p class="field checkbox">
+  <%= check_box_tag "settings[deliver_notification_to_users][]", 
+    user_entry.email, 
+    RefinerySetting.find_or_set('deliver_notification_to_users', @users.collect{|u|u.email}).include?(user_entry.email),
+    :id => "user_entry_#{user_entry_counter}" %>
+  <label for="<%= "user_entry_#{user_entry_counter}" %>"><%= "#{user_entry.username} (#{user_entry.email})" %></label>
+</p>

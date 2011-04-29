@@ -1,0 +1,13 @@
+<% content_for :body_content_left do %>
+  <%=raw @page[:body_above] if @page %>
+  <%=raw @page[:body] if @page %>
+  <div id="member">
+    <%= render :partial => "static_account" %>
+    <%= render :partial => "static_profile" %>
+    <%= render :partial => "static_organization" %>    
+  </div>
+  <%= link_to t('.edit_profile'), profile_members_path %>
+  <%=raw @page[:body_below] if @page %>
+<% end %>
+
+<%= render :partial => "/shared/content_page", :hide_sections => [:body_below, :body_above] %>

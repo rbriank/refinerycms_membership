@@ -1,0 +1,17 @@
+<fieldset id="member_account_form">
+  <legend><%=t('account', :scope => 'admin.members')%></legend>
+  <p class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email, :class => 'widest'%>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password, :autocomplete => 'off', :class => 'widest' %><br />
+      <span class='preview'><%= t('admin.users.form.blank_password_keeps_current') %></span>
+  </p>
+  <p class="field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :autocomplete => 'off', :class => 'widest' %><br />
+  </p>
+</fieldset>

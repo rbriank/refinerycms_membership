@@ -1,0 +1,12 @@
+<% if searching? %>
+  <h2><%= t('results_for', :scope => 'shared.admin.search', :query => params[:search]) %></h2>
+<% end %>
+<% if @membership_email_parts.any? %>
+<div id='admin_membership_email_parts' class="pagination_container">
+  <%= render :partial => 'email_parts' %>
+</div>
+<% else %>
+  <p>
+    <strong><%= t('no_email_parts_yet', :scope => 'admin.membership_emails') %></strong>
+  </p>
+<% end %>

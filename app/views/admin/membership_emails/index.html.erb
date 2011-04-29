@@ -1,0 +1,31 @@
+<div id='records'>
+  <h2><%= t('emails_administration', :scope => 'admin.membership_emails')%></h2>
+  <%= render :partial => 'records' %>
+  <br />
+  <h2><%= t('shared_email_parts', :scope => 'admin.membership_emails')%></h2>
+  <%= render :partial => 'parts' %>
+</div>
+
+<div id='actions'>
+  <%= render :partial => '/admin/shared/memberships_actions' %>
+</div>
+
+<% content_for :javascripts do %>
+<script type="text/javascript">
+(function($){
+$.fn.applyMinimumHeightFromChildren = function() {
+  $(this).each(function(){
+    var child_heights = 0;
+    $(this).children().each(function(i, child){
+      child_heights += $(child).height();
+      $.each(['marginTop', 'marginBottom', 'paddingTop', 'paddingBottom'], function(i, attr) {
+        child_heights += (parseInt($(child).css(attr)) || 0);
+      });
+    });
+    $(this).css('min-height', child_heights);
+  });
+  return $(this);
+}
+})(jQuery);
+</script>
+<% end %>

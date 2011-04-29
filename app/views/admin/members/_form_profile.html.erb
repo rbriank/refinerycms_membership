@@ -1,0 +1,27 @@
+<fieldset id="member_profile_form">
+  <legend><%=t('profile', :scope => 'admin.members')%></legend>
+  <p class="field">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :phone %>
+      <%= f.text_field :phone, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :fax %>
+      <%= f.text_field :fax, :class => 'widest' %>
+  </p> 
+</fieldset>

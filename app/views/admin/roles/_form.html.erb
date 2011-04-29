@@ -1,0 +1,32 @@
+<%= form_for [:admin, @role], :url => @url_override || @url do |f| -%>
+
+  <%= render :partial => "/shared/admin/error_messages",
+             :locals => {
+               :object => @role,
+               :include_object_name => false
+             } %>
+
+  <div class='field'>
+    <%= f.label :title %>
+    <%= f.text_field :title, :class => 'widest' %>
+  </div>
+
+  <%= render :partial => "/shared/admin/form_actions",
+             :locals => {
+               :f => f,
+               :continue_editing => false,
+               :hide_cancel => false,
+               :hide_delete => (@role.new_record?),
+               :delete_title => t('delete', :scope => 'admin.roles'),
+               :delete_confirmation => (t('message', :scope => 'shared.admin.delete',
+                                        :title => @role.title) if @role.persisted?)
+                                      } %>
+<% end -%>
+
+<% content_for :javascripts do %>
+<script>
+$(function(){
+  $('.form-actions-dialog #cancel_button').not('.wym_iframe_body .form-actions-dialog #cancel_button').click(close_dialog);
+});
+</script
+<% end %>

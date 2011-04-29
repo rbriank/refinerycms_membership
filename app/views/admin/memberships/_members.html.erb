@@ -1,0 +1,23 @@
+<% if @members.any? %>
+<%= will_paginate @members %>
+<table id="members" cellpadding="0" cellspacing="0" style="visibility: hidden; width: 650px;">
+  <thead>
+    <tr>
+      <th align="center" class="sortable"><%= Member.human_attribute_name :name %></th>
+      <th align="center" class="sortable"><%= Member.human_attribute_name :organization %></th>
+      <th align="center" class="sortable"><%= Member.human_attribute_name :email %></th>
+      <th align="center" class="sortable"><%= Member.human_attribute_name :created_at %></th>
+      <!--<th align="center"><%= Member.human_attribute_name :member_until %></th>
+      <th align="center"><%= Member.human_attribute_name :active %></th>-->
+      <th align="center" class="width_80"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render :partial => 'member', :collection => @members if @members %>
+  </tbody>
+</table>
+<% else %>
+<p>
+  <strong><%= t('no_new_members', :scope => 'admin.memberships')%></strong>
+</p>
+<% end %>

@@ -1,0 +1,25 @@
+<tr class="record <%= cycle("on", "on-hover") %>">
+  <td><%= member.first_name %> <%= member.last_name %></td>
+  <td><%= member.organization %></td>
+  <td><%= member.email %></td>
+  <td><%= member.created_at.strftime('%d/%m/%Y') %></td>
+  <!--<td><%= member.member_until.nil? ? '--' : member.member_until.strftime('%d/%m/%Y') %></td>
+  <td><%= member.active? ? 'member' : '--' %></td>-->
+  <td>
+    <span style="white-space:nowrap" class="row_actions">
+    
+    <%= link_to refinery_icon_tag('thumb_up.png'), accept_admin_member_path(member),
+      :title => t('accept', :scope => 'admin.members'), :class => 'accept' if member.is_new %>
+    <%= link_to refinery_icon_tag('thumb_down.png'), reject_admin_member_path(member),
+      :title => t('reject', :scope => 'admin.members'), :class => 'reject' %>
+    
+    <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_member_path(member),
+      :title => t('edit', :scope => 'admin.members') %>
+    <%= link_to refinery_icon_tag('delete.png'), admin_member_path(member),
+      :class => "cancel confirm-delete",
+      :title => t('delete', :scope => 'admin.members'),
+      :confirm => t('message', :scope => 'shared.admin.delete', :title => member.full_name),
+      :method => :delete %>
+    </span>
+  </td>
+</tr>

@@ -1,0 +1,12 @@
+<% if Role.where(['title NOT IN (?)',['Superuser','Refinery','Member']]).count > 0 %>
+  <fieldset id="member_roles_form" class="clearfix">
+    <legend><%=t('user_roles', :scope => 'admin.members')%></legend>  
+    
+    <% Role.where(['title NOT IN (?)',['Superuser','Refinery','Member']]).all.each_with_index do | role, idx | %>
+    <p class="role">
+      <%= check_box_tag "member[role_ids][]", role.id, f.object.roles.include?(role), :id => "member_role_#{idx}" %>
+      <label for="member_role_<%= idx %>"><%= role.title %></label>
+    </p>
+    <% end %> 
+  </fieldset>
+<% end %>

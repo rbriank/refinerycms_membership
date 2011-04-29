@@ -1,0 +1,35 @@
+<h2><%= MembershipEmail.model_name.human %>: <%= t(@membership_email.title, :scope => 'admin.membership_emails') %></h2>
+<%= form_for [:admin, @membership_email], :url => @url_override || @url do |f| -%>
+
+  <%= render :partial => "/shared/admin/error_messages",
+             :locals => {
+               :object => @membership_email,
+               :include_object_name => false
+             } %>
+
+  <%= render :partial => "admin/pages/locale_picker",
+             :locals => {
+               :current_locale => Thread.current[:globalize_locale]
+             } if defined?(::Refinery::I18n) %>
+
+  <div class="field">
+    <%= f.label :subject %>
+    <%= f.text_field :subject, :class => "larger widest" %>
+  </div>
+  
+  <%= render :partial => "body_field", :locals => {:f => f} %>
+  
+  <%= render :partial => "email_body_help" %>
+
+  <%= render :partial => "/shared/admin/form_actions",
+             :locals => {
+               :f => f,
+               :continue_editing => false,
+               :hide_cancel => (@app_dialog or action_name == "insert" or from_dialog?),
+               :hide_delete => true
+  } %>
+<% end -%>
+
+<% content_for :after_javascript_libraries do %>
+  <%= javascript_include_tag 'custom_wym_options' %>
+<% end %>

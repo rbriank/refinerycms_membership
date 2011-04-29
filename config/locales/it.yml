@@ -1,0 +1,102 @@
+it:
+  activerecord:
+    models:
+      member: Utente registrato
+      role: Gruppo utente
+      membership_email: Email notifica utente
+      membership_email_part: Parti comuni email
+    attributes:
+      role:
+        title: Nome gruppo
+      member:
+        name: Nome
+        organization: Organizzazione
+        email: Email
+        created_at: Data iscrizione
+        member_until: Scadenza iscrizione
+        status: Stato
+        password: Password
+        password_confirmation: Ripeti password
+        first_name: Nome
+        last_name: Cognome
+        title: Titolo
+        phone: Telefono
+        fax: Fax
+        street_address: Indirizzo
+        city: Città
+        province: Provincia
+        postal_code: C.A.P.
+        website: Sito web
+      membership_email:
+        subject: Oggetto
+        body: Corpo del messaggio
+      membership_email_part:
+        body: Testo
+  years:
+    one: '1 anno'
+    other: '%{count} anni'
+  admin:
+    memberships:
+      new_members: Nuovi utenti iscritti
+      no_new_members: Non ci sono nuovi utenti iscritti
+    pages:
+      tabs:
+        roles:
+          allow_everyone: "Permetti l'accesso a tutti"
+          allow_all_members: "Permetti l'accesso a tutti gli utenti registrati"
+          allow_members_of: "Permetti l'accesso agli utenti dei gruppi"
+    roles:
+      delete: Elimina gruppo
+      no_roles_yet: Non sono stati ancora creati dei gruppi
+      edit: Modifica gruppo
+      delete: Elimina gruppo
+      new_role: Nuovo gruppo
+      roles_administration: Amministrazione gruppi di utenti
+    members:
+      accept: "Accetta l'iscrizione"
+      reject: "Rifiuta l'iscrizione"
+      edit: Modifica utente
+      delete: Elimina utente
+      member_until: Scadenza iscrizione
+      membership_expired: Iscrizione scaduta il
+      not_yet_member: "L'utente non è ancora attivo"
+      activate_member_for: "Attiva iscrizione per"
+      account_active: Utente attivo
+      new_account: Nuovo utente
+      account_disabled: Utente disabilitato
+      account_expired: Utente scaduto
+      cancel: Disabilita utente
+      enable: Abilita utente
+      delete: Elimina questo utente
+      no_members_yet: Non ci sono ancora utenti registrati
+      members_administration: Amministrazione utenti
+      account: Dati iscrizione
+      organization: Organizzazione
+      profile: Dati personali
+      activation: Attivazione iscrizione
+      user_roles: Gruppi utente
+      user_can_login: "L'utente può accedere alle pagine riservate"
+      extend: Rinnova iscrizione
+      extend_membership_for: Rinnova iscrizione per
+    membership_email_parts:
+      email_header: Intestazione messaggio
+      email_footer: Firma messaggio
+    membership_emails:
+      member_accepted: Iscrizione accettata
+      member_created: Nuova iscrizione
+      member_deleted: Iscrizione cancellata
+      member_rejected: Iscrizione rifiutata
+      membership_extended: Iscrizione rinnovata
+      edit: Modifica email
+      no_emails_yet: Non ci sono ancora email
+      emails_administration: Amministrazione email
+      membership_email:
+      email_settings: Preferenze email
+      toggle_email_body_help: Mostra/nascondi documentazione
+      email_body_help: Documentazione su 'Corpo del messaggio'
+      shared_email_parts: Parti comuni alle email
+      settings:
+        deliver_notifications_on: Spedire le seguenti notifiche agli utenti
+        deliver_admin_notifications_to: Spedire le notifiche amministrative a
+        email_delivery: Notifiche utente
+        admin_notifications: Notifiche amministrative

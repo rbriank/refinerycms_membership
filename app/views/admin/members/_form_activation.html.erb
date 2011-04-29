@@ -1,0 +1,50 @@
+<fieldset id="member_activation_form" class="clearfix">
+  <legend><%=t('activation', :scope => 'admin.members')%></legend>  
+  
+  <p class="field">
+    <%= f.check_box :enabled %>
+    <%= f.label :enabled, t('user_can_login', :scope => 'admin.members') %>
+  </p>
+  <% if RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+  <p class="field">
+  <span>
+    <% if f.object.member_until %>
+      <%= t('member_until', :scope => 'admin.members') if @member.member_until.future? %> 
+      <%= t('membership_expired', :scope => 'admin.members') if @member.member_until.past? %> 
+      <b><%= f.object.member_until.strftime('%d/%m/%Y') %></b><br />
+      <%= t('extend_membership_for', :scope => 'admin.members')%> <%= f.select :add_to_member_until, [[]]+(1..10).collect{|n| [t('years', :count => n), n]} %>
+    <% else %>
+    <b><%= t('not_yet_member', :scope => 'admin.members')%></b><br />
+      <%= t('activate_member_for', :scope => 'admin.members')%> <%= f.select :add_to_member_until, [[]]+(1..10).collect{|n| [t('years', :count => n), n]} %>
+    <% end %>
+  </span>
+  </p>
+  <% end %>
+</fieldset>
+
+<% if RefinerySetting::find_or_set('memberships_timed_accounts', true) && (!f.object.member_until || (f.object.lapsed? && !f.object.enabled)) %>
+<% content_for :javascripts do %>
+<script type="text/javascript">
+$(function(){
+  $('#member_enabled').change(function(){
+    var sel = $('#member_add_to_member_until').get(0);
+    if(sel) {
+      if($(this).is(':checked') && parseInt(sel.options[0].value||0) < 1){
+        for(var n = 0; n < sel.options.length-1; n++){
+          var old = sel.options[n+1];
+          sel.options[n] = new Option(old.text, old.value);
+        }
+        sel.options.length = sel.options.length-1;
+      } else if(!$(this).is(':checked') && parseInt(sel.options[0].value||0) > 0){
+        for(var n = sel.options.length; n > 0; n--){
+          var old = sel.options[n-1];
+          sel.options[n] = new Option(old.text, old.value);
+        }
+        sel.options[0] = new Option();
+      }      
+    }
+  });
+});
+</script>
+<% end %>
+<%end%>

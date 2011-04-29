@@ -1,0 +1,20 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>'>
+  <span class='title'>
+    <%= t(email.title, :scope => 'admin.membership_emails') %>
+    <% if defined?(::Refinery::I18n) and ::Refinery::I18n.frontend_locales.many? and
+    (locales = email.translations.collect{|t| t.locale}).present? %>
+    <span class='preview'>
+      <% locales.each do |locale| %>
+      <%= link_to refinery_icon_tag("flags/#{locale}.png", :size => '16x11'),
+      edit_admin_membership_email_url(email, :switch_locale => locale),
+      :class => 'locale' %>
+      <% end %>
+    </span>
+    <% end %>
+    
+  </span>
+  <span class='actions'>
+    <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_membership_email_path(email),
+    :title => t('edit', :scope => 'admin.membership_emails') %>
+  </span>
+</li>

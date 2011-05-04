@@ -9,7 +9,7 @@ __A role based membership engine for [refinerycms](http://refinerycms.com)__
 * gem 'refinerycms-memberships', '1.0', :path => 'vendor/engines'
 * Then run:
 * bundle install
-* rails generate refinerycms_events
+* rails generate refinerycms_memberships
 * rake db:migrate
 * Via the rails console, add a membership role:
 * Role.create!(:id => 3, :title => 'Member')

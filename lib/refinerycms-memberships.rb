@@ -57,7 +57,8 @@ module Refinery
             end
           end
         end # Page.class_eval
-
+      end # config.to_prepare
+      refinery.after_inclusion do
         PagesController.class_eval do
           def show
             # Find the page by the newer 'path' or fallback to the page's id if no path.
@@ -77,8 +78,8 @@ module Refinery
             end
           end
         end # PagesController.class_eval
-        
-      end # config.to_prepare
+       end #refinery on attach
+
     end # Engine < Rails::Engine
   end # Memberships
 end # Refinery

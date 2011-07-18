@@ -1,0 +1,48 @@
+bg:
+  shared:
+    admin:
+      image_picker:
+        image: изображение
+  plugins:
+    memberships:
+      title: Членства
+  admin:
+    memberships:
+      index:
+        title: Членства
+        create_new: Добавяне на ново членство
+        reorder: Пренареждане на членствата
+        reorder_done: Запис на текущото подреждане на членствата
+        sorry_no_results: За съжаление нищо не бе намерено.
+        no_items_yet: Все още нямате членства. Натиснете "Добавяне на ново членство", за да въведете ново.
+      membership:
+        view_live_html: Преглед на това членство <br/><em>(ще се отвори се в нов прозорец)</em>
+        edit: Редактиране на това членство
+        delete: Изтриване на това членство завинаги
+  memberships:
+    show:
+      other: Други членства
+  members:
+    shared:
+      account: Регистрация
+      profile: Профил
+      organization: Организация
+    error_messages:
+      problems_in_following_fields: Има проблем със следните полета
+    form_actions:
+      save: Запис
+      cancel: Отказ
+    form:
+      blank_password_keeps_current: При празно поле текущата парола ще бъде запазена
+    new:
+      title: Формуляр за кандидатстване в членство
+      instructions: Моля, въведете Вашите данни. След одобрение на Вашата кандидатура ще бъдете известени.
+      submit_application: Изпращане на формуляра
+    shared:
+      account: Регистрация
+      profile: Профил
+      organization: Организация
+  activerecord:
+    attributes:
+     user:
+      membership_level: Ниво на членство

@@ -1,0 +1,48 @@
+es:
+  shared:
+    admin:
+      image_picker:
+        image: imagen
+  plugins:
+    memberships:
+      title: Miembros
+  admin:
+    memberships:
+      index:
+        title: Miembros
+        create_new: Añadir miembro nuevo
+        reorder: Reordenar membresía
+        reorder_done: Reordenación de la membresía completada
+        sorry_no_results: No se ha encontrado ningún resultado.
+        no_items_yet: Aún no hay miembros. Haz clic en "Añadir miembro nuevo" para añadir tu primer miembro.
+      membership:
+        view_live_html: Ver este miembro en directo <br/><em>(se abre en una ventana nueva)</em>
+        edit: Editar este miembro
+        delete: Eliminar este miembro para siempre
+  memberships:
+    show:
+      other: Otros miembros
+  members:
+    shared:
+      account: Cuenta
+      profile: Perfil
+      organization: Organización
+    error_messages:
+      problems_in_following_fields: Hay problemas con los siguientes campos
+    form_actions:
+      save: Guardar
+      cancel: Cancelar
+    form:
+      blank_password_keeps_current: Deja en blanco la contraseña para mantener la contraseña actual
+    new:
+      title: Formulario de incorporación
+      instructions: Por favor completa la información. Serás notificado cuando se apruebe la petición.
+      submit_application: Enviar la aplicación
+    shared:
+      account: Cuenta
+      profile: Perfil
+      organization: Organización
+  activerecord:
+    attributes:
+     user:
+      membership_level: Nivel de membresía

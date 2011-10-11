@@ -16,7 +16,7 @@ module Refinery
 
         # this broke as part of config.to_prepare
         # Do this or lost password non-admins still goes to the dashboard
-        ::Admin::DashboardController.class_eval do
+        Refinery::Admin::DashboardController.class_eval do
           old_index = instance_method(:index)
           define_method(:index){|*args|
             if current_user.has_role?(:super_user) || current_user.has_role?(:refinery)

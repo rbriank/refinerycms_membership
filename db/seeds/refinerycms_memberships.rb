@@ -1,5 +1,10 @@
 Role.create(:id => 3, :title => 'Member')
 
+# settings!
+
+RefinerySetting::find_or_set('memberships_timed_accounts', true)
+
+
 members_page = Page.create({:title => "Members",
   :deletable => false,
   :link_url => "/members",

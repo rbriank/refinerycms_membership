@@ -1,4 +1,7 @@
 it:
+  plugins:
+    memberships:
+      title: Iscrizioni
   activerecord:
     models:
       member: Utente registrato

@@ -34,7 +34,7 @@ module Refinery
         end # Admin::DashboardController.class_eval
       end # config.after_initialize
 
-      refinery.on_attach do
+      refinery.after_inclusion do
         require File.expand_path('../rails_datatables/rails_datatables', __FILE__)
         ActionView::Base.send :include, RailsDatatables
         

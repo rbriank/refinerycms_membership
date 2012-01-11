@@ -43,13 +43,13 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(params[:member])
 
-    if @member.save
-      MembershipMailer.application_confirmation_member(@member).deliver
-      MembershipMailer.application_confirmation_admin(@member).deliver
+    if @member.save!
+      MembershipMailer::deliver_member_created(@member)
       
       redirect_to thank_you_members_path
 
     else
+      raise Exception.new(@member.errors.inspect)
       @member.errors.delete(:username) # this is set to email
       render :action => :new
       

@@ -7,11 +7,15 @@ class Member < User
   acts_as_indexed :fields => [:first_name, :last_name]
   
   validates :membership_level, :first_name, :last_name, :province, :presence => true
+  
   attr_accessible :membership_level, :first_name, :last_name, :title, :organization,
     :street_address, :city, :province, :postal_code, :phone, :fax, :website, 
     :enabled, :add_to_member_until, :role_ids
 
   set_inheritance_column :membership_level
+  
+  after_create :set_enabled
+  after_create :set_default_roles
   
   def full_name
     "#{self.first_name} #{last_name}"
@@ -34,17 +38,16 @@ class Member < User
   def enabled=(e)
     write_attribute(:enabled, e)
     e = read_attribute(:enabled)
-    write_attribute(:is_new, false) if e && self.is_new
     e ? ensure_member_role : remove_member_role
     e
   end
   
   def is_member?
-    role_ids.include?(MEMBER_ROLE_ID)
+    role_ids.include?(Role[:member].id)
   end
 
   def active_for_authentication?
-    a = self.enabled && role_ids.include?(MEMBER_ROLE_ID)
+    a = self.enabled && role_ids.include?(Role[:member].id)
     if RefinerySetting::find_or_set('memberships_timed_accounts', true)
       if member_until.nil?
         a = false
@@ -101,7 +104,25 @@ class Member < User
   end
     
   
+  # write_attribute(:is_new, false) if e && self.is_new
+  
+  
   protected
+  
+  def set_enabled
+    self.enabled = RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'no'
+    save
+  end
+  
+  def set_default_roles
+    ids = RefinerySetting::find_or_set('memberships_default_roles', [])
+    if ids.present?
+      Role::find(:all, :conditions => {'id' => ids}).each do | role |
+        self.roles << role
+      end
+      save
+    end
+  end
 
   def add_year_to_member_until(amount = 1)
     if amount && amount > 0
@@ -110,11 +131,11 @@ class Member < User
   end
 
   def ensure_member_role
-    self.roles << Role.find(MEMBER_ROLE_ID) unless role_ids.include?(MEMBER_ROLE_ID)
+    self.add_role(:member) unless has_role?(:member)
   end
 
   def remove_member_role
-    self.roles.delete(Role.find(MEMBER_ROLE_ID))
+    self.roles.delete(Role[:member]) if has_role?(:member)
   end
 
   def nil_paid_until

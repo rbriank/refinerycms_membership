@@ -129,7 +129,7 @@ module Refinery
         # show only admins in Users administration
         ::Admin::UsersController.class_eval do
           def render(*args)
-            @users.reject!{|u|u.is_a?(Member)} if @users
+            @users = @users.reject{|u| u.is_a?(Member) } if @users
             super
           end
         end

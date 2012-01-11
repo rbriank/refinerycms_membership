@@ -17,6 +17,22 @@ class Admin::MembershipsController < Admin::BaseController
     end
   end
   
+  
+  def settings
+    @membership_emails = MembershipEmail::find(:all)
+    @users = User.where(['membership_level <> ? OR membership_level IS NULL', 'Member']).all
+    @roles = Role::find(:all, :conditions => ['title NOT IN (?)',['Superuser','Refinery','Member']])
+  end
+    
+  def save_settings
+    params[:settings].each do | key, value |
+      logger.debug "#{key} #{value}"        
+      value.reject!{|v| !v || v == ''} if value.is_a?(Array)
+      RefinerySetting.set(key, value)
+    end if params[:settings].present?
+    render :text => "<script>parent.window.$('.ui-dialog .ui-dialog-titlebar-close').trigger('click');</script>"
+  end
+    
   private
   
   def find_all_members(conditions = {:is_new => true})

@@ -5,6 +5,7 @@
   <td><%= member.created_at.strftime('%d/%m/%Y') %></td>
   <% if RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
   <td><%= member.member_until.nil? ? '--' : member.member_until.strftime('%d/%m/%Y') %></td>
+  <% end %>
   <td>
     <% if member.active? %>
       <%= image_tag 'refinery/icons/tick.png', :tooltip => t('account_active', :scope => 'admin.members') %>
@@ -16,12 +17,11 @@
       <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('account_expired', :scope => 'admin.members') %>
     <% end %>
   </td>
-  <% end %>
   <td>
-    <span style="white-space:nowrap" class="row_actions">
+    <span style="white-space:nowrap" class="actions row_actions">
     <% if member.enabled %>
       <%= link_to refinery_icon_tag('date_add.png'), extend_admin_member_path(member),
-        :title => t('extend', :scope => 'admin.members'), :class => 'extend' if RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+        :title => t('extend', :scope => 'admin.members'), :class => 'extend' if RefinerySetting::find_or_set('memberships_timed_accounts', true) && member.lapsed? %>
       <%= link_to refinery_icon_tag('thumb_down.png'), cancel_admin_member_path(member.id),
         :title => t('cancel', :scope => 'admin.members'), :class => 'disable' %>
     <% else %>

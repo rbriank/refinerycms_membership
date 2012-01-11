@@ -1,4 +1,14 @@
 
     <ul class="<%= ['pagination_frame', pagination_css_class].compact.join(' ') %>">
-      <%= render :partial => "email", :collection => @membership_emails %> 
+      <% @membership_emails.each do | email | %>
+        <% next if email.title == 'membership_extended' && !RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+        
+        <% next if email.title == 'member_accepted' && RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin' %>
+        <% next if email.title == 'member_rejected' && RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin' %>
+        
+        <% next if email.title == 'member_activated' && RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'email' %>
+        
+        
+        <%= render :partial => "email", :locals => {:email => email} %>
+      <% end %> 
     </ul>

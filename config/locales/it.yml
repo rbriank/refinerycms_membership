@@ -39,9 +39,24 @@ it:
     one: '1 anno'
     other: '%{count} anni'
   admin:
+    memberships_settings: Impostazioni
     memberships:
       new_members: Nuovi utenti iscritti
       no_new_members: Non ci sono nuovi utenti iscritti
+      settings:
+        signup_defaults: Predefiniti
+        signup_confirmation: Conferma registrazione
+        no_confirmation: Nessuna conferma
+        email_confirmation: Conferma registrazione con una email all'utente
+        admin_confirmation: Attendere l'approvazione di un amministratore
+        membership_expiration: Scadenza iscrizione
+        no_expiration: Nessuna scadenza
+        timed_expiration: Iscrizione con scadenza
+        default_expiration_in_days_before: "Scadenza predefinita iscrizione dopo:" 
+        default_expiration_in_days_after: giorni 
+        default_groups: Gruppi predefiniti
+        assign_new_users_to_the_selected_groups: Assegna automaticamente i nuovi utenti ai seguenti gruppi
+        no_groups_found: "Nessun gruppo di utenti trovato." 
     pages:
       tabs:
         roles:

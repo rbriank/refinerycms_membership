@@ -1,0 +1,18 @@
+<div id="email_delivery" class="dialog_area" style="display: none;">
+  <h3><%= t('deliver_notifications_on', :scope => 'admin.membership_emails.settings')%>:</h3>
+  <% if @membership_emails.any? %>
+  <% @membership_emails.each do | email | %>
+  
+    <% next if email.title == 'member_created' %>
+    <% next if email.title == 'member_activated' %>
+    
+    <% next if email.title == 'membership_extended' && !RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+        
+    <% next if email.title == 'member_accepted' && RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin' %>
+    <% next if email.title == 'member_rejected' && RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin' %>
+      
+        
+    <%= render :partial => 'email_setting', :locals => {:email_setting => email.title} %>
+  <% end %>
+  <% end %>
+</div>

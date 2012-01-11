@@ -1,6 +1,11 @@
 Refinery::Application.routes.draw do
   scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
-    resources :memberships, :only => :index
+    resources :memberships, :only => :index do
+      collection do
+        get :settings
+        put :save_settings
+      end
+    end
     resources :roles 
     resources :members do
       member do

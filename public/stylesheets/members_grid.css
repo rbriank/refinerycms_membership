@@ -177,3 +177,14 @@ classes should alter those!
   display: block;
   text-align: right;
 }
+
+#content .slick-grid span.actions.row_actions a {
+  display: inline-block;
+  margin: 3px 0;
+  float: none;
+}
+
+#content .slick-grid span.actions.row_actions a img {
+  padding-left: 1px;
+  padding-right: 0;
+}

@@ -1,3 +1,5 @@
+
+
 var custom_wymeditor_boot_options = {
   toolsItems: [
     {'name': 'Bold', 'title': 'Bold', 'css': 'wym_tools_strong'}
@@ -10,9 +12,10 @@ var custom_wymeditor_boot_options = {
     ,{'name': 'Redo', 'title': 'Redo', 'css': 'wym_tools_redo'}*/
     ,{'name': 'CreateLink', 'title': 'Link', 'css': 'wym_tools_link'}
     ,{'name': 'Unlink', 'title': 'Unlink', 'css': 'wym_tools_unlink'}
-    //,{'name': 'InsertImage', 'title': 'Image', 'css': 'wym_tools_image'}
+    ,{'name': 'InsertImage', 'title': 'Image', 'css': 'wym_tools_image'}
     ,{'name': 'InsertTable', 'title': 'Table', 'css': 'wym_tools_table'}
     //,{'name': 'Paste', 'title': 'Paste_From_Word', 'css': 'wym_tools_paste'}
     ,{'name': 'ToggleHtml', 'title': 'HTML', 'css': 'wym_tools_html'}
   ]
 };
+

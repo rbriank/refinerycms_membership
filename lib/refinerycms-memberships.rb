@@ -11,7 +11,7 @@ module Refinery
       config.after_initialize do
         Refinery::Plugin.register do |plugin|
           plugin.name = "memberships"
-          plugin.menu_match = /(refinery|admin)\/(memberships|members|membership_emails|membership_email_parts|roles)$/
+          plugin.menu_match = /(refinery|admin)\/(memberships|members|membership_emails|membership_email_parts|email_images|roles)$/
         end
         
         # permissions tap on page editor
@@ -131,6 +131,32 @@ module Refinery
           def render(*args)
             @users = @users.reject{|u| u.is_a?(Member) } if @users
             super
+          end
+        end
+        
+        # override image dialog
+        ::Admin::DialogsController.class_eval do
+          def render(*args)      
+            if @dialog_type && @dialog_type == 'image'
+              if args[0].kind_of?(Hash)
+                args[0][:action] = 'admin/memberships/image_dialog'
+              end
+              super(*args) 
+            else 
+              super
+            end
+          end
+        end
+        
+        # override image dialog iframe
+        ::Admin::ImagesController.class_eval do
+          def render(*args)      
+            if args[0].kind_of?(Hash) && args[0][:action] == 'insert'
+              args[0][:action] = 'insert_patched'
+              super(*args) 
+            else 
+              super
+            end
           end
         end
         

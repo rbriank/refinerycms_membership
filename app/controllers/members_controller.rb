@@ -1,13 +1,15 @@
 class MembersController < ApplicationController
 
   # Protect these actions behind member login - do we need to check out not signing up when signed in?
-  before_filter :redirect?, :except => [:new, :create, :login, :index, :thank_you]
+  before_filter :redirect?, :except => [:new, :create, :login, :index, :thank_you, :activate]
 
-  before_filter :find_page
+  before_filter :find_page, :except => [:activate, :login]
 
   # GET /member/:id
   def profile
-    @member = current_user
+    @member = Member::find(:first) #current_user
+    @email = MembershipEmail['member_created']
+    render :action => 'membership_mailer/email'
   end
 
   def new
@@ -49,7 +51,6 @@ class MembersController < ApplicationController
       redirect_to thank_you_members_path
 
     else
-      raise Exception.new(@member.errors.inspect)
       @member.errors.delete(:username) # this is set to email
       render :action => :new
       
@@ -62,9 +63,19 @@ class MembersController < ApplicationController
   end
 
 	def login
+    find_page('/members/login')
 	end
 	
   def thank_you
+  end
+  
+  def activate
+    find_page('/members/activate')
+    resource = Member.confirm_by_token(params[:confirmation_token])
+    
+    if resource.errors.present?
+      error_404
+    end
   end
 
   private
@@ -76,11 +87,9 @@ protected
     end
   end
 
-  def find_page
-    uri = request.fullpath
+  def find_page(uri = nil)
+    uri = uri ? uri : request.fullpath
     uri.gsub!(/\?.*/, '')
-    # devise login failure...
-    uri = '/members/login' if uri == '/registrations/login'
     @page = Page.find_by_link_url(uri, :include => [:parts, :slugs])
   end
 end

@@ -35,6 +35,10 @@ module Refinery
       end # config.after_initialize
 
       refinery.after_inclusion do
+        Devise.setup do | config |
+          config.mailer = 'MembershipMailer'
+        end
+        
         require File.expand_path('../rails_datatables/rails_datatables', __FILE__)
         ActionView::Base.send :include, RailsDatatables
         
@@ -53,9 +57,10 @@ module Refinery
           protected
           def after_sign_in_path_for(resource_or_scope)
             
-            if resource_or_scope.class.superclass.name == 'User' || 
-              resource_or_scope.class.name == 'User' ||
-              resource_or_scope.to_s == 'user'
+            # if resource_or_scope.class.superclass.name == 'User' || 
+              # resource_or_scope.class.name == 'User' ||
+              # resource_or_scope.to_s == 'user'
+            if (resource_or_scope.is_a?(User) || resource_or_scope == :user)
               if params[:redirect].present?
                 params[:redirect]
               else
@@ -73,7 +78,8 @@ module Refinery
 
         Page.class_eval do
           has_and_belongs_to_many :roles
-
+          attr_accessible :role_ids
+          
           def user_allowed?(user)
             # if a page has no roles assigned, let everyone see it
             if roles.blank?

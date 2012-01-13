@@ -21,7 +21,7 @@
     <span style="white-space:nowrap" class="actions row_actions">
     <% if member.enabled %>
       <%= link_to refinery_icon_tag('date_add.png'), extend_admin_member_path(member),
-        :title => t('extend', :scope => 'admin.members'), :class => 'extend' if RefinerySetting::find_or_set('memberships_timed_accounts', true) && member.lapsed? %>
+        :title => t('extend', :scope => 'admin.members'), :class => 'extend' if RefinerySetting::find_or_set('memberships_timed_accounts', true) && (member.lapsed? || member.almost_lapsed?) %>
       <%= link_to refinery_icon_tag('thumb_down.png'), cancel_admin_member_path(member.id),
         :title => t('cancel', :scope => 'admin.members'), :class => 'disable' %>
     <% else %>

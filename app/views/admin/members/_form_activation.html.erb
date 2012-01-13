@@ -9,10 +9,16 @@
   <p class="field">
   <span>
     <% if f.object.member_until %>
-      <%= t('member_until', :scope => 'admin.members') if @member.member_until.future? %> 
-      <%= t('membership_expired', :scope => 'admin.members') if @member.member_until.past? %> 
+      <% if !@member.lapsed? %> 
+      <%= t('member_until', :scope => 'admin.members') %>
+      <% else %>
+      <%= t('membership_expired', :scope => 'admin.members') %>
+      <% end %> 
       <b><%= f.object.member_until.strftime('%d/%m/%Y') %></b><br />
+      
+      <% if @member.lapsed? || @member.almost_lapsed? %> 
       <%= t('extend_membership_for', :scope => 'admin.members')%> <%= f.select :add_to_member_until, [[]]+(1..10).collect{|n| [t('years', :count => n), n]} %>
+      <% end %>
     <% else %>
     <b><%= t('not_yet_member', :scope => 'admin.members')%></b><br />
       <%= t('activate_member_for', :scope => 'admin.members')%> <%= f.select :add_to_member_until, [[]]+(1..10).collect{|n| [t('years', :count => n), n]} %>

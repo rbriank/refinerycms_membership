@@ -1,5 +1,7 @@
 class Member < User
   
+  devise :confirmable
+  
   def self.per_page
     12
   end
@@ -74,6 +76,10 @@ class Member < User
     end
   end
 
+  def almost_lapsed?
+    !lapsed? && member_until.present? && (member_until-7.days).past?
+  end
+
   # multiple calls extends the membership life
   def activate
     self.is_new = false
@@ -106,9 +112,49 @@ class Member < User
   
   # write_attribute(:is_new, false) if e && self.is_new
   
+  def mail_data
+    allowed_attributes = %w(email first_name last_name title organization
+    street_address city province postal_code phone fax website)
+    d = attributes.to_hash
+    d.reject!{|k,v| !allowed_attributes.include?(k.to_s)}
+    d[:activation_url] = Rails.application.routes.url_helpers.activate_members_url(:confirmation_token => self.confirmation_token) if RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email'
+    d
+  end
+
+
+  # devise confirmable
+
+  def confirmed?
+    RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'email' || !!confirmed_at
+  end
   
+  # override... the token was sent with the welcome email
+  def send_confirmation_instructions
+    generate_confirmation_token! if self.confirmation_token.nil?
+  end
+  
+  # resend the welcome email
+  def resend_confirmation_token
+    unless_confirmed do 
+      generate_confirmation_token! if self.confirmation_token.nil?
+      member_email('member_created', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_member_created", true)
+    end
+  end
+  
+  def confirm!
+    unless_confirmed do
+      self.enabled = true
+    end
+    super
+  end
+
+
   protected
-  
+
+  def confirmation_required?
+    RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email' && !confirmed?
+  end
+
   def set_enabled
     self.enabled = RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'no'
     save

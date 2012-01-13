@@ -120,3 +120,19 @@ page.parts.create({
   :body => "",
   :position => 2
 })
+
+page = members_page.children.create({:title => "Activate",
+  :deletable => false,
+  :link_url => "/members/activate",
+  :show_in_menu => false,
+  :menu_match => "^/members/activate\/[a-zA-Z0-9]+$"})
+page.parts.create({
+  :title => "Body",
+  :body => "",
+  :position => 0
+})
+page.parts.create({
+  :title => "Side Body",
+  :body => "",
+  :position => 2
+})

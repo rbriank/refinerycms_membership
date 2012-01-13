@@ -100,6 +100,7 @@ it:
       email_header: Intestazione messaggio
       email_footer: Firma messaggio
     membership_emails:
+      member_activated: Iscrizione attivata
       member_accepted: Iscrizione accettata
       member_created: Nuova iscrizione
       member_deleted: Iscrizione cancellata

@@ -5,14 +5,13 @@
   
     <% next if email.title == 'member_created' %>
     <% next if email.title == 'member_activated' %>
-    
-    <% next if email.title == 'membership_extended' && !RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
-        
-    <% next if email.title == 'member_accepted' && RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin' %>
-    <% next if email.title == 'member_rejected' && RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin' %>
+
+		<% disabled = false %>	
+    <% disabled = true if email.title == 'membership_extended' && !RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+    <% disabled = true if email.title == 'member_accepted' && RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin' %>
       
         
-    <%= render :partial => 'email_setting', :locals => {:email_setting => email.title} %>
+		<%= render :partial => 'email_setting', :locals => {:email_setting => email.title, :disabled => disabled} %>
   <% end %>
   <% end %>
 </div>

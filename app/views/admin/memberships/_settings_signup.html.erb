@@ -62,7 +62,16 @@
       var is_enabled = ($(this).val() == 'true' && $(this).is(':checked'));
       $('#settings_memberships_default_account_validity').attr('disabled', is_enabled ? '' : 'disabled');
       $('#settings_memberships_default_account_validity').parent()[is_enabled ? 'show' : 'hide']();
-    });
+			$('#email_membership_extended')[is_enabled ? 'show' : 'hide']();
+			$('#email_membership_extended input').attr('disabled', is_enabled ? '' : 'disabled');
+		});
+
+		$('#signup_settings input[type="radio"][id*="memberships_confirmation"]').change(function(){
+			var val = $(this).val();
+			$('#email_member_accepted')[val == 'admin' ? 'show' : 'hide']();
+			$('#email_member_accepted input').attr('disabled', val == 'admin' ? '' : 'disabled');
+		});
+
   });
 </script>
 <% end %>

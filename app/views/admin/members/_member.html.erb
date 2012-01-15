@@ -20,7 +20,7 @@
     
       <%= image_tag 'refinery/icons/cross.png', :tooltip => t('account_rejected', :scope => 'admin.members') %>
     
-    <% elsif member.lapsed? || member.never_member? %>
+    <% elsif timed && (member.lapsed? || member.never_member?) %>
     
       <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('account_expired', :scope => 'admin.members') %>
       

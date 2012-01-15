@@ -20,7 +20,7 @@
     
       <%= image_tag 'refinery/icons/cross.png', :tooltip => t('account_rejected', :scope => 'admin.members') %>
     
-    <% elsif member.lapsed? %>
+    <% elsif member.lapsed? || member.never_member? %>
     
       <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('account_expired', :scope => 'admin.members') %>
       
@@ -54,7 +54,7 @@
       
     <% elsif confirmation == 'email' %>
      
-      <%= extend(member) if timed && member.confirmed? && (member.lapsed? || member.almost_lapsed || member.never_member?) %>
+      <%= extend(member) if timed && member.confirmed? && (member.lapsed? || member.almost_lapsed? || member.never_member?) %>
       
       <%= disable(member)   if member.confirmed? && member.enabled? %>
       <%= enable(member) if member.confirmed? && member.disabled? %>
@@ -64,7 +64,7 @@
   
     <% elsif confirmation == 'admin' %>
     
-      <%= extend(member) if timed && !member.undecided? && (member.lapsed? || member.almost_lapsed || member.never_member?) %>
+      <%= extend(member) if timed && !member.undecided? && (member.lapsed? || member.almost_lapsed? || member.never_member?) %>
       
       <%= disable(member)   if !member.undecided? && !member.rejected? && member.enabled? %>
       <%= enable(member) if !member.undecided? && !member.rejected? && member.disabled? %>

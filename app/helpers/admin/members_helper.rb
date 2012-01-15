@@ -44,10 +44,9 @@ module Admin
     end
     
     def delete(member)
-      link_to refinery_icon_tag('delete.png'), 
+      link_to refinery_icon_tag('delete.png') + t('delete', :scope => 'admin.members'), 
 				admin_member_path(member),
         :class => "confirm-delete",
-        :title => t('delete', :scope => 'admin.members'),
         :confirm => t('message', :scope => 'shared.admin.delete', :title => member.full_name),
         :method => :delete
     end

@@ -70,6 +70,8 @@
 			var val = $(this).val();
 			$('#email_member_accepted')[val == 'admin' ? 'show' : 'hide']();
 			$('#email_member_accepted input').attr('disabled', val == 'admin' ? '' : 'disabled');
+			$('#email_member_rejected')[val == 'admin' ? 'show' : 'hide']();
+			$('#email_member_rejected input').attr('disabled', val == 'admin' ? '' : 'disabled');
 		});
 
   });

@@ -90,7 +90,7 @@ it:
       account_not_activated: Iscrizione non ancora attivata
       disable: Disabilita utente
       enable: Abilita utente
-      delete: Elimina questo utente
+      delete: Elimina utente
       no_members_yet: Non ci sono ancora utenti registrati
       all_members: Tutti gli utenti
       members_administration: Amministrazione utenti

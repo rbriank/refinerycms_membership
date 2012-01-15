@@ -2,11 +2,6 @@
   <li>
     <%= render :partial => "/shared/admin/search", :locals => {:url => send("admin_#{params[:controller].gsub(/^admin\//, '')}_url")} %>
   </li>
-  <%# if params[:controller] == 'admin/memberships' || params[:controller] == 'admin/members' %>
-  <li>    
-    <%= link_to t('memberships_settings', :scope => 'admin'), settings_admin_memberships_path(:dialog => true, :width => 650, :height => 400), :class => "options_icon" %>
-  </li>
-  <%# end %>
   
   <% if params[:controller] == 'admin/roles' %>
   <li>
@@ -29,7 +24,7 @@
   
   <% unless params[:controller] == 'admin/members' %>
   <li>
-    <%= link_to t('members_administration', :scope => 'admin.members'), admin_members_path, :class => "members_icon" %>
+    <%= link_to t('all_members', :scope => 'admin.members'), admin_members_path, :class => "members_icon" %>
   </li>
   <% end %>
   
@@ -44,7 +39,13 @@
   <li>
     <%= link_to t('roles_administration', :scope => 'admin.roles'), admin_roles_path, :class => "roles_icon" %>
   </li>
-  <% end %>
+	<% end %>
+
+  <%# if params[:controller] == 'admin/memberships' || params[:controller] == 'admin/members' %>
+  <li>    
+    <%= link_to t('memberships_settings', :scope => 'admin'), settings_admin_memberships_path(:dialog => true, :width => 650, :height => 400), :class => "options_icon" %>
+  </li>
+  <%# end %>
 </ul>
 
 <% content_for :stylesheets do %>

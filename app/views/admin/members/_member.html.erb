@@ -39,8 +39,9 @@
     <% end %>
   </td>
   <td>
-    <span style="white-space:nowrap" class="actions row_actions">
-		 <span class="row_menu">    
+		<span style="white-space:nowrap" class="actions row_actions">
+			<%= link_to image_tag('/images/refinery/icons/cog_edit.png').html_safe, '#', :tooltip => t('member_actions', :scope => 'admin.members') %>
+		<span class="row_menu">    
     <% if confirmation == 'no' %>
         
       <%= extend(member) if timed && (member.lapsed? || member.almost_lapsed? || member.never_member?) %>

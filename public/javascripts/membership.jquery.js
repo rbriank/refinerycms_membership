@@ -72,6 +72,7 @@
 		var wrapper = $(table).parent();
     $(table).parent().addClass('slick-grid').css({width: $(table).width()});
     var grid = new Slick.Grid($(table).parent().get(0), model, columns, opts);
+		$('.pagination_container').applyMinimumHeightFromChildren();
     
     var self = this;
     
@@ -84,10 +85,12 @@
     
     $(table).parent().show();
 
+		$('#menu_container').remove();
 		var container = $('<div id="menu_container"></div>').appendTo(document.body).css({width: 0, height: 0});
     init_tooltips();
 		initMenus();
     initActions();
+		initFilter();
     
     function getModel() {
       return model;
@@ -149,7 +152,11 @@
     function onSort(ev, obj){
       var dir = obj.sortAsc ? 'asc' : 'desc';
       var col = obj.grid.getColumnIndex(obj.sortCol.id);
-      var url = updateUrlParams({order_by: col, order_dir: dir});
+      var url = updateUrlParams({
+				order_by: col, 
+				order_dir: dir,
+				from_page: '' 
+			});
       if(typeof(window.history.pushState) == 'function') {
         var current_state_location = (location.pathname + location.href.split(location.pathname)[1]);
         window.history.pushState({
@@ -179,6 +186,10 @@
       }
       return params;
     };
+
+		function getCurrentPage() {
+			return $('.pagination').find('em').text();
+		}
   
     function updateUrlParams(new_params){
       var url = window.location.toString().replace(/\?.*$/, '');
@@ -187,7 +198,11 @@
       var c = 0;
       for(k in new_params){
         c++;
-        params[k] = new_params[k];
+				if(new_params[k] !== null && new_params[k] !== '') {
+        	params[k] = new_params[k];
+				} else {
+					delete(params[k]);
+				}
       }
       return c > 0 ? url + '?' + $.param(params) : c;
     };
@@ -228,7 +243,7 @@
 
 		function initMenus() {
 			wrapper.find('span.row_actions span').each(function(e){
-				var trigger = $('<a href="#"><img src="/images/refinery/icons/cog_edit.png" /></a>').appendTo($(this).parent());
+				var trigger = $(this).parent().find('> a');
 				var triggerCopy = trigger.clone().appendTo(container).addClass('menu_trigger').hide();
 				var menu = $(this);
 				var id = 'menu_' + Math.random();
@@ -265,6 +280,26 @@
 						});
 					}, 100);
 				});
+			});
+		}
+
+		function initFilter() {
+			$('#filter_by').change(function(){
+				var filter = $(this).val();
+
+				var curPage = getCurrentPage();
+				var url = updateUrlParams({filter_by: filter, page: 1, from_page: curPage > 1 ? curPage : '' });
+				if(typeof(window.history.pushState) == 'function') {
+					var current_state_location = (location.pathname + location.href.split(location.pathname)[1]);
+					window.history.pushState({
+						path: current_state_location
+					}, '', url);
+					$('.slick-grid').loading();
+					$(document).paginateTo(url);
+				} else {
+					window.location = url;
+				}
+
 			});
 		}
     

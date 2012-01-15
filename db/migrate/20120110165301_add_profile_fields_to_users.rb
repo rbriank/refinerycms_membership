@@ -13,7 +13,7 @@ class AddProfileFieldsToUsers < ActiveRecord::Migration
     add_column ::User.table_name, :province, :integer
     add_column ::User.table_name, :postal_code, :string
     add_column ::User.table_name, :member_until, :datetime
-    add_column ::User.table_name, :membership_level, :string
+    add_column ::User.table_name, :membership_level, :string, :default => 'User'
   end
 
   def self.down

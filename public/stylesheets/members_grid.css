@@ -265,3 +265,25 @@ classes should alter those!
 	vertical-align: middle;
 	margin-right: 8px;
 }
+
+div.pagination_and_filter {
+	margin: 10px 0;
+	background: #C9DAE2;
+	height: 29px;
+}
+div.pagination_and_filter .pagination {
+	margin: 0;
+	background: none;
+}
+
+div.filter {
+	position: absolute;
+	top: 10px;
+	right: 0;
+	padding: 0 5px;
+	line-height: 29px;
+}
+
+div.filter label {
+	display: inline;
+}

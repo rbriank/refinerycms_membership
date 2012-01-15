@@ -36,6 +36,19 @@ class Admin::MembersController < Admin::BaseController
       @activation_steps << [I18n.t('years', :count => n), n*12]
     end
   end
+
+	def index
+		if params['filter_by'].present? && %w(active rejected disabled unconfirmed)
+			case params['filter_by']
+			when 'active' then find_all_members ['rejected = ? AND enabled = ? AND confirmed_at IS NOT NULL', 'NO', true]
+			when 'rejected' then find_all_members :rejected => 'YES'
+			when 'disabled' then find_all_members :enabled => false
+			when 'unconfirmed' then find_all_members ['confirmation_token IS NOT NULL'] 
+			end
+		end
+		paginate_all_members
+		render :partial => 'members' if request.xhr? 
+	end
   
   def redirect_back_or_default(default)
     params[:redirect_to_url].present? ? redirect_to(params[:redirect_to_url]) : super 

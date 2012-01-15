@@ -92,6 +92,7 @@ it:
       enable: Abilita utente
       delete: Elimina questo utente
       no_members_yet: Non ci sono ancora utenti registrati
+      all_members: Tutti gli utenti
       members_administration: Amministrazione utenti
       account: Dati iscrizione
       organization: Organizzazione
@@ -101,6 +102,14 @@ it:
       user_can_login: "L'utente può accedere alle pagine riservate"
       extend: Rinnova iscrizione
       extend_membership_for: Rinnova iscrizione per
+      filter_by: Filtra per
+      member_actions: Azioni utente
+      filter:
+        all: Tutti
+        active: Attivi
+        rejected: Rifiutati
+        disabled: Disabilitati
+        unconfirmed: Non confermati
     membership_email_parts:
       email_header: Intestazione messaggio
       email_footer: Firma messaggio

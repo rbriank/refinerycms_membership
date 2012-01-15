@@ -134,10 +134,11 @@ module Refinery
         
         # show only admins in Users administration
         ::Admin::UsersController.class_eval do
-          def render(*args)
-            @users = @users.reject{|u| u.is_a?(Member) } if @users
-            super
-          end
+					def index
+						find_all_users ["membership_level <> ?", 'Member']
+						paginate_all_users
+						render :partial => 'users' if request.xhr?
+					end
         end
         
         # override image dialog

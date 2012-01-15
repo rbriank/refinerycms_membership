@@ -51,6 +51,7 @@ class Member < User
     d = attributes.to_hash
     d.reject!{|k,v| !allowed_attributes.include?(k.to_s)}
     d[:activation_url] = Rails.application.routes.url_helpers.activate_members_url(:confirmation_token => self.confirmation_token) if RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email'
+    d[:member_until] = I18n.localize(member_until.to_date, :format => :long) if member_until && RefinerySetting::find_or_set('memberships_timed_accounts', true)
     d
   end
   
@@ -160,6 +161,7 @@ class Member < User
   
   def accept!
     update_attribute(:rejected, 'NO')
+		enable!
   end
   
   

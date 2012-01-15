@@ -58,11 +58,14 @@ class Admin::MembersController < Admin::BaseController
     find_member    
     @member.seen!
     @member.extend!
+    @member.reload
     
     #MembershipMailer.extension_confirmation_member(@member).deliver
     #MembershipMailer.extension_confirmation_admin(@member, current_user).deliver
     
-    render :partial => 'member', :layout => false, :locals => {:member => @member}
+    @members = [@member]
+
+    render :partial => 'admin/members/members_table', :layout => false
   end
   
   def enable

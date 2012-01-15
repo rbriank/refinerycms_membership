@@ -61,11 +61,50 @@ new_member_page.parts.create({
 })
 
 
-page = members_page.children.create({:title => "Thank you",
+page = new_member_page.children.create({:title => "Welcome",
   :deletable => false,
-  :link_url => "/members/thank_you",
+  :link_url => "/members/welcome",
   :show_in_menu => false,
-  :menu_match => "^/members/thank_you*$"})
+  :menu_match => "^/members/welcome$"})
+page.parts.create({
+  :title => "Body",
+  :body => "",
+  :position => 0
+})
+page.parts.create({
+  :title => "Side body",
+  :body => "",
+  :position => 1
+})
+
+
+lost_password_page = members_page.children.create({:title => "New password",
+  :deletable => false,
+  :link_url => "/members/new_password",
+  :show_in_menu => false,
+  :menu_match => "^/members/new_password$"})
+lost_password_page.parts.create({
+  :title => "Body above",
+  :body => "",
+  :position => 0
+})
+lost_password_page.parts.create({
+  :title => "Body below",
+  :body => "",
+  :position => 1
+})
+lost_password_page.parts.create({
+  :title => "Side Body",
+  :body => "",
+  :position => 2
+})
+
+
+page = lost_password_page.children.create({:title => "New password created",
+  :deletable => false,
+  :link_url => "/members/new_password/created",
+  :show_in_menu => false,
+  :menu_match => "^/members/new_password/created$"})
 page.parts.create({
   :title => "Body",
   :body => "",

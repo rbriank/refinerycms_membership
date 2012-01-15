@@ -1,15 +1,13 @@
 class MembersController < ApplicationController
 
   # Protect these actions behind member login - do we need to check out not signing up when signed in?
-  before_filter :redirect?, :except => [:new, :create, :login, :index, :thank_you, :activate]
+  before_filter :redirect?, :except => [:new, :create, :login, :index, :welcome, :activate]
 
   before_filter :find_page, :except => [:activate, :login]
 
   # GET /member/:id
   def profile
-    @member = Member::find(:first) #current_user
-    @email = MembershipEmail['member_created']
-    render :action => 'membership_mailer/email'
+    @member = current_user
   end
 
   def new
@@ -48,7 +46,7 @@ class MembersController < ApplicationController
     if @member.save!
       MembershipMailer::deliver_member_created(@member)
       
-      redirect_to thank_you_members_path
+      redirect_to welcome_members_path
 
     else
       @member.errors.delete(:username) # this is set to email
@@ -66,7 +64,7 @@ class MembersController < ApplicationController
     find_page('/members/login')
 	end
 	
-  def thank_you
+  def welcome
   end
   
   def activate

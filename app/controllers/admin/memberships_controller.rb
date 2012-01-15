@@ -32,7 +32,8 @@ class Admin::MembershipsController < Admin::BaseController
       value.reject!{|v| !v || v == ''} if value.is_a?(Array)
       RefinerySetting.set(key, value)
     end if params[:settings].present?
-    render :text => "<script>parent.window.$('.ui-dialog .ui-dialog-titlebar-close').trigger('click');</script>"
+    #render :text => "<script>parent.window.$('.ui-dialog .ui-dialog-titlebar-close').trigger('click');</script>"
+    render :text => "<script>parent.window.location.reload();</script>"
   end
     
   private

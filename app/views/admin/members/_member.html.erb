@@ -64,13 +64,13 @@
   
     <% elsif confirmation == 'admin' %>
     
-      <%= extend(member) if timed && !member.undefined? && (member.lapsed? || member.almost_lapsed || member.never_member?) %>
+      <%= extend(member) if timed && !member.undecided? && (member.lapsed? || member.almost_lapsed || member.never_member?) %>
       
-      <%= disable(member)   if !member.undefined? && member.enabled? %>
-      <%= enable(member) if !member.undefined? && member.disabled? %>
+      <%= disable(member)   if !member.undecided? && !member.rejected? && member.enabled? %>
+      <%= enable(member) if !member.undecided? && !member.rejected? && member.disabled? %>
       
-      <%= accept(member) if member.undefined? || member.rejected? %>
-      <%= reject(member) if member.undefined? || member.accepted? %>    
+      <%= accept(member) if member.undecided? || member.rejected? %>
+      <%= reject(member) if member.undecided? %>    
   
     <% end %>
     

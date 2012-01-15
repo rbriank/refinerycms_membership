@@ -3,11 +3,29 @@
     <%= link_to t('toggle_email_body_help', :scope => 'admin.membership_emails'), "#",
                 :id => 'toggle_advanced_options',
                 :style => 'background-image: url(/images/refinery/icons/information.png)',
-                :title => t('email_body_help', :scope => 'admin.membership_emails') %>
+                :title => t('email_body_help_title', :scope => 'admin.membership_emails') %>
   </p>
 </div>
 <div id='more_options' style="display:none;">
-  aaaaaaaaaaaaa
+	<h2><%= t('email_body_help_title', :scope => 'admin.membership_emails') %></h2>
+	<p>
+	<%= t('.email_body_help') %>
+	</p>
+	<h2><%= t('.available_tags') %></h2>
+	<p>
+	<%= t('.user_data') %>: [:email], [:first_name], [:last_name], [:title], [:organization], [:street_address], [:city], [:province], [:postal_code], [:phone], [:fax], [:website]	
+	</p>
+	<% if RefinerySetting.find_or_set('memberships_timed_accounts', true) %>
+	<p>
+  <%= t('.member_until') %>: [:member_until]
+	</p>
+	<% end %>
+	<% if RefinerySetting.find_or_set('memberships_confirmation', 'admin') == 'email' %>
+	<p>
+	<%= t('.activation_url') %>: [:activation_url]
+	</p>
+	<% end %>
+
 </div>
 
 <% content_for :javascripts do %>

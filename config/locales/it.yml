@@ -126,8 +126,14 @@ it:
       membership_email:
       email_settings: Preferenze email
       toggle_email_body_help: Mostra/nascondi documentazione
-      email_body_help: Documentazione su 'Corpo del messaggio'
+      email_body_help_title: Documentazione su 'Corpo del messaggio'
       shared_email_parts: Parti comuni alle email
+      email_body_help: 
+        email_body_help: "Nel corpo del messaggio è possibile inserire delle etichette che verranno sotituite con la corrispondente informazione sull'utente."
+        available_tags: Etichette disponibili
+        user_data: "Dati dell'utente"
+        member_until: La data di scadenza dell'iscrizione
+        activation_url: L'URL a cui è necessario accedere per attivare l'iscrizione
       settings:
         deliver_notifications_on: Spedire le seguenti notifiche agli utenti
         deliver_admin_notifications_to: Spedire le notifiche amministrative a

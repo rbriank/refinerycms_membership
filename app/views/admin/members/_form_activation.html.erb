@@ -21,7 +21,8 @@
       <% end %>
     <% else %>
     <b><%= t('not_yet_member', :scope => 'admin.members')%></b><br />
-      <%= t('activate_member_for', :scope => 'admin.members')%> <%= f.select :add_to_member_until, [[]]+(1..10).collect{|n| [t('years', :count => n), n]} %>
+      <%= t('activate_member_for', :scope => 'admin.members')%> 
+      <%= f.select :add_to_member_until, @activation_steps %>
     <% end %>
   </span>
   </p>

@@ -28,11 +28,20 @@
     <%= radio_button_tag "settings[memberships_timed_accounts]", true, RefinerySetting.find_or_set("memberships_timed_accounts", true) == true %>
     <label for="<%= "settings_memberships_timed_accounts_true" %>"><%= t('timed_expiration', :scope => 'admin.memberships.settings') %></label>
   </p>
-  <% is_true = (RefinerySetting.find_or_set("memberships_timed_accounts", true) == true) %>
-  <p class="field checkbox" <%= 'style="display: none;"'.html_safe unless is_true %>>
-    <label for="<%= "settings_memberships_default_account_validity" %>"><%= t('default_expiration_in_days_before', :scope => 'admin.memberships.settings') %></label>
-    <%= text_field_tag "settings[memberships_default_account_validity]", RefinerySetting.find_or_set("memberships_default_account_validity", 365), :disabled => (is_true ? '' : 'disabled') %>
-    <label for="<%= "settings_memberships_default_account_validity" %>"><%= t('default_expiration_in_days_after', :scope => 'admin.memberships.settings') %></label>
+  <% is_timed = (RefinerySetting.find_or_set("memberships_timed_accounts", true).to_s == 'true') %>
+  <p class="field checkbox" <%= 'style="display: none;"'.html_safe unless is_timed %>>
+    <label for="<%= "settings_memberships_default_account_validity" %>">
+      <%= t('default_expiration_in', :scope => 'admin.memberships.settings') %>:
+    </label>
+    <%= select_tag "settings[memberships_default_account_validity]", options_for_select([
+      [t('months', :count => 1) ,1],
+      [t('months', :count => 2) ,2],
+      [t('months', :count => 3) ,3],
+      [t('months', :count => 4) ,4],
+      [t('months', :count => 6) ,6],
+      [t('years', :count => 1) ,12]
+    ], RefinerySetting.find_or_set("memberships_default_account_validity", 12)),
+    :disabled => (is_timed ? false : 'disabled') %>
   </p>
   
   

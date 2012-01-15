@@ -177,7 +177,7 @@ classes should alter those!
   display: block;
   text-align: right;
 }
-
+/*
 #content .slick-grid span.actions.row_actions a {
   display: inline-block;
   margin: 3px 0;
@@ -187,4 +187,81 @@ classes should alter those!
 #content .slick-grid span.actions.row_actions a img {
   padding-left: 1px;
   padding-right: 0;
+}
+*/
+
+#content .slick-grid span.actions.row_actions {
+/*	background: url(/images/refinery/icons/cog_edit.png) 4px 5px no-repeat;
+	display: inline-block;
+	width: 24px;
+	height: 0;
+	padding-top: 29px;
+	margin: 3px 3px 0 3px; */
+}
+
+#content .slick-grid span.actions.row_actions.open {
+  /*background-color: #DBEDFF;*/
+}
+
+#content .slick-grid span.actions.row_actions:HOVER {
+/*	margin: 2px 2px 0 2px;
+  background-color: #cae7fb;
+	border: 1px solid #65C3F7;*/
+}
+
+.menu_trigger {
+	display: block;
+	float: right;
+	line-height: inherit;
+	text-decoration: none;
+  background-color: #DBEDFF;
+	border: 1px solid #65C3F7;
+	border-bottom-width: 0;
+	line-height: 28px;
+	z-index: 11;
+}
+
+.menu_trigger.menu_on_top {
+	border-bottom-width: 1px;
+	border-top-width: 0;
+}
+
+.menu_trigger:HOVER {
+	border-bottom-width: 0;
+}
+
+.menu_trigger.menu_on_top:HOVER {
+	border-bottom: 1px solid #65C3F7;
+}
+
+.menu_trigger img {
+	vertical-align: middle;
+	padding: 1px 3px 5px 3px;
+	border: none;
+}
+
+.menu_trigger.menu_on_top img {
+	padding: 3px 3px 4px 3px;
+}
+
+.row_menu {
+	display: block;
+  background-color: #DBEDFF;
+	border: 1px solid #65C3F7;
+	z-index: 10;
+}
+
+.row_menu a {
+	display: block;
+	padding: 9px 12px;
+	border: 0;
+}
+
+.row_menu a:HOVER {
+  background-color: #cae7fb;
+}
+
+.row_menu a img {
+	vertical-align: middle;
+	margin-right: 8px;
 }

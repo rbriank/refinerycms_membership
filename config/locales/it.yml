@@ -38,6 +38,9 @@ it:
   years:
     one: '1 anno'
     other: '%{count} anni'
+  months:
+    one: '1 mese'
+    other: '%{count} mesi'
   admin:
     memberships_settings: Impostazioni
     memberships:
@@ -52,11 +55,11 @@ it:
         membership_expiration: Scadenza iscrizione
         no_expiration: Nessuna scadenza
         timed_expiration: Iscrizione con scadenza
-        default_expiration_in_days_before: "Scadenza predefinita iscrizione dopo:" 
-        default_expiration_in_days_after: giorni 
+        default_expiration_in: "Scadenza predefinita iscrizione" 
         default_groups: Gruppi predefiniti
         assign_new_users_to_the_selected_groups: Assegna automaticamente i nuovi utenti ai seguenti gruppi
         no_groups_found: "Nessun gruppo di utenti trovato." 
+        
     pages:
       tabs:
         roles:
@@ -83,7 +86,9 @@ it:
       new_account: Nuovo utente
       account_disabled: Utente disabilitato
       account_expired: Utente scaduto
-      cancel: Disabilita utente
+      account_rejected: Iscrizione rifiutata
+      account_not_activated: Iscrizione non ancora attivata
+      disable: Disabilita utente
       enable: Abilita utente
       delete: Elimina questo utente
       no_members_yet: Non ci sono ancora utenti registrati

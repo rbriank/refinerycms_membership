@@ -1,6 +1,8 @@
 class Admin::MembershipsController < Admin::BaseController
+  include Admin::MembershipsHelper
+  
   crudify :member,
-    :conditions => {:is_new => true},
+    :conditions => {:seen => false},
     :title_attribute => :full_name,
     :xhr_paging => true
   
@@ -35,7 +37,7 @@ class Admin::MembershipsController < Admin::BaseController
     
   private
   
-  def find_all_members(conditions = {:is_new => true})
+  def find_all_members(conditions = {:seen => false})
     @members = Member.where(conditions).order(@order||'')
   end
 end

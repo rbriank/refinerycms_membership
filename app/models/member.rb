@@ -16,7 +16,8 @@ class Member < User
 
   set_inheritance_column :membership_level
   
-  after_create :set_enabled
+  after_create :set_default_enabled
+  after_create :set_default_rejected
   after_create :set_default_roles
   
   def full_name
@@ -29,7 +30,7 @@ class Member < User
   
   def add_to_member_until=(n)
     @add_to_member_until = n
-    add_year_to_member_until n.to_i if n && n.to_i > 0
+    extend_membership n.to_i if n && n.to_i > 0
   end
   
   def email=(e)
@@ -43,13 +44,23 @@ class Member < User
     e ? ensure_member_role : remove_member_role
     e
   end
+
+  def mail_data
+    allowed_attributes = %w(email first_name last_name title organization
+    street_address city province postal_code phone fax website)
+    d = attributes.to_hash
+    d.reject!{|k,v| !allowed_attributes.include?(k.to_s)}
+    d[:activation_url] = Rails.application.routes.url_helpers.activate_members_url(:confirmation_token => self.confirmation_token) if RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email'
+    d
+  end
   
   def is_member?
-    role_ids.include?(Role[:member].id)
+    has_role?(:member)
   end
 
   def active_for_authentication?
-    a = self.enabled && role_ids.include?(Role[:member].id)
+    a = self.enabled && self.is_member?
+    
     if RefinerySetting::find_or_set('memberships_timed_accounts', true)
       if member_until.nil?
         a = false
@@ -59,11 +70,45 @@ class Member < User
     end
     a
   end
-  
-  def active?
-    active_for_authentication?
-  end
 
+  alias :active? :active_for_authentication?
+    
+  def confirmed?
+    RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'email' || !!confirmed_at
+  end
+  
+  def unconfirmed?
+    !self.confirmed?
+  end
+  
+  def seen?
+    self.seen == true
+  end
+  
+  def unseen?
+    !self.seen?
+  end
+  
+  def enabled?
+    self.enabled == true
+  end
+  
+  def disabled?
+    !self.enabled?
+  end
+  
+  def rejected?
+    self.rejected == 'YES'
+  end
+  
+  def accepted?
+    self.rejected == 'NO'
+  end
+  
+  def undecided?
+    self.rejected == 'UNDECIDED'
+  end
+  
   def lapsed?
     if RefinerySetting::find_or_set('memberships_timed_accounts', true)
       if member_until.nil?
@@ -79,54 +124,51 @@ class Member < User
   def almost_lapsed?
     !lapsed? && member_until.present? && (member_until-7.days).past?
   end
-
-  # multiple calls extends the membership life
-  def activate
-    self.is_new = false
-    self.enabled = true
-    add_year_to_member_until if RefinerySetting::find_or_set('memberships_timed_accounts', true) && member_until.nil?
-    ensure_member_role
-    save!
-  end
-
-  def deactivate
-    self.enabled = false
-    self.is_new = false
-    remove_member_role
-    save!
+  
+  def never_member?
+    !RefinerySetting::find_or_set('memberships_timed_accounts', true) || member_until.nil?
   end
   
-  def extend
-    self.is_new = false
-    self.enabled = true
-    nil_paid_until if lapsed? && RefinerySetting::find_or_set('memberships_timed_accounts', true)
-    add_year_to_member_until if RefinerySetting::find_or_set('memberships_timed_accounts', true)
-    ensure_member_role
-    save!
+  def confirm!
+    unless_confirmed do
+      self.enabled = true
+    end
+    super
   end
+  
+  def seen!    
+    self.update_attribute(:seen, true)
+  end
+  
+  def enable!
+    self.enabled = true
+    save
+  end
+  
+  def disable!
+    self.enabled = false
+    save
+  end
+  
+  def extend!
+    extend_membership if RefinerySetting::find_or_set('memberships_timed_accounts', true)
+  end
+
+  def reject!
+    update_attribute(:rejected, 'YES')
+  end
+  
+  def accept!
+    update_attribute(:rejected, 'NO')
+  end
+  
+  
   
   def inactive_message
-    self.is_new ? super : I18n.translate('devise.failure.locked')
+    self.seen? ? I18n.translate('devise.failure.locked') : super
   end
-    
-  
-  # write_attribute(:is_new, false) if e && self.is_new
-  
-  def mail_data
-    allowed_attributes = %w(email first_name last_name title organization
-    street_address city province postal_code phone fax website)
-    d = attributes.to_hash
-    d.reject!{|k,v| !allowed_attributes.include?(k.to_s)}
-    d[:activation_url] = Rails.application.routes.url_helpers.activate_members_url(:confirmation_token => self.confirmation_token) if RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email'
-    d
-  end
-
 
   # devise confirmable
-
-  def confirmed?
-    RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'email' || !!confirmed_at
-  end
   
   # override... the token was sent with the welcome email
   def send_confirmation_instructions
@@ -141,12 +183,6 @@ class Member < User
     end
   end
   
-  def confirm!
-    unless_confirmed do
-      self.enabled = true
-    end
-    super
-  end
 
 
   protected
@@ -155,9 +191,12 @@ class Member < User
     RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email' && !confirmed?
   end
 
-  def set_enabled
-    self.enabled = RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'no'
-    save
+  def set_default_enabled
+    update_attribute(:enabled, RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'no')
+  end
+  
+  def set_default_rejected
+    update_attribute(:rejected, 'NO') if RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin'
   end
   
   def set_default_roles
@@ -170,9 +209,13 @@ class Member < User
     end
   end
 
-  def add_year_to_member_until(amount = 1)
+  def extend_membership(amount = 1)
+    
+    step = RefinerySetting.find_or_set("memberships_default_account_validity", 12) # months
+    amount = amount*step
     if amount && amount > 0
-      self.member_until = member_until.nil? || lapsed? ? amount.year.from_now : member_until + amount.year
+      self.member_until = member_until.nil? || lapsed? ? amount.month.from_now : member_until + amount.month
+      save
     end
   end
 
@@ -182,9 +225,5 @@ class Member < User
 
   def remove_member_role
     self.roles.delete(Role[:member]) if has_role?(:member)
-  end
-
-  def nil_paid_until
-    self.member_until = nil
   end
 end

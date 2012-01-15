@@ -9,11 +9,13 @@ Refinery::Application.routes.draw do
     resources :roles 
     resources :members do
       member do
-        put :reject
-        put :accept
-        put :cancel
         put :extend
+        
         put :enable
+        put :disable
+        
+        put :accept
+        put :reject
       end
     end
     resources :membership_emails, :except => :show do

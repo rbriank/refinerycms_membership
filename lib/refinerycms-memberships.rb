@@ -50,6 +50,12 @@ module Refinery
         
         Role.class_eval do
           has_and_belongs_to_many :pages
+          validates_presence_of :title
+          acts_as_indexed :fields => [:title]
+          # Number of settings to show per page when using will_paginate
+          def self.per_page
+            12
+          end
         end
         
         #redirect user to the right page after login
@@ -101,15 +107,6 @@ module Refinery
         end # Page.class_eval
         
         
-        # validations and pagination
-        Role.class_eval do          
-          validates_presence_of :title
-          acts_as_indexed :fields => [:title]
-          # Number of settings to show per page when using will_paginate
-          def self.per_page
-            12
-          end
-        end
 
         PagesController.class_eval do
           def show
@@ -163,6 +160,17 @@ module Refinery
               super(*args) 
             else 
               super
+            end
+          end
+        end
+        
+        ::Admin::BaseController.class_eval do
+          def restrict_controller
+            admin = refinery_user? || current_user.has_role?(:superuser)
+            if !admin || Refinery::Plugins.active.reject { |plugin| params[:controller] !~ Regexp.new(plugin.menu_match)}.empty?
+              warn "'#{current_user.username}' tried to access '#{params[:controller]}' but was rejected."
+              error_404 if admin
+              redirect_to '/' unless admin
             end
           end
         end

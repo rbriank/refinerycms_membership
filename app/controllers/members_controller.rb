@@ -43,7 +43,7 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(params[:member])
 
-    if @member.save!
+    if @member.save
       MembershipMailer::deliver_member_created(@member)
       
       redirect_to welcome_members_path

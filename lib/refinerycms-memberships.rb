@@ -1,5 +1,6 @@
 require 'refinerycms-base'
 require 'refinerycms-dashboard'
+        
 
 module Refinery
   module Memberships
@@ -180,9 +181,11 @@ module Refinery
         # render the right page on login      
         ::Devise.setup do |config|
           config.warden do |manager|
-            manager.failure_app = Refinery::Memberships::WardenFailure
+            manager.failure_app = Memberships::WardenFailure
           end
         end
+        
+        require 'memberships/member'
         
       end # config.to_prepare
     end # Engine < Rails::Engine

@@ -132,8 +132,8 @@ it:
         email_body_help: "Nel corpo del messaggio è possibile inserire delle etichette che verranno sotituite con la corrispondente informazione sull'utente."
         available_tags: Etichette disponibili
         user_data: "Dati dell'utente"
-        member_until: La data di scadenza dell'iscrizione
-        activation_url: L'URL a cui è necessario accedere per attivare l'iscrizione
+        member_until: "La data di scadenza dell'iscrizione"
+        activation_url: "L'URL a cui è necessario accedere per attivare l'iscrizione"
       settings:
         deliver_notifications_on: Spedire le seguenti notifiche agli utenti
         deliver_admin_notifications_to: Spedire le notifiche amministrative a

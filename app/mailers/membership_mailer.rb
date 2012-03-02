@@ -51,7 +51,8 @@ class MembershipMailer < ActionMailer::Base
   def member_created_admin(member)
     @member = member
     
-    mail(:to => admins, :subject => "New user registration on #{RefinerySetting::get('site_name')}") do |format|
+    mail(:from => RefinerySetting.find_or_set("memberships_sender_address", nil),
+         :to => admins, :subject => "New user registration on #{RefinerySetting::get('site_name')}") do |format|
       format.text
     end
   end

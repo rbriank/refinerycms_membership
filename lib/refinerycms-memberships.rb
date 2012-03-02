@@ -61,6 +61,16 @@ module Refinery
         
         #redirect user to the right page after login
         ApplicationController.class_eval do
+          def render(*args)
+            Rails.logger.info @page.inspect
+            unless @page.nil? || self.class.name == 'PagesController' || self.class.name =~ /^Admin::/
+              redirect_to login_members_path(:redirect => request.fullpath, :member_login => true) unless @page.user_allowed?(current_user) 
+              super *args if @page.user_allowed?(current_user)  
+            else
+              super *args
+            end
+          end
+         
           protected
           def after_sign_in_path_for(resource_or_scope)
             
@@ -129,7 +139,7 @@ module Refinery
             end
           end
         end # PagesController.class_eval
-        
+
         # show only admins in Users administration
         ::Admin::UsersController.class_eval do
 					def index

@@ -40,7 +40,8 @@ class MembershipMailer < ActionMailer::Base
     html = extract_images(html)
     text = html_to_text(html)
     
-    mail(:to => member.email, :subject => @email.subject) do |format|
+    mail(:from => RefinerySetting.find_or_set("memberships_sender_address", nil),
+         :to => member.email, :subject => @email.subject) do |format|
       format.text { render :text => text }
       format.html { render :text => html }
     end
@@ -90,7 +91,7 @@ class MembershipMailer < ActionMailer::Base
       image = v[:size] == 'original' ? record.image : record.thumbnail(v[:size].to_sym)
       attachments.inline[image.name] = {
         :mime_type => image.mime_type,
-        :content => File::read(image.tempfile)
+        :content => File::read(image.tempfile.path)
       }
       v[:nodes].each do | node |
         node['src'] = attachments[image.name].url

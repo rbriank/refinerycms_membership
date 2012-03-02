@@ -59,9 +59,8 @@ class Admin::MembersController < Admin::BaseController
     @member.seen!
     @member.extend!
     @member.reload
-    
-    #MembershipMailer.extension_confirmation_member(@member).deliver
-    #MembershipMailer.extension_confirmation_admin(@member, current_user).deliver
+        
+    MembershipMailer.deliver_member_accepted(@member)
     
     @members = [@member]
 
@@ -98,12 +97,12 @@ class Admin::MembersController < Admin::BaseController
   
   def accept
     find_member
+    old = @member.rejected
     @member.seen!
     @member.accept!
     @member.reload 
     
-    #MembershipMailer.acceptance_confirmation_member(@member).deliver
-    #MembershipMailer.acceptance_confirmation_admin(@member, current_user).deliver
+    MembershipMailer.deliver_member_accepted(@member) if old == 'UNDECIDED'
     
     @members = [@member]    
     render :partial => 'admin/members/members_table', :layout => false
@@ -115,8 +114,7 @@ class Admin::MembersController < Admin::BaseController
     @member.reject!
     @member.reload 
     
-    #MembershipMailer.rejection_confirmation_member(@member).deliver
-    #MembershipMailer.rejection_confirmation_admin(@member, current_user).deliver
+    MembershipMailer.deliver_member_rejected(@member) if old == 'UNDECIDED'
     
     @members = [@member]    
     render :partial => 'admin/members/members_table', :layout => false

@@ -1,5 +1,6 @@
 <% content_for :body_content_left do %>
   <%=raw @page[:body_above] if @page %>
+  <br />
   <div id="new_member_form">
     <%= render :partial => 'form',
       :locals => {
@@ -8,4 +9,4 @@
   <%=raw @page[:body_below] if @page %>
 <% end %>
 
-<%= render :partial => "/shared/content_page", :hide_sections => [:body_below, :body_above] %>
+<%= render :partial => "/shared/content_page", :locals => {:hide_sections => [:bodybelow, :bodyabove]} %>

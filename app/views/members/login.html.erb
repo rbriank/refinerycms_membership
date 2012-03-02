@@ -6,4 +6,4 @@
   <%=raw @page[:body_below] if @page %>
 <% end %>
 
-<%= render :partial => "/shared/content_page", :hide_sections => [:body_below, :body_above] %>
+<%= render :partial => "/shared/content_page", :locals => {:hide_sections => [:bodybelow, :bodyabove]} %>

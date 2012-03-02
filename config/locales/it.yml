@@ -1,4 +1,9 @@
 it:
+  members:
+    login_form:
+      username: Nome utente
+      password: Password
+      login: Accedi  
   plugins:
     memberships:
       title: Iscrizioni

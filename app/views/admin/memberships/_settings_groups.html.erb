@@ -1,6 +1,8 @@
 <div id="default_groups" class="dialog_area" style="display: none">
   <h3><%= t('assign_new_users_to_the_selected_groups', :scope => 'admin.memberships.settings')%>:</h3>
-  <inout type="hidden" name="settings[memberships_default_roles][]" value="">
+
+  <input type="hidden" name="memberships_default_roles[value][]" value="">
+    
   <% if @roles.any? %>
     <% cnt = 0 %>
     <table>
@@ -12,8 +14,8 @@
           <tr>
         <% end %>
         <td>
-          <% is_active = RefinerySetting.find_or_set("memberships_default_roles", []).include?(role.id) %>
-          <input id="role_cb_<%= role.id %>" type="checkbox" name="settings[memberships_default_roles][]" value="<%= role.id %>" >
+          <% is_active = @memberships_default_roles.value.include?(role.id) %>
+          <input id="role_cb_<%= role.id %>" type="checkbox" name="memberships_default_roles[value][]" value="<%= role.id %>" >
           <label for="role_cb_<%= role.id %>"><%= role.title %></label>
         </td>
         <% cnt += 1 %>
@@ -31,7 +33,6 @@
     <%= t('no_groups_found', :scope => 'admin.memberships.settings')%>
   </p>
   <% end %>
-  
   
 </div>
 

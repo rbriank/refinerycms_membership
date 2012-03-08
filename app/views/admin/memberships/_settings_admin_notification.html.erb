@@ -1,7 +1,19 @@
 <div id="admin_notifications" style="display: none;" class="dialog_area">
-  <h3><%= t('deliver_admin_notifications_to', :scope => 'admin.membership_emails.settings')%>:</h3>
-  <%= hidden_field_tag "settings[memberships_deliver_notification_to_users][]" %>
-  <% if @users.any? %>
-    <%= render :partial => 'user_entry', :collection => @users %>
+  <h3><%= t('deliver_admin_notifications_to', :scope => 'admin.membership_emails.settings')%>:</h3>  
+  
+  <%= fields_for :notification_setting, @notification_setting do | f | %>
+  <div class='field'>
+    <%= f.text_field :value, :value => f.object.value, # required, we can't use :value
+                     :class => "widest" %>
+  </div>
+
+  <p>
+    <%= t('.hint') %>
+  </p>
+  <p>
+    <%= t('.example') %>
+  </p>
+  
   <% end %>
+  
 </div>

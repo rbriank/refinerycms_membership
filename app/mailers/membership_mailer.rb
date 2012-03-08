@@ -60,14 +60,7 @@ class MembershipMailer < ActionMailer::Base
   protected
   
   def admins
-    addrs = RefinerySetting.get('memberships_deliver_notification_to_users')
-		if addrs.blank?
-			addrs = User::find(:all, :conditions => ["membership_level <> ?", 'Member']).collect{|u| u.email}
-			Rails.logger.debug '-'*90
-			Rails.logger.debug addrs.inspect
-			RefinerySetting.find_or_set('memberships_deliver_notification_to_users', addrs)
-		end
-		addrs
+    RefinerySetting.get('memberships_deliver_notification_to_users').split(/[\s,]/).collect{|a|a.strip}.reject{|e|e.blank?}
   end
   
   def extract_images(html)

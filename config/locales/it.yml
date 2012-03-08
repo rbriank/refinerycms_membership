@@ -51,6 +51,9 @@ it:
     memberships:
       new_members: Nuovi utenti iscritti
       no_new_members: Non ci sono nuovi utenti iscritti
+      settings_admin_notification:
+        example: "Inserisci i tuoi indirizzi email come: jack@work.com, jill@office.com"
+        hint: Quando una nuova utente si iscrive, Refinery ti invierà una email di notifica.
       settings:
         signup_defaults: Predefiniti
         signup_confirmation: Conferma registrazione
@@ -64,7 +67,6 @@ it:
         default_groups: Gruppi predefiniti
         assign_new_users_to_the_selected_groups: Assegna automaticamente i nuovi utenti ai seguenti gruppi
         no_groups_found: "Nessun gruppo di utenti trovato." 
-        
     pages:
       tabs:
         roles:

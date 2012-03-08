@@ -1,49 +1,49 @@
 <div id="signup_settings" class="dialog_area">
   <h3><%= t('signup_confirmation', :scope => 'admin.memberships.settings')%>:</h3>
   
-  
+  <%= fields_for :memberships_confirmation, @memberships_confirmation do | f | %>
   <p class="field checkbox">
-    <%= radio_button_tag "settings[memberships_confirmation]", 'no', RefinerySetting.find_or_set("memberships_confirmation", 'admin') == 'no' %>
-    <label for="<%= "settings_memberships_confirmation_no" %>"><%= t('no_confirmation', :scope => 'admin.memberships.settings') %></label>
+    <%= f.radio_button :value, 'no' %>
+    <%= f.label :value, t('no_confirmation', :scope => 'admin.memberships.settings'), :value => 'no' %>
   </p>
-   <p class="field checkbox">
-    <%= radio_button_tag "settings[memberships_confirmation]", 'email', RefinerySetting.find_or_set("memberships_confirmation", 'admin') == 'email' %>
-    <label for="<%= "settings_memberships_confirmation_email" %>"><%= t('email_confirmation', :scope => 'admin.memberships.settings') %></label>
+  <p class="field checkbox">
+    <%= f.radio_button :value, 'email' %>
+    <%= f.label :value, t('email_confirmation', :scope => 'admin.memberships.settings'), :value => 'email' %>
   </p>
-   <p class="field checkbox">
-    <%= radio_button_tag "settings[memberships_confirmation]", 'admin', RefinerySetting.find_or_set("memberships_confirmation", 'admin') == 'admin' %>
-    <label for="<%= "settings_memberships_confirmation_admin" %>"><%= t('admin_confirmation', :scope => 'admin.memberships.settings') %></label>
+  <p class="field checkbox">
+    <%= f.radio_button :value, 'admin' %>
+    <%= f.label :value, t('admin_confirmation', :scope => 'admin.memberships.settings'), :value => 'admin' %>
   </p>
-  
+  <% end %>
   <br />
   
   <h3><%= t('membership_expiration', :scope => 'admin.memberships.settings')%>:</h3>
   
+  <%= fields_for :memberships_timed_accounts, @memberships_timed_accounts do | f | %>
+  <p class="field checkbox">
+    <%= f.radio_button :value, false %>
+    <%= f.label :value, t('no_expiration', :scope => 'admin.memberships.settings'), :value => false %>
+  </p>
+  <p class="field checkbox">
+    <%= f.radio_button :value, true %>
+    <%= f.label :value, t('timed_expiration', :scope => 'admin.memberships.settings'), :value => true %>
+  </p>
+  <% end %>
   
-  <p class="field checkbox">
-    <%= radio_button_tag "settings[memberships_timed_accounts]", false, RefinerySetting.find_or_set("memberships_timed_accounts", true) == false %>
-    <label for="<%= "settings_memberships_timed_accounts_false" %>"><%= t('no_expiration', :scope => 'admin.memberships.settings') %></label>
-  </p>
-  <p class="field checkbox">
-    <%= radio_button_tag "settings[memberships_timed_accounts]", true, RefinerySetting.find_or_set("memberships_timed_accounts", true) == true %>
-    <label for="<%= "settings_memberships_timed_accounts_true" %>"><%= t('timed_expiration', :scope => 'admin.memberships.settings') %></label>
-  </p>
-  <% is_timed = (RefinerySetting.find_or_set("memberships_timed_accounts", true).to_s == 'true') %>
+  <% is_timed = (@memberships_timed_accounts.value.to_s == 'true') %>
+  <%= fields_for :memberships_default_account_validity, @memberships_default_account_validity do | f | %>
   <p class="field checkbox" <%= 'style="display: none;"'.html_safe unless is_timed %>>
-    <label for="<%= "settings_memberships_default_account_validity" %>">
-      <%= t('default_expiration_in', :scope => 'admin.memberships.settings') %>:
-    </label>
-    <%= select_tag "settings[memberships_default_account_validity]", options_for_select([
+    <%= f.label :value, t('default_expiration_in', :scope => 'admin.memberships.settings') %>
+    <%= f.select :value, [
       [t('months', :count => 1) ,1],
       [t('months', :count => 2) ,2],
       [t('months', :count => 3) ,3],
       [t('months', :count => 4) ,4],
       [t('months', :count => 6) ,6],
       [t('years', :count => 1) ,12]
-    ], RefinerySetting.find_or_set("memberships_default_account_validity", 12)),
-    :disabled => (is_timed ? false : 'disabled') %>
+    ], :disabled => (is_timed ? false : 'disabled') %>
   </p>
-  
+  <% end %>
   
 </div>
 
@@ -58,10 +58,10 @@
 <% content_for :javascripts do %>
 <script type="text/javascript">
   $(function(){
-    $('#signup_settings input[type="radio"][id*="memberships_timed_accounts"]').change(function(){
+    $('#signup_settings input[type="radio"][id^="memberships_timed_accounts"]').change(function(){
       var is_enabled = ($(this).val() == 'true' && $(this).is(':checked'));
-      $('#settings_memberships_default_account_validity').attr('disabled', is_enabled ? '' : 'disabled');
-      $('#settings_memberships_default_account_validity').parent()[is_enabled ? 'show' : 'hide']();
+      $('#memberships_default_account_validity_value').attr('disabled', is_enabled ? '' : 'disabled');
+      $('#memberships_default_account_validity_value').parent()[is_enabled ? 'show' : 'hide']();
 			$('#email_membership_extended')[is_enabled ? 'show' : 'hide']();
 			$('#email_membership_extended input').attr('disabled', is_enabled ? '' : 'disabled');
 		});

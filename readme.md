@@ -12,14 +12,14 @@ Refinery CMS version 2.0.0 or above.
 Open up your ``Gemfile`` and add at the bottom this line:
 
 ```ruby
-gem 'refinerycms-blog', '~> 2.0.0'
+gem 'refinerycms-memberships', '~> 2.0.0'
 ```
 
 Now, run ``bundle install``
 
 Next, to install the blog plugin run:
 
-    rails generate refinery:blog
+    rails generate refinery:memberships
 
 Run database migrations:
 

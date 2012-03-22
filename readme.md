@@ -2,17 +2,33 @@
 
 __A role based membership engine for [refinerycms](http://refinerycms.com)__
 
-## Installation
 
-* Clone this repo into vendor/engines/refinerycms-memberships
-* To your Gemfile add: 
-* gem 'refinerycms-memberships', '1.0', :path => 'vendor/engines'
-* Then run:
-* bundle install
-* rails generate refinerycms_events
-* rake db:migrate
-* Via the rails console, add a membership role:
-* Role.create!(:id => 3, :title => 'Member')
+## Requirements
+
+Refinery CMS version 2.0.0 or above.
+
+## Install
+
+Open up your ``Gemfile`` and add at the bottom this line:
+
+```ruby
+gem 'refinerycms-blog', '~> 2.0.0'
+```
+
+Now, run ``bundle install``
+
+Next, to install the blog plugin run:
+
+    rails generate refinery:blog
+
+Run database migrations:
+
+    rake db:migrate
+
+Finally seed your database and you're done.
+
+    rake db:seed
+
 
 ## Notes
 

@@ -13,7 +13,7 @@ module Refinery
         Refinery::Plugin.register do |plugin|
           plugin.pathname = root
           plugin.name = "refinerycms_memberships"
-          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.memberships_admin_members_path }
+          plugin.url = '/refinery/memberships/members' #proc { Refinery::Core::Engine.routes.url_helpers.memberships_admin_members_path }
           plugin.menu_match = /refinery\/memberships/
         end
 

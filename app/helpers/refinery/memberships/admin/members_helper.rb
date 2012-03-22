@@ -49,7 +49,7 @@ module Refinery
           link_to refinery_icon_tag('delete.png') + t('delete', :scope => 'admin.members'),
     				admin_member_path(member),
             :class => "confirm-delete",
-            :confirm => t('message', :scope => 'shared.admin.delete', :title => member.full_name),
+            :confirm => t('message', :scope => 'refinery.admin.delete', :title => member.full_name),
             :method => :delete
         end
       end

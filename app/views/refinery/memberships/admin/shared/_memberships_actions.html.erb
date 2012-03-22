@@ -1,6 +1,6 @@
 <ul>
   <li>
-    <%= render :partial => "/shared/admin/search", :locals => {:url => send("admin_#{params[:controller].gsub(/^admin\//, '')}_url")} %>
+    <%= render :partial => "/refinery/admin/search", :locals => {:url => send("admin_#{params[:controller].gsub(/^admin\//, '')}_url")} %>
   </li>
   
   <% if params[:controller] == 'admin/roles' %>

@@ -1,7 +1,7 @@
 <h2><%= MembershipEmail.model_name.human %>: <%= t(@membership_email.title, :scope => 'admin.membership_emails') %></h2>
 <%= form_for [:admin, @membership_email], :url => @url_override || @url do |f| -%>
 
-  <%= render :partial => "/shared/admin/error_messages",
+  <%= render :partial => "/refinery/admin/error_messages",
              :locals => {
                :object => @membership_email,
                :include_object_name => false
@@ -21,7 +21,7 @@
   
   <%= render :partial => "email_body_help" %>
 
-  <%= render :partial => "/shared/admin/form_actions",
+  <%= render :partial => "/refinery/admin/form_actions",
              :locals => {
                :f => f,
                :continue_editing => false,

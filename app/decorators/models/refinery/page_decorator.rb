@@ -1,5 +1,5 @@
 ::Refinery::Page.class_eval do
-  has_and_belongs_to_many :roles
+  has_and_belongs_to_many :roles, :join_table => ::Refinery::Memberships::PagesRoles.table_name
   attr_accessible :role_ids
 
   def user_allowed?(user)

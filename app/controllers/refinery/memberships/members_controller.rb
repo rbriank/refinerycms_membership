@@ -9,7 +9,7 @@ module Refinery
 
       # GET /member/:id
       def profile
-        @member = current_user
+        @member = current_refinery_user
       end
 
       def new
@@ -18,12 +18,12 @@ module Refinery
 
       # GET /members/:id/edit
       def edit
-        @member = current_user
+        @member = current_refinery_user
       end
 
       # PUT /members/:id
       def update
-        @member = current_user
+        @member = current_refinery_user
 
         if params[:member][:password].blank? and params[:member][:password_confirmation].blank?
           params[:member].delete(:password)
@@ -82,7 +82,7 @@ module Refinery
 
     protected
       def redirect?
-        if current_user.nil?
+        if current_refinery_user.nil?
           redirect_to new_user_session_path
         end
       end

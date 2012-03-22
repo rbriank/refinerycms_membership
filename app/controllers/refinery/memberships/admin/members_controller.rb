@@ -77,7 +77,7 @@ module Refinery
           @member.reload
 
           #MembershipMailer.extension_confirmation_member(@member).deliver
-          #MembershipMailer.extension_confirmation_admin(@member, current_user).deliver
+          #MembershipMailer.extension_confirmation_admin(@member, current_refinery_user).deliver
 
           @members = [@member]
 
@@ -91,7 +91,7 @@ module Refinery
           @member.reload
 
           #MembershipMailer.extension_confirmation_member(@member).deliver
-          #MembershipMailer.extension_confirmation_admin(@member, current_user).deliver
+          #MembershipMailer.extension_confirmation_admin(@member, current_refinery_user).deliver
 
           @members = [@member]
           render :partial => 'admin/members/members_table', :layout => false

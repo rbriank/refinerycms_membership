@@ -28,7 +28,7 @@ require 'refinery/memberships'
 #         ::Admin::DashboardController.class_eval do
 #           old_index = instance_method(:index)
 #           define_method(:index){|*args|
-#             if current_user.has_role?(:super_user) || current_user.has_role?(:refinery)
+#             if current_refinery_user.has_role?(:super_user) || current_refinery_user.has_role?(:refinery)
 #               old_index.bind(self).call(*args)
 #             else
 #               redirect_to '/'
@@ -66,8 +66,8 @@ require 'refinery/memberships'
 #           def render(*args)
 #             Rails.logger.info @page.inspect
 #             unless @page.nil? || self.class.name == 'PagesController' || self.class.name =~ /^Admin::/
-#               redirect_to login_members_path(:redirect => request.fullpath, :member_login => true) unless @page.user_allowed?(current_user)
-#               super *args if @page.user_allowed?(current_user)
+#               redirect_to login_members_path(:redirect => request.fullpath, :member_login => true) unless @page.user_allowed?(current_refinery_user)
+#               super *args if @page.user_allowed?(current_refinery_user)
 #             else
 #               super *args
 #             end
@@ -127,9 +127,9 @@ require 'refinery/memberships'
 #             @page = Page.find(params[:path] ? params[:path].to_s.split('/').last : params[:id],
 #               :include => :roles)
 #
-#             if @page.user_allowed?(current_user) &&
+#             if @page.user_allowed?(current_refinery_user) &&
 #               (@page.try(:live?) ||
-#                   (refinery_user? and current_user.authorized_plugins.include?("refinery_pages")))
+#                   (refinery_user? and current_refinery_user.authorized_plugins.include?("refinery_pages")))
 #
 #               # if the admin wants this to be a "placeholder" page which goes to its first child, go to that instead.
 #               if @page.skip_to_first_child and (first_live_child = @page.children.order('lft ASC').where(:draft=>false).first).present?
@@ -179,9 +179,9 @@ require 'refinery/memberships'
 #
 #         ::Admin::BaseController.class_eval do
 #           def restrict_controller
-#             admin = refinery_user? || current_user.has_role?(:superuser)
+#             admin = refinery_user? || current_refinery_user.has_role?(:superuser)
 #             if !admin || Refinery::Plugins.active.reject { |plugin| params[:controller] !~ Regexp.new(plugin.menu_match)}.empty?
-#               warn "'#{current_user.username}' tried to access '#{params[:controller]}' but was rejected."
+#               warn "'#{current_refinery_user.username}' tried to access '#{params[:controller]}' but was rejected."
 #               error_404 if admin
 #               redirect_to '/' unless admin
 #             end

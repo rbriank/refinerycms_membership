@@ -3,7 +3,7 @@
 ::Refinery::Admin::DashboardController.class_eval do
   old_index = instance_method(:index)
   define_method(:index){|*args|
-    if current_user.has_role?(:super_user) || current_user.has_role?(:refinery)
+    if current_refinery_user.has_role?(:super_user) || current_refinery_user.has_role?(:refinery)
       old_index.bind(self).call(*args)
     else
       redirect_to '/'

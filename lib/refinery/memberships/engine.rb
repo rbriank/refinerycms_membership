@@ -26,7 +26,7 @@ module Refinery
 
       refinery.after_inclusion do
         ::Devise.setup do | config |
-          config.mailer = 'MembershipMailer'
+          config.mailer = '::Refinery::Memberships::MembershipMailer'
         end
 
         require File.expand_path('../rails_datatables/rails_datatables', __FILE__)

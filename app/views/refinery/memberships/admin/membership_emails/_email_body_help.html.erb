@@ -15,12 +15,12 @@
 	<p>
 	<%= t('.user_data') %>: [:email], [:first_name], [:last_name], [:title], [:organization], [:street_address], [:city], [:province], [:postal_code], [:phone], [:fax], [:website]	
 	</p>
-	<% if RefinerySetting.find_or_set('memberships_timed_accounts', true) %>
+	<% if Refinery::Setting.find_or_set('memberships_timed_accounts', true) %>
 	<p>
   <%= t('.member_until') %>: [:member_until]
 	</p>
 	<% end %>
-	<% if RefinerySetting.find_or_set('memberships_confirmation', 'admin') == 'email' %>
+	<% if Refinery::Setting.find_or_set('memberships_confirmation', 'admin') == 'email' %>
 	<p>
 	<%= t('.activation_url') %>: [:activation_url]
 	</p>

@@ -29,7 +29,7 @@ module Refinery
           config.mailer = '::Refinery::Memberships::MembershipMailer'
         end
 
-        require File.expand_path('../rails_datatables/rails_datatables', __FILE__)
+        require File.expand_path('../../../rails_datatables/rails_datatables', __FILE__)
         ActionView::Base.send :include, RailsDatatables
 
 

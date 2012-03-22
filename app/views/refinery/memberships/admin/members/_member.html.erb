@@ -1,12 +1,12 @@
-<% confirmation = RefinerySetting::find_or_set('memberships_confirmation', 'admin') %>
-<% timed = RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+<% confirmation = Refinery::Setting::find_or_set('memberships_confirmation', 'admin') %>
+<% timed = Refinery::Setting::find_or_set('memberships_timed_accounts', true) %>
 
 <tr data-row-id="<%= member.id %>" class="record <%= cycle("on", "on-hover") %>">
   <td><%= member.first_name %> <%= member.last_name %></td>
   <td><%= member.organization %></td>
   <td><%= member.email %></td>
   <td><%= member.created_at.strftime('%d/%m/%Y') %></td>
-  <% if RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+  <% if Refinery::Setting::find_or_set('memberships_timed_accounts', true) %>
   <td><%= member.member_until.nil? ? '--' : member.member_until.strftime('%d/%m/%Y') %></td>
   <% end %>
   <td>

@@ -6,28 +6,28 @@ module Refinery
 
       class << self
         def deliver_member_created(member)
-          member_email('member_created', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_member_created", true)
+          member_email('member_created', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_created", true)
           member_created_admin(member).deliver
         end
 
         def deliver_member_activated(member)
-          member_email('member_activated', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_member_activated", true)
+          member_email('member_activated', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_activated", true)
         end
 
         def deliver_member_rejected(member)
-          member_email('member_rejected', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_member_rejected", true)
+          member_email('member_rejected', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_rejected", true)
         end
 
         def deliver_member_deleted(member)
-          member_email('member_deleted', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_member_deleted", true)
+          member_email('member_deleted', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_deleted", true)
         end
 
         def deliver_membership_extended(member)
-          member_email('membership_extended', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_membership_extended", true)
+          member_email('membership_extended', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_membership_extended", true)
         end
 
         def deliver_member_accepted(member)
-          member_email('member_accepted', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_member_accepted", true)
+          member_email('member_accepted', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_accepted", true)
         end
       end
 
@@ -41,7 +41,7 @@ module Refinery
         html = extract_images(html)
         text = html_to_text(html)
 
-        mail(:from => RefinerySetting.find_or_set("memberships_sender_address", nil),
+        mail(:from => Refinery::Setting.find_or_set("memberships_sender_address", nil),
              :to => member.email, :subject => @email.subject) do |format|
           format.text { render :text => text }
           format.html { render :text => html }
@@ -52,8 +52,8 @@ module Refinery
       def member_created_admin(member)
         @member = member
 
-        mail(:from => RefinerySetting.find_or_set("memberships_sender_address", nil),
-             :to => admins, :subject => "New user registration on #{RefinerySetting::get('site_name')}") do |format|
+        mail(:from => Refinery::Setting.find_or_set("memberships_sender_address", nil),
+             :to => admins, :subject => "New user registration on #{Refinery::Setting::get('site_name')}") do |format|
           format.text
         end
       end
@@ -61,7 +61,7 @@ module Refinery
       protected
 
       def admins
-        RefinerySetting.get('memberships_deliver_notification_to_users').split(/[\s,]/).collect{|a|a.strip}.reject{|e|e.blank?}
+        Refinery::Setting.get('memberships_deliver_notification_to_users').split(/[\s,]/).collect{|a|a.strip}.reject{|e|e.blank?}
       end
 
       def extract_images(html)

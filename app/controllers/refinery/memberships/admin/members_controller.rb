@@ -30,7 +30,7 @@ module Refinery
         end
 
         before_filter(:only => :edit) do
-          step = RefinerySetting.find_or_set("memberships_default_account_validity", 12)
+          step = Refinery::Setting.find_or_set("memberships_default_account_validity", 12)
           @activation_steps = []
           1.upto(11) do | n |
             @activation_steps << [I18n.t('months', :count => n), n] if n%step.to_i == 0

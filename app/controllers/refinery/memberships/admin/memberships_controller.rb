@@ -62,33 +62,33 @@ module Refinery
           @membership_emails = MembershipEmail::find(:all)
           @roles = Role::find(:all, :conditions => ['title NOT IN (?)',['Superuser','Refinery','Member']])
 
-          @notification_setting = RefinerySetting.find_by_name('memberships_deliver_notification_to_users')
-          @notification_setting ||= RefinerySetting.new({:name => 'memberships_deliver_notification_to_users'})
+          @notification_setting = Refinery::Setting.find_by_name('memberships_deliver_notification_to_users')
+          @notification_setting ||= Refinery::Setting.new({:name => 'memberships_deliver_notification_to_users'})
 
 
-          @memberships_timed_accounts = RefinerySetting.find_by_name('memberships_timed_accounts')
-          @memberships_timed_accounts ||= RefinerySetting.new({:name => 'memberships_timed_accounts', :value => false})
+          @memberships_timed_accounts = Refinery::Setting.find_by_name('memberships_timed_accounts')
+          @memberships_timed_accounts ||= Refinery::Setting.new({:name => 'memberships_timed_accounts', :value => false})
 
-          @memberships_confirmation = RefinerySetting.find_by_name('memberships_confirmation')
-          @memberships_confirmation ||= RefinerySetting.new({:name => 'memberships_confirmation', :value => 'admin'})
+          @memberships_confirmation = Refinery::Setting.find_by_name('memberships_confirmation')
+          @memberships_confirmation ||= Refinery::Setting.new({:name => 'memberships_confirmation', :value => 'admin'})
 
-          @memberships_default_roles = RefinerySetting.find_by_name('memberships_default_roles')
-          @memberships_default_roles ||= RefinerySetting.new({:name => 'memberships_default_roles', :value => []})
+          @memberships_default_roles = Refinery::Setting.find_by_name('memberships_default_roles')
+          @memberships_default_roles ||= Refinery::Setting.new({:name => 'memberships_default_roles', :value => []})
 
-          @memberships_default_account_validity = RefinerySetting.find_by_name('memberships_default_account_validity')
-          @memberships_default_account_validity ||= RefinerySetting.new({:name => 'memberships_default_account_validity', :value => 12})
+          @memberships_default_account_validity = Refinery::Setting.find_by_name('memberships_default_account_validity')
+          @memberships_default_account_validity ||= Refinery::Setting.new({:name => 'memberships_default_account_validity', :value => 12})
 
-          @member_deleted = RefinerySetting.find_by_name('memberships_deliver_mail_on_member_deleted')
-          @member_deleted ||= RefinerySetting.new({:name => 'memberships_deliver_mail_on_member_deleted', :value => true})
+          @member_deleted = Refinery::Setting.find_by_name('memberships_deliver_mail_on_member_deleted')
+          @member_deleted ||= Refinery::Setting.new({:name => 'memberships_deliver_mail_on_member_deleted', :value => true})
 
-          @member_rejected = RefinerySetting.find_by_name('memberships_deliver_mail_on_member_rejected')
-          @member_rejected ||= RefinerySetting.new({:name => 'memberships_deliver_mail_on_member_rejected', :value => true})
+          @member_rejected = Refinery::Setting.find_by_name('memberships_deliver_mail_on_member_rejected')
+          @member_rejected ||= Refinery::Setting.new({:name => 'memberships_deliver_mail_on_member_rejected', :value => true})
 
-          @membership_extended = RefinerySetting.find_by_name('memberships_deliver_mail_on_membership_extended')
-          @membership_extended ||= RefinerySetting.new({:name => 'memberships_deliver_mail_on_membership_extended', :value => true})
+          @membership_extended = Refinery::Setting.find_by_name('memberships_deliver_mail_on_membership_extended')
+          @membership_extended ||= Refinery::Setting.new({:name => 'memberships_deliver_mail_on_membership_extended', :value => true})
 
-          @member_accepted = RefinerySetting.find_by_name('memberships_deliver_mail_on_member_accepted')
-          @member_accepted ||= RefinerySetting.new({:name => 'memberships_deliver_mail_on_member_accepted', :value => true})
+          @member_accepted = Refinery::Setting.find_by_name('memberships_deliver_mail_on_member_accepted')
+          @member_accepted ||= Refinery::Setting.new({:name => 'memberships_deliver_mail_on_member_accepted', :value => true})
 
         end
 

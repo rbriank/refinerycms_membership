@@ -5,7 +5,7 @@
     <%= f.check_box :enabled %>
     <%= f.label :enabled, t('user_can_login', :scope => 'admin.members') %>
   </p>
-  <% if RefinerySetting::find_or_set('memberships_timed_accounts', true) %>
+  <% if Refinery::Setting::find_or_set('memberships_timed_accounts', true) %>
   <p class="field">
   <span>
     <% if f.object.member_until %>
@@ -29,7 +29,7 @@
   <% end %>
 </fieldset>
 
-<% if RefinerySetting::find_or_set('memberships_timed_accounts', true) && (!f.object.member_until || (f.object.lapsed? && !f.object.enabled)) %>
+<% if Refinery::Setting::find_or_set('memberships_timed_accounts', true) && (!f.object.member_until || (f.object.lapsed? && !f.object.enabled)) %>
 <% content_for :javascripts do %>
 <script type="text/javascript">
 $(function(){

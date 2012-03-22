@@ -17,7 +17,7 @@ gem 'refinerycms-memberships', '~> 2.0.0'
 
 Now, run ``bundle install``
 
-Next, to install the blog plugin run:
+Next, to install the memberships plugin run:
 
     rails generate refinery:memberships
 

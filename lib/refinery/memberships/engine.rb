@@ -22,7 +22,7 @@ module Refinery
           tab.name = "Access restrictions"
           tab.partial = "/refinery/pages/admin/tabs/roles"
         end
-    end
+      end
 
       refinery.after_inclusion do
         ::Devise.setup do | config |
@@ -42,9 +42,7 @@ module Refinery
           end
         end
 
-        require 'memberships/member'
-
-      end # config.to_prepare
+      end # refinery.after_inclusion
     end # Engine < Rails::Engine
   end # Memberships
 end # Refinery

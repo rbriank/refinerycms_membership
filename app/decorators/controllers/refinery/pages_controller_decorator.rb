@@ -1,4 +1,4 @@
-PagesController.class_eval do
+::Refinery::PagesController.class_eval do
   def show
     # Find the page by the newer 'path' or fallback to the page's id if no path.
     @page = Page.find(params[:path] ? params[:path].to_s.split('/').last : params[:id],

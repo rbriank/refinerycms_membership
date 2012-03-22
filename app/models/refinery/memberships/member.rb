@@ -51,8 +51,8 @@ module Refinery
         street_address city province postal_code phone fax website)
         d = attributes.to_hash
         d.reject!{|k,v| !allowed_attributes.include?(k.to_s)}
-        d[:activation_url] = Rails.application.routes.url_helpers.activate_members_url(:confirmation_token => self.confirmation_token) if RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email'
-        d[:member_until] = I18n.localize(member_until.to_date, :format => :long) if member_until && RefinerySetting::find_or_set('memberships_timed_accounts', true)
+        d[:activation_url] = Rails.application.routes.url_helpers.activate_members_url(:confirmation_token => self.confirmation_token) if Refinery::Setting::find_or_set('memberships_confirmation', 'admin') == 'email'
+        d[:member_until] = I18n.localize(member_until.to_date, :format => :long) if member_until && Refinery::Setting::find_or_set('memberships_timed_accounts', true)
         d
       end
 
@@ -63,7 +63,7 @@ module Refinery
       def active_for_authentication?
         a = self.enabled && self.is_member?
 
-        if RefinerySetting::find_or_set('memberships_timed_accounts', true)
+        if Refinery::Setting::find_or_set('memberships_timed_accounts', true)
           if member_until.nil?
           a = false
           else
@@ -76,7 +76,7 @@ module Refinery
       alias :active? :active_for_authentication?
 
       def confirmed?
-        RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'email' || !!confirmed_at
+        Refinery::Setting::find_or_set('memberships_confirmation', 'admin') != 'email' || !!confirmed_at
       end
 
       def unconfirmed?
@@ -112,7 +112,7 @@ module Refinery
       end
 
       def lapsed?
-        if RefinerySetting::find_or_set('memberships_timed_accounts', true)
+        if Refinery::Setting::find_or_set('memberships_timed_accounts', true)
           if member_until.nil?
           false
           else
@@ -128,7 +128,7 @@ module Refinery
       end
 
       def never_member?
-        !RefinerySetting::find_or_set('memberships_timed_accounts', true) || member_until.nil?
+        !Refinery::Setting::find_or_set('memberships_timed_accounts', true) || member_until.nil?
       end
 
       def confirm!
@@ -153,7 +153,7 @@ module Refinery
       end
 
       def extend!
-        extend_membership if RefinerySetting::find_or_set('memberships_timed_accounts', true)
+        extend_membership if Refinery::Setting::find_or_set('memberships_timed_accounts', true)
       end
 
       def reject!
@@ -180,26 +180,26 @@ module Refinery
       def resend_confirmation_token
         unless_confirmed do
           generate_confirmation_token! if self.confirmation_token.nil?
-          member_email('member_created', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_member_created", true)
+          member_email('member_created', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_created", true)
         end
       end
 
       protected
 
       def confirmation_required?
-        RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email' && !confirmed?
+        Refinery::Setting::find_or_set('memberships_confirmation', 'admin') == 'email' && !confirmed?
       end
 
       def set_default_enabled
-        update_attribute(:enabled, RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'no')
+        update_attribute(:enabled, Refinery::Setting::find_or_set('memberships_confirmation', 'admin') == 'no')
       end
 
       def set_default_rejected
-        update_attribute(:rejected, 'NO') if RefinerySetting::find_or_set('memberships_confirmation', 'admin') != 'admin'
+        update_attribute(:rejected, 'NO') if Refinery::Setting::find_or_set('memberships_confirmation', 'admin') != 'admin'
       end
 
       def set_default_roles
-        ids = RefinerySetting::find_or_set('memberships_default_roles', [])
+        ids = Refinery::Setting::find_or_set('memberships_default_roles', [])
         if ids.present?
           Role::find(:all, :conditions => {'id' => ids}).each do | role |
             self.roles << role
@@ -210,7 +210,7 @@ module Refinery
 
       def extend_membership(amount = 1)
 
-        step = RefinerySetting.find_or_set("memberships_default_account_validity", 12) # months
+        step = Refinery::Setting.find_or_set("memberships_default_account_validity", 12) # months
         amount = amount*step
         if amount && amount > 0
           self.member_until = member_until.nil? || lapsed? ? amount.month.from_now : member_until + amount.month

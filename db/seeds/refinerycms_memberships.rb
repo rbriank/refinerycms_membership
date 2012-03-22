@@ -1,6 +1,6 @@
-Role.create(:id => 3, :title => 'Member')
+::Refinery::Role.create(:id => 3, :title => 'Member')
 
-members_page = Page.create({:title => "Members",
+members_page = ::Refinery::Page.create({:title => "Members",
   :deletable => false,
   :link_url => "/members",
   :show_in_menu => false,

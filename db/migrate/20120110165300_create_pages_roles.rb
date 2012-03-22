@@ -6,15 +6,15 @@ class CreatePagesRoles < ActiveRecord::Migration
       t.references :role
     end
     if (seed_file = Rails.root.join('db', 'seeds', 'refinerycms_memberships.rb')).file?
-      load seed_file.to_s unless Page.where(:link_url => '/members').any?
+      load seed_file.to_s unless ::Refinery::Page.where(:link_url => '/members').any?
     end
     if (seed_file = Rails.root.join('db', 'seeds', 'refinerycms_memberships_settings.rb')).file?
-      load seed_file.to_s unless Page.where(:link_url => '/members').any?
+      load seed_file.to_s unless ::Refinery::Page.where(:link_url => '/members').any?
     end
   end
 
   def self.down
-    UserPlugin.destroy_all({:name => "memberships"})
+    ::Refinery::UserPlugin.destroy_all({:name => "memberships"})
     drop_table :pages_roles
   end
 

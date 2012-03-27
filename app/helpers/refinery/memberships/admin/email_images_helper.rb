@@ -2,7 +2,7 @@ module Refinery
   module Memberships
     module Admin
       module EmailImagesHelper
-        include Admin::ImagesHelper
+        include Refinery::Admin::ImagesHelper
       end
     end
   end

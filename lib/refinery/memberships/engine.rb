@@ -2,7 +2,6 @@ module Refinery
   module Memberships
     class Engine < Rails::Engine
       include Refinery::Engine
-      isolate_namespace Refinery::Memberships
 
       engine_name :refinery_memberships
 

@@ -20,7 +20,7 @@ require 'refinery/memberships'
 #         # permissions tab on page editor
 #         ::Refinery::Pages::Tab.register do |tab|
 #           tab.name = "Access restrictions"
-#           tab.partial = "/admin/pages/tabs/roles"
+#           tab.partial = "/refinery/memberships/admin/pages/tabs/roles"
 #         end
 #
 #         # this broke as part of config.to_prepare

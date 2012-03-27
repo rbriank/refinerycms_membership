@@ -6,6 +6,8 @@ module Refinery
         include MembersHelper
 
         crudify :'refinery/memberships/member',
+          :singular_name => "member",
+          :plural_name => "members",
           :title_attribute => :full_name,
           :xhr_paging => true
 

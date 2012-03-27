@@ -5,6 +5,8 @@ module Refinery
         include Admin::MembershipsHelper
 
         crudify :'refinery/memberships/member',
+          :singular_name => "member",
+          :plural_name => "members",
           :conditions => {:seen => false},
           :title_attribute => :full_name,
           :xhr_paging => true
@@ -89,7 +91,6 @@ module Refinery
 
           @member_accepted = Refinery::Setting.find_by_name('memberships_deliver_mail_on_member_accepted')
           @member_accepted ||= Refinery::Setting.new({:name => 'memberships_deliver_mail_on_member_accepted', :value => true})
-
         end
 
         def find_all_members(conditions = {:seen => false})

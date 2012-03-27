@@ -7,7 +7,8 @@
 </div>
 
 <div id='actions'>
-  <%= render :partial => '/refinery/memberships/admin/shared/memberships_actions' %>
+  <%= render :partial => '/refinery/memberships/admin/shared/memberships_actions',
+              :locals => {:section => 'membership_emails'} %>
 </div>
 
 <% content_for :javascripts do %>

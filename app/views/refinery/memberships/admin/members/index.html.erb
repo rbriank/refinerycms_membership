@@ -3,7 +3,8 @@
   <%= render :partial => 'members' %>
 </div>
 <div id='actions'>
-  <%= render :partial => '/refinery/memberships/admin/shared/memberships_actions' %>
+  <%= render :partial => '/refinery/memberships/admin/shared/memberships_actions',
+              :locals => {:section => 'members'} %>
 </div>
 
 <% content_for :stylesheets do %>

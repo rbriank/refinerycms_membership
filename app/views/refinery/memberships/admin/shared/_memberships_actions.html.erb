@@ -1,51 +1,51 @@
 <ul>
   <li>
-    <%= render :partial => "/refinery/admin/search", :locals => {:url => send("admin_#{params[:controller].gsub(/^admin\//, '')}_url")} %>
+    <%= render :partial => "/refinery/admin/search", :locals => {:url => send("admin_#{section}_path")} %>
   </li>
-  
-  <% if params[:controller] == 'admin/roles' %>
-  <li>
-    <%= link_to t('new_role', :scope => 'admin.roles'), new_admin_role_url(:dialog => true, :width => 500, :height => 300), :class => "add_icon" %>
-  </li> 
+
+  <% if section == 'roles' %>
+    <li>
+      <%= link_to t('new_role', :scope => 'admin.roles'),
+                  new_admin_role_url(:dialog => true, :width => 500, :height => 300),
+                  :class => "add_icon" %>
+    </li>
   <% end %>
   <!--
-  <% if params[:controller] == 'admin/membership_emails' %>
+  <% #if section == 'membership_emails' %>
   <li>
-    <%= link_to t('email_settings', :scope => 'admin.membership_emails'), settings_admin_membership_emails_path(:dialog => true, :width => 650, :height => 400), :class => "options_icon" %>
-  </li> 
-  <% end %>
+    <% #link_to t('email_settings', :scope => 'admin.membership_emails'), settings_admin_membership_emails_path(:dialog => true, :width => 650, :height => 400), :class => "options_icon" %>
+  </li>
+  <% #end %>
   -->
-  <% unless params[:controller] == 'admin/memberships' %>
-  <li>
-    <%= link_to t('new_members', :scope => 'admin.memberships'), admin_memberships_path, :class => "new_members_icon" %>
-  </li>  
+  <% unless section == 'memberships' %>
+    <li>
+      <%= link_to t('new_members', :scope => 'admin.memberships'), admin_memberships_path, :class => "new_members_icon" %>
+    </li>
   <% end %>
-  
-  
-  <% unless params[:controller] == 'admin/members' %>
-  <li>
-    <%= link_to t('all_members', :scope => 'admin.members'), admin_members_path, :class => "members_icon" %>
-  </li>
+
+
+  <% unless section == 'members' %>
+    <li>
+      <%= link_to t('all_members', :scope => 'admin.members'), admin_members_path, :class => "members_icon" %>
+    </li>
   <% end %>
-  
-  
-  <% unless params[:controller] == 'admin/membership_emails' %>
-  <li>
-    <%= link_to t('emails_administration', :scope => 'admin.membership_emails'), admin_membership_emails_path, :class => "email_icon" %>
-  </li>
+
+
+  <% unless section == 'membership_emails' %>
+    <li>
+      <%= link_to t('emails_administration', :scope => 'admin.membership_emails'), admin_membership_emails_path, :class => "email_icon" %>
+    </li>
   <% end %>
-  
-  <% unless params[:controller] == 'admin/roles' %>
-  <li>
-    <%= link_to t('roles_administration', :scope => 'admin.roles'), admin_roles_path, :class => "roles_icon" %>
-  </li>
+
+  <% unless section == 'roles' %>
+    <li>
+      <%= link_to t('roles_administration', :scope => 'admin.roles'), admin_roles_path, :class => "roles_icon" %>
+    </li>
 	<% end %>
 
-  <%# if params[:controller] == 'admin/memberships' || params[:controller] == 'admin/members' %>
-  <li>    
+  <li>
     <%= link_to t('memberships_settings', :scope => 'admin'), settings_admin_memberships_path(:dialog => true, :width => 650, :height => 400), :class => "options_icon" %>
   </li>
-  <%# end %>
 </ul>
 
 <% content_for :stylesheets do %>

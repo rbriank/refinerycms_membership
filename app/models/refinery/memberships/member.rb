@@ -11,7 +11,7 @@ module Refinery
       :street_address, :city, :province, :postal_code, :phone, :fax, :website,
       :enabled, :add_to_member_until, :role_ids
 
-      set_inheritance_column :membership_level
+      self.inheritance_column = :membership_level
 
       after_create :set_default_enabled
       after_create :set_default_rejected

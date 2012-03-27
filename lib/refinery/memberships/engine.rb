@@ -4,6 +4,7 @@ module Refinery
       include Refinery::Engine
       isolate_namespace Refinery::Memberships
 
+      engine_name :refinery_memberships
 
       initializer "static assets" do |app|
         app.middleware.insert_after ::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public"
@@ -13,7 +14,7 @@ module Refinery
         Refinery::Plugin.register do |plugin|
           plugin.pathname = root
           plugin.name = "refinerycms_memberships"
-          plugin.url = '/refinery/memberships/members' #proc { Refinery::Core::Engine.routes.url_helpers.memberships_admin_members_path }
+          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.admin_memberships_path }
           plugin.menu_match = /refinery\/memberships/
         end
 
@@ -24,7 +25,7 @@ module Refinery
         end
       end
 
-      refinery.after_inclusion do
+      after_inclusion do
         ::Devise.setup do | config |
           config.mailer = '::Refinery::Memberships::MembershipMailer'
         end
@@ -46,6 +47,11 @@ module Refinery
         end
 
       end # refinery.after_inclusion
+
+      config.after_initialize do
+        Refinery.register_engine(Refinery::Memberships)
+      end
+
     end # Engine < Rails::Engine
   end # Memberships
 end # Refinery

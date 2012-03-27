@@ -4,7 +4,7 @@ module Refinery
       class MembershipsController < ::Refinery::AdminController
         include Admin::MembershipsHelper
 
-        crudify :member,
+        crudify :'refinery/memberships/member',
           :conditions => {:seen => false},
           :title_attribute => :full_name,
           :xhr_paging => true

@@ -5,7 +5,7 @@ module Refinery
 
         include MembersHelper
 
-        crudify :member,
+        crudify :'refinery/memberships/member',
           :title_attribute => :full_name,
           :xhr_paging => true
 

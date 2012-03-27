@@ -2,7 +2,7 @@ module Refinery
   module Memberships
     module Admin
       class MembershipEmailsController < ::Refinery::AdminController
-        crudify :membership_email,
+        crudify :'refinery/memberships/membership_email',
           :title_attribute => :title,
           :order => "title ASC"
 

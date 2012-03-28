@@ -28,6 +28,10 @@ class MembershipMailer < ActionMailer::Base
     def deliver_member_accepted(member)
       member_email('member_accepted', member).deliver if RefinerySetting.find_or_set("memberships_deliver_mail_on_member_accepted", true)
     end
+
+    def deliver_reset_password(member)
+      member_email('reset_password', member).deliver
+    end
   end
   
   def member_email(email, member)
@@ -60,7 +64,9 @@ class MembershipMailer < ActionMailer::Base
   protected
   
   def admins
-    RefinerySetting.get('memberships_deliver_notification_to_users').split(/[\s,]/).collect{|a|a.strip}.reject{|e|e.blank?}
+    admins = RefinerySetting.get('memberships_deliver_notification_to_users')
+    admins = admins.split(/[\s,]/).collect{|a|a.strip}.reject{|e|e.blank?} if admins.is_a?(String)
+    admins
   end
   
   def extract_images(html)

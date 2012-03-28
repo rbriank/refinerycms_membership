@@ -1,12 +1,22 @@
+
 it:
   members:
+    reset_password_form:
+      send: Invia
     login_form:
       username: Nome utente
       password: Password
       login: Accedi  
+    new_password_form:
+      email: Email
+      send: Invia
   plugins:
     memberships:
       title: Iscrizioni
+  activemodel:
+    attributes:
+      password_reset:
+        password_confirmation: Ripeti password
   activerecord:
     models:
       member: Utente registrato
@@ -121,6 +131,7 @@ it:
       email_header: Intestazione messaggio
       email_footer: Firma messaggio
     membership_emails:
+      reset_password: Reimposta password
       member_activated: Iscrizione attivata
       member_accepted: Iscrizione accettata
       member_created: Nuova iscrizione
@@ -146,3 +157,7 @@ it:
         deliver_admin_notifications_to: Spedire le notifiche amministrative a
         email_delivery: Notifiche utente
         admin_notifications: Notifiche amministrative
+
+
+
+

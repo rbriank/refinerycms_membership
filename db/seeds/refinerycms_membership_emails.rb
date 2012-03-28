@@ -28,3 +28,8 @@ MembershipEmail.new({
   :subject => 'Account activated',
   :body => '<p>Account activated email</p>'
 }).save(false)
+MembershipEmail.new({
+  :title => 'reset_password',
+  :subject => 'Reset password',
+  :body => '<p>Reset password</p>'
+}).save(false)

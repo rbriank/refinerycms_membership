@@ -59,6 +59,8 @@ module Refinery
           d.reject!{|k,v| !allowed_attributes.include?(k.to_s)}
           d[:activation_url] = Rails.application.routes.url_helpers.activate_members_url(:confirmation_token => self.confirmation_token) if RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email'
           d[:member_until] = I18n.localize(member_until.to_date, :format => :long) if member_until && RefinerySetting::find_or_set('memberships_timed_accounts', true)
+          d[:reset_password_url] = Rails.application.routes.url_helpers.reset_password_members_url(:reset_password_token => self.reset_password_token) if self.reset_password_token.present?
+          Rails.logger.debug d.inspect
           d
         end
 

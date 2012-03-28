@@ -5,10 +5,6 @@ module Refinery
 
       engine_name :refinery_memberships
 
-      initializer "static assets" do |app|
-        app.middleware.insert_after ::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public"
-      end
-
       initializer "register refinerycms_memberships plugin" do
         Refinery::Plugin.register do |plugin|
           plugin.pathname = root

@@ -16,7 +16,7 @@ ApplicationController.class_eval do
     # if resource_or_scope.class.superclass.name == 'User' ||
       # resource_or_scope.class.name == 'User' ||
       # resource_or_scope.to_s == 'user'
-    if (resource_or_scope.instance_of?(User) || resource_or_scope == :user)
+    if (resource_or_scope.instance_of?(Refinery::User) || resource_or_scope == :user)
       if params[:redirect].present?
         params[:redirect]
       else

@@ -1,7 +1,7 @@
 
 (function($){
-  
-  
+
+
   // redefine slideTo to init slickGrid before sliding
   $.fn.slideTo = function(response) {
     $(this).html(response);
@@ -10,56 +10,56 @@
     $(this).find('.pagination_frame').removeClass('frame_right').addClass('frame_center');
     init_modal_dialogs();
     init_tooltips();
-    return $(this);  
+    return $(this);
   };
 
   $.fn.slickGrid = function(o){
-    
+
     var Model = function(data){
       this.id_field = 'id';
       this.data = data || [];
     }
-    
+
     Model.prototype.getItem = function(n) {
       return this.data[n];
     }
-    
+
     Model.prototype.getItemIndex = function(id) {
-      if(!id) return null; 
+      if(!id) return null;
       for(var n = 0; n < this.data.length; n++) {
         if(this.data[n][this.id_field] == id) return n;
       }
       return null;
     }
-    
+
     Model.prototype.getLength = function() {
       return this.data.length;
     }
-    
+
     Model.prototype.push = function(d) {
       this.data.push(d);
     }
-    
+
     Model.prototype.updateItemByIndex = function(index, d) {
       this.data[index] = d;
-    }    
-    
+    }
+
     Model.prototype.updateItem = function(d) {
       var idx = this.getItemIndex(d.id);
       if(idx !== null) {
         this.updateItemByIndex(idx, d);
       }
     }
-    
+
     var table = this[0];
-    
+
     if(!table) return false;
-    
+
     var columns = extractColumns(table);
     var data = extractData(table, columns);
-    
+
     var model = new Model(data);
-    
+
     var opts = {
 			enableCellNavigation: true,
       enableColumnReorder: false,
@@ -73,16 +73,16 @@
     $(table).parent().addClass('slick-grid').css({width: $(table).width()});
     var grid = new Slick.Grid($(table).parent().get(0), model, columns, opts);
 		$('.pagination_container').applyMinimumHeightFromChildren();
-    
+
     var self = this;
-    
+
     grid.onSort.subscribe(function(){onSort.apply(self, arguments)});
     grid.onColumnsResized.subscribe(function(){onColumnsResize.apply(self, arguments)});
-  
+
     var sort = getSortInfo();
 
     grid.setSortColumn(columns[sort[0]||0].id, sort[1] == 'asc');
-    
+
     $(table).parent().show();
 
 		$('#menu_container').remove();
@@ -91,24 +91,24 @@
 		initMenus();
     initActions();
 		initFilter();
-    
+
     function getModel() {
       return model;
     }
-    
+
     function getGrid() {
       return grid;
     }
-    
-    function extractColumns(table) {    
+
+    function extractColumns(table) {
       var columns = [];
       var widths = loadColumnsWidths();
       $(table).find('thead th').each(function(idx, th){
         var w = $(th).widthFromClass();
         columns.push({
-          name: $(th).html(), 
-          field: $(th).attr('data-column-id'), 
-          id: $(th).attr('data-column-id'), 
+          name: $(th).html(),
+          field: $(th).attr('data-column-id'),
+          id: $(th).attr('data-column-id'),
           width: w || widths[idx],
           resizable: w === null,
           sortable: $(th).hasClass('sortable')
@@ -116,8 +116,8 @@
       });
       return columns;
     };
-    
-    function extractData(table, columns) {  
+
+    function extractData(table, columns) {
       var data = []
       $(table).find('tbody tr').each(function(idx, tr){
         var row = {};
@@ -129,7 +129,7 @@
       });
       return data;
     };
-    
+
     function onColumnsResize(ev, grid){
       var columns = grid.grid.getColumns();
       var widths = [];
@@ -138,24 +138,24 @@
       }
       saveColumnsWidths(widths);
     };
-    
+
     function saveColumnsWidths(ary){
       var str = '[' + (ary||[]).join(',') + ']';
       $.cookie('membership_column_widths', str, {expires: 10000, path: '/'});
     };
-    
+
     function loadColumnsWidths(){
       var str = $.cookie('membership_column_widths', {path: '/'}) || '[]';
       return $.parseJSON(str);
     };
-    
+
     function onSort(ev, obj){
       var dir = obj.sortAsc ? 'asc' : 'desc';
       var col = obj.grid.getColumnIndex(obj.sortCol.id);
       var url = updateUrlParams({
-				order_by: col, 
+				order_by: col,
 				order_dir: dir,
-				from_page: '' 
+				from_page: ''
 			});
       if(typeof(window.history.pushState) == 'function') {
         var current_state_location = (location.pathname + location.href.split(location.pathname)[1]);
@@ -168,12 +168,12 @@
         window.location = url;
       }
     };
-    
+
     function getSortInfo(){
       var params = getUrlParams();
       return [parseInt(params.order_by || 0), (params.order_dir || 'asc').toLowerCase()];
     };
-  
+
     function getUrlParams(){
       var url = window.location.toString();
       var params = {};
@@ -190,7 +190,7 @@
 		function getCurrentPage() {
 			return $('.pagination').find('em').text();
 		}
-  
+
     function updateUrlParams(new_params){
       var url = window.location.toString().replace(/\?.*$/, '');
       var params = getUrlParams();
@@ -206,12 +206,12 @@
       }
       return c > 0 ? url + '?' + $.param(params) : c;
     };
-    
-    
+
+
     function initActions(){
       $('#menu_container a.action').live('click', onActionClicked);
     };
-    
+
     function onActionClicked(ev){
       ev.preventDefault();
       $('.slick-grid').loading();
@@ -224,16 +224,16 @@
       });
       return false;
     };
-    
-    
+
+
     function updateGrid(table) {
       if(!table) return false;
-      var columns = extractColumns(table); 
-      var data = extractData(table, columns); 
+      var columns = extractColumns(table);
+      var data = extractData(table, columns);
       for(var n =0; n < data.length; n++) {
         var idx = model.getItemIndex(data[n].id);
         model.updateItem(data[n]);
-        grid.invalidateRow(idx);         
+        grid.invalidateRow(idx);
         console.log(idx, data[n])
       }
       grid.render();
@@ -275,8 +275,8 @@
 							trigger.removeClass('open');
 							triggerCopy.removeClass('menu_on_bottom');
 							triggerCopy.removeClass('menu_on_top');
-							menu.hide();	
-							triggerCopy.hide();	
+							menu.hide();
+							triggerCopy.hide();
 						});
 					}, 100);
 				});
@@ -302,10 +302,10 @@
 
 			});
 		}
-    
+
     return $(table);
   };
-  
+
   $.fn.widthFromClass = function(){
     var el = this[0];
     if(!el) return null;
@@ -318,11 +318,15 @@
     }
     return null;
   };
-  
+
+
   $.fn.loading = function(){
-    $(this).find('.slick-header-column:last-child').css({'background-image':  'url(/images/refinery/icons/ajax-loader.gif)', 'background-position': 'right center', 'background-repeat': 'no-repeat'});
+    $(this).find('.slick-header-column:last-child').css(
+      {'background-image':  'url(<%= image_path("refinery/icons/ajax-loader.gif") %>)',
+      'background-position': 'right center',
+      'background-repeat': 'no-repeat'});
   };
-  
+
   $.fn.stopLoading = function(){
     $(this).find('.slick-header-column:last-child').css({'background-image':  ''});
   };

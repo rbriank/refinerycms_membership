@@ -51,18 +51,18 @@ classes should alter those!
 	width: 19px;
 	height: 19px;
 	margin-left: 4px;
-  background: url(/images/grid/sort_both.png);
+  background: image-url("grid/sort_both.png");
   position: absolute;
   right: 0;
   top: 8px;
 }
 
 .slick-sort-indicator-desc {
-	background: url(/images/grid/sort_desc.png);
+	background: image-url("grid/sort_desc.png");
 }
 
 .slick-sort-indicator-asc {
-	background: url(/images/grid/sort_asc.png);
+	background: image-url("grid/sort_asc.png");
 }
 
 .slick-resizable-handle {
@@ -160,7 +160,7 @@ classes should alter those!
     border: 2px dashed black;
 }
 
-.slick-row.even, 
+.slick-row.even,
 .slick-row.even .slick-cell {
   background: #eee;
 }

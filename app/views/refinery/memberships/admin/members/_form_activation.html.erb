@@ -1,27 +1,27 @@
 <fieldset id="member_activation_form" class="clearfix">
-  <legend><%=t('activation', :scope => 'admin.members')%></legend>  
+  <legend><%=t('activation', :scope => 'refinery.admin.members')%></legend>  
   
   <p class="field">
     <%= f.check_box :enabled %>
-    <%= f.label :enabled, t('user_can_login', :scope => 'admin.members') %>
+    <%= f.label :enabled, t('user_can_login', :scope => 'refinery.admin.members') %>
   </p>
   <% if Refinery::Setting::find_or_set('memberships_timed_accounts', true) %>
   <p class="field">
   <span>
     <% if f.object.member_until %>
       <% if !@member.lapsed? %> 
-      <%= t('member_until', :scope => 'admin.members') %>
+      <%= t('member_until', :scope => 'refinery.admin.members') %>
       <% else %>
-      <%= t('membership_expired', :scope => 'admin.members') %>
+      <%= t('membership_expired', :scope => 'refinery.admin.members') %>
       <% end %> 
       <b><%= f.object.member_until.strftime('%d/%m/%Y') %></b><br />
       
       <% if @member.lapsed? || @member.almost_lapsed? %> 
-      <%= t('extend_membership_for', :scope => 'admin.members')%> <%= f.select :add_to_member_until, [[]]+(1..10).collect{|n| [t('years', :count => n), n]} %>
+      <%= t('extend_membership_for', :scope => 'refinery.admin.members')%> <%= f.select :add_to_member_until, [[]]+(1..10).collect{|n| [t('years', :count => n), n]} %>
       <% end %>
     <% else %>
-    <b><%= t('not_yet_member', :scope => 'admin.members')%></b><br />
-      <%= t('activate_member_for', :scope => 'admin.members')%> 
+    <b><%= t('not_yet_member', :scope => 'refinery.admin.members')%></b><br />
+      <%= t('activate_member_for', :scope => 'refinery.admin.members')%> 
       <%= f.select :add_to_member_until, @activation_steps %>
     <% end %>
   </span>

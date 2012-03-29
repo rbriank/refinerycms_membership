@@ -1,6 +1,6 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>'>
   <span class='title'>
-    <%= t(email.title, :scope => 'admin.membership_emails') %>
+    <%= t(email.title, :scope => 'refinery.admin.membership_emails') %>
     <% if defined?(::Refinery::I18n) and ::Refinery::I18n.frontend_locales.many? and
     (locales = email.translations.collect{|t| t.locale}).present? %>
     <span class='preview'>
@@ -15,6 +15,6 @@
   </span>
   <span class='actions'>
     <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_membership_email_path(email),
-    :title => t('edit', :scope => 'admin.membership_emails') %>
+    :title => t('edit', :scope => 'refinery.admin.membership_emails') %>
   </span>
 </li>

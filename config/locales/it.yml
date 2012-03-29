@@ -3,7 +3,7 @@ it:
     login_form:
       username: Nome utente
       password: Password
-      login: Accedi  
+      login: Accedi
   plugins:
     memberships:
       title: Iscrizioni
@@ -46,103 +46,104 @@ it:
   months:
     one: '1 mese'
     other: '%{count} mesi'
-  admin:
-    memberships_settings: Impostazioni
-    memberships:
-      new_members: Nuovi utenti iscritti
-      no_new_members: Non ci sono nuovi utenti iscritti
-      settings_admin_notification:
-        example: "Inserisci i tuoi indirizzi email come: jack@work.com, jill@office.com"
-        hint: Quando una nuova utente si iscrive, Refinery ti invierà una email di notifica.
-      settings:
-        signup_defaults: Predefiniti
-        signup_confirmation: Conferma registrazione
-        no_confirmation: Nessuna conferma
-        email_confirmation: Conferma registrazione con una email all'utente
-        admin_confirmation: Attendere l'approvazione di un amministratore
-        membership_expiration: Scadenza iscrizione
-        no_expiration: Nessuna scadenza
-        timed_expiration: Iscrizione con scadenza
-        default_expiration_in: "Scadenza predefinita iscrizione" 
-        default_groups: Gruppi predefiniti
-        assign_new_users_to_the_selected_groups: Assegna automaticamente i nuovi utenti ai seguenti gruppi
-        no_groups_found: "Nessun gruppo di utenti trovato." 
-    pages:
-      tabs:
-        roles:
-          allow_everyone: "Permetti l'accesso a tutti"
-          allow_all_members: "Permetti l'accesso a tutti gli utenti registrati"
-          allow_members_of: "Permetti l'accesso agli utenti dei gruppi"
-    roles:
-      delete: Elimina gruppo
-      no_roles_yet: Non sono stati ancora creati dei gruppi
-      edit: Modifica gruppo
-      delete: Elimina gruppo
-      new_role: Nuovo gruppo
-      roles_administration: Amministrazione gruppi di utenti
-    members:
-      accept: "Accetta l'iscrizione"
-      reject: "Rifiuta l'iscrizione"
-      edit: Modifica utente
-      delete: Elimina utente
-      member_until: Scadenza iscrizione
-      membership_expired: Iscrizione scaduta il
-      not_yet_member: "L'utente non è ancora attivo"
-      activate_member_for: "Attiva iscrizione per"
-      account_active: Utente attivo
-      new_account: Nuovo utente
-      account_disabled: Utente disabilitato
-      account_expired: Utente scaduto
-      account_rejected: Iscrizione rifiutata
-      account_not_activated: Iscrizione non ancora attivata
-      disable: Disabilita utente
-      enable: Abilita utente
-      delete: Elimina utente
-      no_members_yet: Non ci sono ancora utenti registrati
-      all_members: Tutti gli utenti
-      members_administration: Amministrazione utenti
-      account: Dati iscrizione
-      organization: Organizzazione
-      profile: Dati personali
-      activation: Attivazione iscrizione
-      user_roles: Gruppi utente
-      user_can_login: "L'utente può accedere alle pagine riservate"
-      extend: Rinnova iscrizione
-      extend_membership_for: Rinnova iscrizione per
-      filter_by: Filtra per
-      member_actions: Azioni utente
-      filter:
-        all: Tutti
-        active: Attivi
-        rejected: Rifiutati
-        disabled: Disabilitati
-        unconfirmed: Non confermati
-    membership_email_parts:
-      email_header: Intestazione messaggio
-      email_footer: Firma messaggio
-    membership_emails:
-      member_activated: Iscrizione attivata
-      member_accepted: Iscrizione accettata
-      member_created: Nuova iscrizione
-      member_deleted: Iscrizione cancellata
-      member_rejected: Iscrizione rifiutata
-      membership_extended: Iscrizione rinnovata
-      edit: Modifica email
-      no_emails_yet: Non ci sono ancora email
-      emails_administration: Amministrazione email
-      membership_email:
-      email_settings: Preferenze email
-      toggle_email_body_help: Mostra/nascondi documentazione
-      email_body_help_title: Documentazione su 'Corpo del messaggio'
-      shared_email_parts: Parti comuni alle email
-      email_body_help: 
-        email_body_help: "Nel corpo del messaggio è possibile inserire delle etichette che verranno sotituite con la corrispondente informazione sull'utente."
-        available_tags: Etichette disponibili
-        user_data: "Dati dell'utente"
-        member_until: "La data di scadenza dell'iscrizione"
-        activation_url: "L'URL a cui è necessario accedere per attivare l'iscrizione"
-      settings:
-        deliver_notifications_on: Spedire le seguenti notifiche agli utenti
-        deliver_admin_notifications_to: Spedire le notifiche amministrative a
-        email_delivery: Notifiche utente
-        admin_notifications: Notifiche amministrative
+  refinery:
+    admin:
+      memberships_settings: Impostazioni
+      memberships:
+        new_members: Nuovi utenti iscritti
+        no_new_members: Non ci sono nuovi utenti iscritti
+        settings_admin_notification:
+          example: "Inserisci i tuoi indirizzi email come: jack@work.com, jill@office.com"
+          hint: Quando una nuova utente si iscrive, Refinery ti invierà una email di notifica.
+        settings:
+          signup_defaults: Predefiniti
+          signup_confirmation: Conferma registrazione
+          no_confirmation: Nessuna conferma
+          email_confirmation: Conferma registrazione con una email all'utente
+          admin_confirmation: Attendere l'approvazione di un amministratore
+          membership_expiration: Scadenza iscrizione
+          no_expiration: Nessuna scadenza
+          timed_expiration: Iscrizione con scadenza
+          default_expiration_in: "Scadenza predefinita iscrizione"
+          default_groups: Gruppi predefiniti
+          assign_new_users_to_the_selected_groups: Assegna automaticamente i nuovi utenti ai seguenti gruppi
+          no_groups_found: "Nessun gruppo di utenti trovato."
+      pages:
+        tabs:
+          roles:
+            allow_everyone: "Permetti l'accesso a tutti"
+            allow_all_members: "Permetti l'accesso a tutti gli utenti registrati"
+            allow_members_of: "Permetti l'accesso agli utenti dei gruppi"
+      roles:
+        delete: Elimina gruppo
+        no_roles_yet: Non sono stati ancora creati dei gruppi
+        edit: Modifica gruppo
+        delete: Elimina gruppo
+        new_role: Nuovo gruppo
+        roles_administration: Amministrazione gruppi di utenti
+      members:
+        accept: "Accetta l'iscrizione"
+        reject: "Rifiuta l'iscrizione"
+        edit: Modifica utente
+        delete: Elimina utente
+        member_until: Scadenza iscrizione
+        membership_expired: Iscrizione scaduta il
+        not_yet_member: "L'utente non è ancora attivo"
+        activate_member_for: "Attiva iscrizione per"
+        account_active: Utente attivo
+        new_account: Nuovo utente
+        account_disabled: Utente disabilitato
+        account_expired: Utente scaduto
+        account_rejected: Iscrizione rifiutata
+        account_not_activated: Iscrizione non ancora attivata
+        disable: Disabilita utente
+        enable: Abilita utente
+        delete: Elimina utente
+        no_members_yet: Non ci sono ancora utenti registrati
+        all_members: Tutti gli utenti
+        members_administration: Amministrazione utenti
+        account: Dati iscrizione
+        organization: Organizzazione
+        profile: Dati personali
+        activation: Attivazione iscrizione
+        user_roles: Gruppi utente
+        user_can_login: "L'utente può accedere alle pagine riservate"
+        extend: Rinnova iscrizione
+        extend_membership_for: Rinnova iscrizione per
+        filter_by: Filtra per
+        member_actions: Azioni utente
+        filter:
+          all: Tutti
+          active: Attivi
+          rejected: Rifiutati
+          disabled: Disabilitati
+          unconfirmed: Non confermati
+      membership_email_parts:
+        email_header: Intestazione messaggio
+        email_footer: Firma messaggio
+      membership_emails:
+        member_activated: Iscrizione attivata
+        member_accepted: Iscrizione accettata
+        member_created: Nuova iscrizione
+        member_deleted: Iscrizione cancellata
+        member_rejected: Iscrizione rifiutata
+        membership_extended: Iscrizione rinnovata
+        edit: Modifica email
+        no_emails_yet: Non ci sono ancora email
+        emails_administration: Amministrazione email
+        membership_email:
+        email_settings: Preferenze email
+        toggle_email_body_help: Mostra/nascondi documentazione
+        email_body_help_title: Documentazione su 'Corpo del messaggio'
+        shared_email_parts: Parti comuni alle email
+        email_body_help:
+          email_body_help: "Nel corpo del messaggio è possibile inserire delle etichette che verranno sotituite con la corrispondente informazione sull'utente."
+          available_tags: Etichette disponibili
+          user_data: "Dati dell'utente"
+          member_until: "La data di scadenza dell'iscrizione"
+          activation_url: "L'URL a cui è necessario accedere per attivare l'iscrizione"
+        settings:
+          deliver_notifications_on: Spedire le seguenti notifiche agli utenti
+          deliver_admin_notifications_to: Spedire le notifiche amministrative a
+          email_delivery: Notifiche utente
+          admin_notifications: Notifiche amministrative

@@ -14,33 +14,33 @@
 
     <% if member.disabled? && (confirmation != 'email' || member.confirmed?) %>
 
-      <%= image_tag 'refinery/icons/user_locked.png', :tooltip => t('account_disabled', :scope => 'admin.members') %>
+      <%= image_tag 'refinery/icons/user_locked.png', :tooltip => t('account_disabled', :scope => 'refinery.admin.members') %>
 
     <% elsif member.rejected? %>
 
-      <%= image_tag 'refinery/icons/cross.png', :tooltip => t('account_rejected', :scope => 'admin.members') %>
+      <%= image_tag 'refinery/icons/cross.png', :tooltip => t('account_rejected', :scope => 'refinery.admin.members') %>
 
     <% elsif timed && (member.lapsed? || member.never_member?) %>
 
-      <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('account_expired', :scope => 'admin.members') %>
+      <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('account_expired', :scope => 'refinery.admin.members') %>
 
     <% elsif member.active? %>
 
-      <%= image_tag 'refinery/icons/tick.png', :tooltip => t('account_active', :scope => 'admin.members') %>
+      <%= image_tag 'refinery/icons/tick.png', :tooltip => t('account_active', :scope => 'refinery.admin.members') %>
 
     <% elsif confirmation == 'email' && member.unconfirmed? %>
 
-      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('account_not_activated', :scope => 'admin.members') %>
+      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('account_not_activated', :scope => 'refinery.admin.members') %>
 
     <% elsif member.undecided? %>
 
-      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('new_account', :scope => 'admin.members') %>
+      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('new_account', :scope => 'refinery.admin.members') %>
 
     <% end %>
   </td>
   <td>
 		<span style="white-space:nowrap" class="actions row_actions">
-			<%= link_to image_tag('refinery/icons/cog_edit.png').html_safe, '#', :tooltip => t('member_actions', :scope => 'admin.members') %>
+			<%= link_to image_tag('refinery/icons/cog_edit.png').html_safe, '#', :tooltip => t('member_actions', :scope => 'refinery.admin.members') %>
 		<span class="row_menu">
     <% if confirmation == 'no' %>
 

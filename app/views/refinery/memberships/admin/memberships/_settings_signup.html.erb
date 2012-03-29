@@ -1,39 +1,39 @@
 <div id="signup_settings" class="dialog_area">
-  <h3><%= t('signup_confirmation', :scope => 'admin.memberships.settings')%>:</h3>
+  <h3><%= t('signup_confirmation', :scope => 'refinery.admin.memberships.settings')%>:</h3>
   
   <%= fields_for :memberships_confirmation, @memberships_confirmation do | f | %>
   <p class="field checkbox">
     <%= f.radio_button :value, 'no' %>
-    <%= f.label :value, t('no_confirmation', :scope => 'admin.memberships.settings'), :value => 'no' %>
+    <%= f.label :value, t('no_confirmation', :scope => 'refinery.admin.memberships.settings'), :value => 'no' %>
   </p>
   <p class="field checkbox">
     <%= f.radio_button :value, 'email' %>
-    <%= f.label :value, t('email_confirmation', :scope => 'admin.memberships.settings'), :value => 'email' %>
+    <%= f.label :value, t('email_confirmation', :scope => 'refinery.admin.memberships.settings'), :value => 'email' %>
   </p>
   <p class="field checkbox">
     <%= f.radio_button :value, 'admin' %>
-    <%= f.label :value, t('admin_confirmation', :scope => 'admin.memberships.settings'), :value => 'admin' %>
+    <%= f.label :value, t('admin_confirmation', :scope => 'refinery.admin.memberships.settings'), :value => 'admin' %>
   </p>
   <% end %>
   <br />
   
-  <h3><%= t('membership_expiration', :scope => 'admin.memberships.settings')%>:</h3>
+  <h3><%= t('membership_expiration', :scope => 'refinery.admin.memberships.settings')%>:</h3>
   
   <%= fields_for :memberships_timed_accounts, @memberships_timed_accounts do | f | %>
   <p class="field checkbox">
     <%= f.radio_button :value, false %>
-    <%= f.label :value, t('no_expiration', :scope => 'admin.memberships.settings'), :value => false %>
+    <%= f.label :value, t('no_expiration', :scope => 'refinery.admin.memberships.settings'), :value => false %>
   </p>
   <p class="field checkbox">
     <%= f.radio_button :value, true %>
-    <%= f.label :value, t('timed_expiration', :scope => 'admin.memberships.settings'), :value => true %>
+    <%= f.label :value, t('timed_expiration', :scope => 'refinery.admin.memberships.settings'), :value => true %>
   </p>
   <% end %>
   
   <% is_timed = (@memberships_timed_accounts.value.to_s == 'true') %>
   <%= fields_for :memberships_default_account_validity, @memberships_default_account_validity do | f | %>
   <p class="field checkbox" <%= 'style="display: none;"'.html_safe unless is_timed %>>
-    <%= f.label :value, t('default_expiration_in', :scope => 'admin.memberships.settings') %>
+    <%= f.label :value, t('default_expiration_in', :scope => 'refinery.admin.memberships.settings') %>
     <%= f.select :value, [
       [t('months', :count => 1) ,1],
       [t('months', :count => 2) ,2],

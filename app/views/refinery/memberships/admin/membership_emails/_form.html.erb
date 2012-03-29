@@ -1,4 +1,4 @@
-<h2><%= MembershipEmail.model_name.human %>: <%= t(@membership_email.title, :scope => 'admin.membership_emails') %></h2>
+<h2><%= MembershipEmail.model_name.human %>: <%= t(@membership_email.title, :scope => 'refinery.admin.membership_emails') %></h2>
 <%= form_for [:admin, @membership_email], :url => @url_override || @url do |f| -%>
 
   <%= render :partial => "/refinery/admin/error_messages",

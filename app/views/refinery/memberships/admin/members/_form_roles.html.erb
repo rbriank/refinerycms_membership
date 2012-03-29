@@ -1,6 +1,6 @@
 <% if Role.where(['title NOT IN (?)',['Superuser','Refinery','Member']]).count > 0 %>
   <fieldset id="member_roles_form" class="clearfix">
-    <legend><%=t('user_roles', :scope => 'admin.members')%></legend>  
+    <legend><%=t('user_roles', :scope => 'refinery.admin.members')%></legend>  
     
     <% Role.where(['title NOT IN (?)',['Superuser','Refinery','Member']]).all.each_with_index do | role, idx | %>
     <p class="role">

@@ -8,11 +8,11 @@
 </div>
 
 <% content_for :stylesheets do %>
-  <%= stylesheet_link_tag ['members_grid'] %>
+  <%= stylesheet_link_tag 'refinery/memberships/members_grid' %>
 <% end %>
 
 <% content_for :javascripts do %>
-  <%= javascript_include_tag ['jquery.cookie.js', 'membership.jquery.js','jquery.event.drag-2.0.min.js', 'slick.core.js', 'slick.grid.js'] %>
+  <%= javascript_include_tag 'jquery.cookie.js', 'refinery/memberships/membership.jquery.js','jquery.event.drag-2.0.min.js', 'slick.core.js', 'slick.grid.js' %>
   <script>
   $(function(){
 		$("#members").slickGrid();

@@ -1,9 +1,8 @@
 #redirect user to the right page after login
 ApplicationController.class_eval do
   def render(*args)
-    Rails.logger.info @page.inspect
     unless @page.nil? || self.class.name == 'PagesController' || self.class.name =~ /^Admin::/
-      redirect_to login_members_path(:redirect => request.fullpath, :member_login => true) unless @page.user_allowed?(current_refinery_user)
+      redirect_to login_members_path(:redirect => env['REQUEST_URI'], :member_login => true) unless @page.user_allowed?(current_refinery_user)
       super *args if @page.user_allowed?(current_refinery_user)
     else
       super *args

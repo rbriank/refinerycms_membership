@@ -90,7 +90,7 @@ module Refinery
       def find_page(uri = nil)
         uri = uri ? uri : request.fullpath
         uri.gsub!(/\?.*/, '')
-        @page = Page.find_by_link_url(uri, :include => [:parts, :slugs])
+        @page = Page.find_by_link_url(uri, :include => [:parts])
       end
     end
   end

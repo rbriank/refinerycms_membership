@@ -121,6 +121,20 @@ it:
       extend_membership_for: Rinnova iscrizione per
       filter_by: Filtra per
       member_actions: Azioni utente
+      details: Dettagli
+      show:
+        actions: Azioni
+        address: Indirizzo
+        back_to_all_members: Torna alla lista
+        click_to_email: Click  per inviare una e-mail
+        contacts: Contatti
+        details: Dettagli
+        fax: Fax
+        member: Iscritto
+        member_from: Iscritto da
+        organization: Azienda
+        phone: Telefono
+        website: Sito web
       filter:
         all: Tutti
         active: Attivi
@@ -157,6 +171,7 @@ it:
         deliver_admin_notifications_to: Spedire le notifiche amministrative a
         email_delivery: Notifiche utente
         admin_notifications: Notifiche amministrative
+
 
 
 

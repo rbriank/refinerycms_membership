@@ -37,10 +37,16 @@ module Admin
 				:class => 'action'
     end
     
+    def details(member)
+      link_to refinery_icon_tag('application_show.png') + t('details', :scope => 'admin.members'), 
+        admin_member_path(member)#, 
+        #:title => t('edit', :scope => 'admin.members')
+    end
+    
     def edit(member)
       link_to refinery_icon_tag('application_edit.png') + t('edit', :scope => 'admin.members'), 
-				edit_admin_member_path(member)#, 
-				#:title => t('edit', :scope => 'admin.members')
+        edit_admin_member_path(member)#, 
+        #:title => t('edit', :scope => 'admin.members')
     end
     
     def delete(member)

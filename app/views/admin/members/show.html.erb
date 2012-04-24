@@ -1,0 +1,94 @@
+<div id='actions'>
+  <h2><%= t('.details')%></h2>
+  <p>
+    <strong><%= t('.member_from') %>:</strong> <%= time_ago_in_words(@member.created_at) %>
+  </p>
+
+  <h2><%= t('.actions') %></h2>
+  <ul>
+    <li>
+      <%= link_to t('.back_to_all_members'), url_for(:back), :class => "back_icon" %>
+    </li>
+  </ul>
+</div>
+<div id='records'>
+  <h2><%= t('.member') %></h2>
+  
+  <table class="inquiry">
+    
+    <tr>
+      <td>
+        <strong><%= t('.member') %></strong>
+      </td>
+      <td>
+        <%= @member.first_name %> <%= @member.last_name %> [<%= mail_to @member.email, @member.email, {:title => t('.click_to_email')} %>]
+      </td>
+    </tr>
+    
+  </table>
+  
+  <br />
+  
+  <h2><%= t('.contacts') %></h2>
+  
+  <table class="inquiry">
+
+    <tr>
+      <td>
+        <strong><%= t('.address') %></strong>
+      </td>
+      <td>
+        <%= @member.street_address %><br />
+        <%= @member.postal_code %>
+        <%= @member.city %>
+        (<%= @member.province %>)
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        <strong><%= t('.phone') %></strong>
+      </td>
+      <td>
+        <%= @member.phone.present? ? @member.phone : '-' %>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        <strong><%= t('.fax') %></strong>
+      </td>
+      <td>
+        <%= @member.fax.present? ? @member.fax : '-' %>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        <strong><%= t('.website') %></strong>
+      </td>
+      <td>
+        <%= @member.website.present? ? @member.website : '-' %>
+      </td>
+    </tr>
+    
+  </table>
+  
+  <br />
+  
+  <h2><%= t('.organization') %></h2>
+  
+  <table class="inquiry">
+    
+    <tr>
+      <td>
+        <strong><%= t('.organization') %></strong>
+      </td>
+      <td>
+        <%= @member.organization.present? ? @member.organization : '-' %>
+      </td>
+    </tr>
+    
+  </table>
+    
+</div>

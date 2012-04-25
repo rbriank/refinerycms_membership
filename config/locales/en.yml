@@ -28,7 +28,8 @@ en:
           default_groups: Default groups for members
           assign_new_users_to_the_selected_groups: Assign new user to the selected group
           no_groups_found: "No groups found"
-      pages:
+    pages:
+      admin:
         tabs:
           roles:
             allow_everyone: "Allow everyone"

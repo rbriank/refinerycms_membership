@@ -36,7 +36,7 @@ module Refinery
 
         @email = MembershipEmail[email]
 
-        html = render_to_string :template => 'membership_mailer/email'
+        html = render_to_string :template => 'refinery/memberships/membership_mailer/email'
 
         html = extract_images(html)
         text = html_to_text(html)

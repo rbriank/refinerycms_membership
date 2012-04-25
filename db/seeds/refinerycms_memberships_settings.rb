@@ -9,3 +9,5 @@ Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_deleted", true
 Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_rejected", true)
 Refinery::Setting.find_or_set("memberships_deliver_mail_on_membership_extended", true)
 Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_accepted", true)
+
+Refinery::Setting.find_or_set('memberships_deliver_notification_to_users', '')

@@ -4,7 +4,7 @@ describe PagesRoles do
 
   before do
     @page = Page.create!(:title => 'I have no roles yet!')
-    @role = Role.create!(:title => 'I have no pages yet!')
+    @role = Refinery::Role.create!(:title => 'I have no pages yet!')
     @user = mock(User)
   end
 

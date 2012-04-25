@@ -201,7 +201,7 @@ module Refinery
       def set_default_roles
         ids = Refinery::Setting::find_or_set('memberships_default_roles', [])
         if ids.present?
-          Role::find(:all, :conditions => {'id' => ids}).each do | role |
+          Refinery::Role::find(:all, :conditions => {'id' => ids}).each do | role |
             self.roles << role
           end
           save
@@ -223,7 +223,7 @@ module Refinery
       end
 
       def remove_member_role
-        self.roles.delete(Role[:member]) if has_role?(:member)
+        self.roles.delete(Refinery::Role[:member]) if has_role?(:member)
       end
     end
   end

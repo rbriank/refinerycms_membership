@@ -33,7 +33,7 @@ describe PagesController do
 
       @page = Page.create!(
         :title => 'my restricted page',
-        :roles => [Role[:my_role]])
+        :roles => [Refinery::Role[:my_role]])
     end
 
     it "should 404 for invalid page/user role combination" do
@@ -43,7 +43,7 @@ describe PagesController do
     end
 
     it "should 200 for valid page/user role combination" do
-      @mock_user.stub(:roles).and_return([Role[:my_role]])
+      @mock_user.stub(:roles).and_return([Refinery::Role[:my_role]])
       get :show, :id => @page.id
       response.status.should eql 200
     end

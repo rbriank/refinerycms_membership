@@ -38,7 +38,7 @@ describe Admin::UserRolesController do
 
     before(:each) do
       @user = Factory(:user)
-      @role = Role[:my_role]
+      @role = Refinery::Role[:my_role]
     end
 
     it 'should add roles to the user' do
@@ -69,8 +69,8 @@ describe Admin::UserRolesController do
         @users = [Factory(:user),
           Factory(:user),
           Factory(:user)]
-        @roles = [Role[:one_more_role], Role[:yet_another_role],
-          Role[:please_no_more], Role[:ok_one_more]]
+        @roles = [Refinery::Role[:one_more_role], Refinery::Role[:yet_another_role],
+          Refinery::Role[:please_no_more], Refinery::Role[:ok_one_more]]
       end
 
       it 'should add many roles to one user' do
@@ -102,7 +102,7 @@ describe Admin::UserRolesController do
       @users = [Factory(:user),
         Factory(:user),
         Factory(:user)]
-      @roles = [Role[:my_role], Role[:role_heaven], Role[:monster_truck]]
+      @roles = [Refinery::Role[:my_role], Refinery::Role[:role_heaven], Refinery::Role[:monster_truck]]
       @users.each{|user| user.roles << @roles}
     end
 

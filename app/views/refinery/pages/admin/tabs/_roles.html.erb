@@ -8,20 +8,20 @@
   </div>
   <div id="role_allow_all_members">
     <p>
-      <%= radio_button_tag 'page_allow', '', @page.roles == [Role.where(:title => 'Member').first], :id => 'allow_all_members' %>
+      <%= radio_button_tag 'page_allow', '', @page.roles == [Refinery::Role.where(:title => 'Member').first], :id => 'allow_all_members' %>
       <label for="allow_all_members"><%= t('.allow_all_members') %></label>
-      <%= hidden_field_tag "page[role_ids][]", Role.where(:title => 'Member').first.id %>
+      <%= hidden_field_tag "page[role_ids][]", Refinery::Role.where(:title => 'Member').first.id %>
     </p>
   </div>
-  <% if Role.where(['title NOT IN (?)',['Superuser','Refinery','Member']]).count > 0 %>
+  <% if Refinery::Role.where(['title NOT IN (?)',['Superuser','Refinery','Member']]).count > 0 %>
   <div id="role_allow_members_of">
     <p>
-      <%= radio_button_tag 'page_allow', '', @page.roles.present? && @page.roles != [Role.where(:title => 'Member').first], :id => 'allow_members_of' %>
+      <%= radio_button_tag 'page_allow', '', @page.roles.present? && @page.roles != [Refinery::Role.where(:title => 'Member').first], :id => 'allow_members_of' %>
       <label for="allow_members_of"><%= t('.allow_members_of') %></label>
     </p>
     <%= hidden_field_tag "page[role_ids][]", 1 %>
     <%= hidden_field_tag "page[role_ids][]", 2 %>
-    <% Role.where(['title NOT IN (?)',['Superuser','Refinery','Member']]).all.each_with_index do | role, idx | %>
+    <% Refinery::Role.where(['title NOT IN (?)',['Superuser','Refinery','Member']]).all.each_with_index do | role, idx | %>
     <p class="role">
       <%= check_box_tag "page[role_ids][]", role.id, @page.roles.include?(role), :id => "page_role_#{idx}" %><label for="page_role_<%= idx %>"><%= role.title %></label>
     </p>

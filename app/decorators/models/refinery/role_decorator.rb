@@ -1,4 +1,4 @@
-::Refinery::Role.class_eval do
+Refinery::Role.class_eval do
   has_and_belongs_to_many :pages, :join_table => ::Refinery::Memberships::PagesRoles.table_name
   validates_presence_of :title
   acts_as_indexed :fields => [:title]

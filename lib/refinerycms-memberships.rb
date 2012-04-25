@@ -51,7 +51,7 @@ require 'refinery/memberships'
 #         end
 #
 #
-#         Role.class_eval do
+#         Refinery::Role.class_eval do
 #           has_and_belongs_to_many :pages
 #           validates_presence_of :title
 #           acts_as_indexed :fields => [:title]

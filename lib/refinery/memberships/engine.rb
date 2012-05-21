@@ -32,6 +32,7 @@ module Refinery
         require File.expand_path('../../../rails_datatables/rails_datatables', __FILE__)
         ActionView::Base.send :include, RailsDatatables
 
+        # load decorators
         Dir.glob(File.join(Refinery::Memberships.root, "app/decorators/**/*_decorator.rb")) do |c|
           Rails.application.config.cache_classes ? require(c) : load(c)
         end

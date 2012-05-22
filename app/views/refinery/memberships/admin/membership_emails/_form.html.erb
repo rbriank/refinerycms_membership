@@ -29,10 +29,3 @@
                :hide_delete => true
   } %>
 <% end -%>
-
-<% content_for :after_javascript_libraries do %>
-  <%= javascript_include_tag 'custom_wym_options' %>
-<% end %>
-<% content_for :javascripts do %>
-  <%= javascript_include_tag 'wym_monkeypatches' %>
-<% end %>

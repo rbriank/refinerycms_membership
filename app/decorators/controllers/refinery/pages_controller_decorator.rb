@@ -24,5 +24,5 @@
   #     # redirect to the right login page...
   #     redirect_to login_members_path(:redirect => request.fullpath, :member_login => true)
   #   end
-  end
+  # end
 end # PagesController.class_eval

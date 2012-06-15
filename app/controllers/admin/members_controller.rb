@@ -38,12 +38,14 @@ class Admin::MembersController < Admin::BaseController
   end
 
 	def index
+    @members = find_all_members
+		search_all_members if searching?
 		if params['filter_by'].present? && %w(active rejected disabled unconfirmed)
 			case params['filter_by']
-			when 'active' then find_all_members ['rejected = ? AND enabled = ? AND confirmed_at IS NOT NULL', 'NO', true]
-			when 'rejected' then find_all_members :rejected => 'YES'
-			when 'disabled' then find_all_members :enabled => false
-			when 'unconfirmed' then find_all_members ['confirmation_token IS NOT NULL'] 
+			when 'active' then @members = @members.where ['rejected = ? AND enabled = ?', 'NO', true] # AND confirmed_at IS NOT NULL', 'NO', 1]
+			when 'rejected' then @members = @members.where :rejected => 'YES'
+			when 'disabled' then @members = @members.where :enabled => false
+			when 'unconfirmed' then @members = @members.where ['confirmation_token IS NOT NULL'] 
 			end
 		end
 		paginate_all_members
@@ -100,6 +102,7 @@ class Admin::MembersController < Admin::BaseController
     old = @member.rejected
     @member.seen!
     @member.accept!
+    @member.enable!
     @member.reload 
     
     MembershipMailer.deliver_member_accepted(@member) if old == 'UNDECIDED'

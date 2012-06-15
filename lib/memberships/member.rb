@@ -52,13 +52,24 @@ module Refinery
           e
         end
 
+        def reset_password!(new_password, new_password_confirmation)
+          self.password = new_password
+          self.password_confirmation = new_password_confirmation
+          if new_password == new_password_confirmation
+            clear_reset_password_token
+            after_password_reset
+          end
+
+          save :validate => false
+        end
+
         def mail_data
           allowed_attributes = %w(email first_name last_name title organization
           street_address city province postal_code phone fax website)
           d = attributes.to_hash
           d.reject!{|k,v| !allowed_attributes.include?(k.to_s)}
           d[:activation_url] = Rails.application.routes.url_helpers.activate_members_url(:confirmation_token => self.confirmation_token) if RefinerySetting::find_or_set('memberships_confirmation', 'admin') == 'email'
-          d[:member_until] = I18n.localize(member_until.to_date, :format => :long) if member_until && RefinerySetting::find_or_set('memberships_timed_accounts', true)
+          d[:member_until] = ::I18n.localize(member_until.to_date, :format => :long) if member_until && RefinerySetting::find_or_set('memberships_timed_accounts', true)
           d[:reset_password_url] = Rails.application.routes.url_helpers.reset_password_members_url(:reset_password_token => self.reset_password_token) if self.reset_password_token.present?
           Rails.logger.debug d.inspect
           d
@@ -151,13 +162,11 @@ module Refinery
         end
 
         def enable!
-          self.enabled = true
-          save
+          update_attribute :enabled, true
         end
 
         def disable!
-          self.enabled = false
-          save
+          update_attribute :enabled, false
         end
 
         def extend!
@@ -174,7 +183,7 @@ module Refinery
         end
 
         def inactive_message
-          self.seen? ? I18n.translate('devise.failure.locked') : super
+          self.seen? ? ::I18n.translate('devise.failure.locked') : super
         end
 
         # devise confirmable

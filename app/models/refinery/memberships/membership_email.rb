@@ -3,6 +3,12 @@ module Refinery
     class MembershipEmail < ActiveRecord::Base
       translates :subject, :body
 
+      class Translation
+        attr_accessible :locale
+      end
+
+      attr_accessible :title, :subject, :body
+
       validates_uniqueness_of :title
 
       validates_presence_of :subject, :body

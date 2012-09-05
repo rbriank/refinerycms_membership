@@ -1,0 +1,42 @@
+<%content_for :stylesheets do
+  stylesheet_link_tag 'membership', 'demo_table', 'demo_page'
+end%>
+<div id="membership-wrapper" style="display:none">
+  <div id="tabs">
+    <ul class="clearfix">
+      <li><a href="#user_roles"><span>Members</span></a></li>
+      <li><a href="#page_roles"><span>Pages</span></a></li>
+    </ul>
+
+    <div id="user_roles"><%= render :partial => 'user_roles',
+        :locals => {:members => @members} %></div>
+    <div id="page_roles">
+      <%=  render :partial => 'page_roles',
+        :layout => false,
+        :locals => {
+        :pages => @pages,
+        :roles => @roles
+      }
+    %>
+    </div>
+  </div>
+</div>
+
+<%content_for :javascripts do
+  javascript_include_tag 'jquery.dataTables.min.js', 'membership.jquery.js'
+end%>
+
+<%content_for :javascripts do%>
+  <script type="text/javascript">
+    $(function() {
+      $("#tabs").tabs();
+    });
+  </script>
+  <% columns = [{}, {}, {}, {}, {}, {:sortable => false}, {:sortable => false}, {:sortable => false}] %>
+  <%= datatable(columns, :per_page=> 25, :ajax_source => ::Refinery::Core::Engine.routes.url_helpers.memberships_admin_memberships_path, :auto_width => false ).html_safe %>
+  <script type="text/javascript">
+    $(function() {
+      $('#membership-wrapper').show();
+    });
+  </script>
+<%end%>

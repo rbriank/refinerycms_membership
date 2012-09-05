@@ -1,0 +1,76 @@
+<div id="right_col">
+  <%=raw @page[:right_body] if @page %>
+</div>
+<div id="page_content">
+  <%=raw @page[:middle_body] if @page %>
+  <div id="new_member_form">
+    <%= form_for @member, :as => :member, :url => refinery.memberships_members_path(:p => params[:p]) do |f| %>
+      <%= render :partial => "error_messages",
+        :locals => {
+        :object => @member,
+        :include_object_name => true
+      } %>      
+
+      <div id="member">
+        <%= render :partial => "form_account", :locals => {:f => f} %>
+        <fieldset>
+          <legend><%=t('members.shared.profile')%></legend>
+          <ol>
+            <li>
+              <%= f.label :first_name %>
+              <%= f.text_field :first_name %>&nbsp;
+            </li>
+            <li>
+              <%= f.label :last_name %>
+              <%= f.text_field :last_name %>&nbsp;
+            </li>
+            <li>
+              <%= f.label :title %>
+              <%= f.text_field :title %>&nbsp;
+            </li>
+            <li>
+              <%= f.label :phone %>
+              <%= f.text_field :phone %>&nbsp;
+            </li>
+            <li>
+              <%= f.label :fax %>
+              <%= f.text_field :fax %>&nbsp;
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend><%=t('members.shared.organization')%></legend>
+          <ol>
+            <li>
+              <%= f.label :organization %>
+              <%= f.text_field :organization %>&nbsp;
+            </li>
+            <li>
+              <%= f.label :street_address %>
+              <%= f.text_field :street_address %>&nbsp;
+            </li>
+            <li>
+              <%= f.label :city %>
+              <%= f.text_field :city %>&nbsp;
+            </li>
+            <!--
+            <li>
+              <%#= f.label :province %>
+              <%#= f.select :province, options_for_select(Provinces::CODES) %>
+            </li>
+            -->
+            <li>
+              <%= f.label :postal_code %>
+              <%= f.text_field :postal_code %>&nbsp;
+            </li>
+            <li>
+              <%= f.label :website %>
+              <%= f.text_field :website %>&nbsp;
+            </li>
+          </ol>
+        </fieldset>
+       <div id='submit'> <%= f.submit %> </div>
+      </div>
+    <%end%>
+  </div>
+</div>

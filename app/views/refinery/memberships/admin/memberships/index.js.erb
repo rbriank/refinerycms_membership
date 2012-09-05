@@ -1,0 +1,26 @@
+<%
+objects = []
+@objects.each do |member|
+  if member
+    links = if member.active?
+      "\"#{link_to('Extend', refinery.memberships_admin_user_role_path(:id => member.id, :switch=>'extend'), :method => :put, :remote => :true).gsub(/"/, "'")}\",
+      \"#{link_to('Cancel', refinery.memberships_admin_user_role_path(:id => member.id, :switch=>'cancel'), :method => :put, :remote => :true).gsub(/"/, "'")}\""
+    else
+      "\"#{link_to('Approve', refinery.memberships_admin_user_role_path(:id => member.id, :switch=>'approve'), :method => :put, :remote => :true).gsub(/"/, "'")}\",
+      \"#{link_to('Reject', refinery.memberships_admin_user_role_path(:id => member.id, :switch=>'reject'), :method => :put, :remote => :true).gsub(/"/, "'")}\""
+    end
+    objects <<
+      "[\"#{link_to("#{member.first_name} #{member.last_name}", refinery.edit_memberships_member_path(:id => member.id)).gsub(/"/, "'")}\",
+    \"#{member.organization || "--"}\",
+    \"#{mail_to(member.email).gsub(/"/, "'")}\",
+    \"#{member.created_at.strftime('%d/%m/%Y')}\",
+    \"#{member.member_until.nil? ? '--' : member.member_until.strftime('%d/%m/%Y')}\",
+    \"#{member.active? ? 'member' : '--'}\",
+    #{links}]"
+  end unless !(member.role_ids & [REFINERY_ROLE_ID, SUPERUSER_ROLE_ID]).empty?
+end
+%>
+{"sEcho": <%= params[:sEcho] || -1 %>,
+"iTotalRecords": <%= @total_objects %>,
+"iTotalDisplayRecords": <%= @total_objects %>,
+"aaData":[<%= objects.join(",").html_safe %>]}

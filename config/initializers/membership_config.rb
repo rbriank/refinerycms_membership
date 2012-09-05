@@ -10,5 +10,5 @@ module Provinces
     UT VI VT VA WA WI WV WY)
 end
 
-ADMIN_EMAIL = ''
+ADMIN_EMAIL = 'pedro@programatica.es'
 

@@ -15,7 +15,7 @@
     </li>
     <li>
       <%= f.label :province %>
-      <%= f.select :province, options_for_select(Provinces::CODES) %>&nbsp;
+      <%= f.select :province, options_for_select(::Refinery::Memberships::Provinces::CODES) %>&nbsp;
     </li>
     <li>
       <%= f.label :postal_code %>

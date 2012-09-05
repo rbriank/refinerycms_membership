@@ -10,7 +10,6 @@
     end
   end
   
-  end
 end
 
 r = Refinery::Role.new

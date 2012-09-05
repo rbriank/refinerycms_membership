@@ -5,12 +5,12 @@ end%>
   <div id="tabs">
     <ul class="clearfix">
       <li><a href="#user_roles"><span>Members</span></a></li>
-      <li><a href="#page_roles"><span>Pages</span></a></li>
+      <li><a href="#refinery_page_roles"><span>Pages</span></a></li>
     </ul>
 
     <div id="user_roles"><%= render :partial => 'user_roles',
         :locals => {:members => @members} %></div>
-    <div id="page_roles">
+    <div id="refinery_page_roles">
       <%=  render :partial => 'page_roles',
         :layout => false,
         :locals => {

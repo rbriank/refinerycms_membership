@@ -1,7 +1,7 @@
 module Refinery
   module Memberships
     class MembershipMailer < ActionMailer::Base
-      default :from => ADMIN_EMAIL
+      default :from => ::Refinery::Memberships.admin_email
       
       def application_confirmation_member(member)
         @member = member
@@ -10,7 +10,7 @@ module Refinery
     
       def application_confirmation_admin(member)
         @member = member
-        mail(:to => ADMIN_EMAIL,
+        mail(:to => ::Refinery::Memberships.admin_email,
           :subject => "Sign up: #{member.first_name} #{member.last_name} (#{member.email})")
       end
     
@@ -23,7 +23,7 @@ module Refinery
       def acceptance_confirmation_admin(member, admin)
         @member = member
         @admin = admin
-        mail(:to => ADMIN_EMAIL,
+        mail(:to => ::Refinery::Memberships.admin_email,
           :subject => "Approved: #{member.first_name} #{member.last_name} (#{member.email})")
       end
     
@@ -36,7 +36,7 @@ module Refinery
       def rejection_confirmation_admin(member, admin)
         @member = member
         @admin = admin
-        mail(:to => ADMIN_EMAIL,
+        mail(:to => ::Refinery::Memberships.admin_email,
           :subject => "Rejected: #{member.first_name} #{member.last_name} (#{member.email})")
       end
     
@@ -49,7 +49,7 @@ module Refinery
       def extension_confirmation_admin(member, admin)
         @member = member
         @admin = admin
-        mail(:to => ADMIN_EMAIL,
+        mail(:to => ::Refinery::Memberships.admin_email,
           :subject => "Extension (1 yr.): #{member.first_name} #{member.last_name} (#{member.email})")
       end
     
@@ -62,13 +62,13 @@ module Refinery
       def cancellation_confirmation_admin(member, admin)
         @member = member
         @admin = admin
-        mail(:to => ADMIN_EMAIL,
+        mail(:to => ::Refinery::Memberships.admin_email,
           :subject => "Cancelled: #{member.first_name} #{member.last_name} (#{member.email})")
       end
     
       def profile_update_notification_admin(member)
         @member = member
-        mail(:to => ADMIN_EMAIL,
+        mail(:to => ::Refinery::Memberships.admin_email,
           :subject => "Profile Updated: #{member.first_name} #{member.last_name} (#{member.email})")
       end
       end

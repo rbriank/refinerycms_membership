@@ -1,10 +1,6 @@
 require 'refinerycms-core'
 require 'refinerycms-dashboard'
 
-MEMBER_ROLE_ID = ::Refinery::Role.where(:title => 'Member').pluck(:id).first
-REFINERY_ROLE_ID = ::Refinery::Role.where(:title => 'Refinery').pluck(:id).first
-SUPERUSER_ROLE_ID = ::Refinery::Role.where(:title => 'Superuser').pluck(:id).first
-
 module Refinery
   
   autoload :MembershipsGenerator, 'generators/refinery/memberships/memberships_generator'
@@ -90,6 +86,10 @@ module Refinery
             end
           end
         end # Page.class_eval
+        
+        ::MEMBER_ROLE_ID = ::Refinery::Role.where(:title => 'Member').pluck(:id).first
+        ::REFINERY_ROLE_ID = ::Refinery::Role.where(:title => 'Refinery').pluck(:id).first
+        ::SUPERUSER_ROLE_ID = ::Refinery::Role.where(:title => 'Superuser').pluck(:id).first
       end # config.to_prepare
 
       after_inclusion do

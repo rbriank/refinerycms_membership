@@ -9,10 +9,10 @@
       end
     end
   end
-
-  r = Refinery::Role.new
-  r.title = 'Member'
-  r.save
   
   end
 end
+
+r = Refinery::Role.new
+r.title = 'Member'
+r.save

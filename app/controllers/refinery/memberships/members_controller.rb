@@ -168,7 +168,7 @@ module Refinery
       def redirect?
         if current_refinery_user.nil?
           store_location
-          redirect_to refinery.send(Refinery::Memberships.new_user_method_path)
+          redirect_to ::Refinery::Memberships.new_user_path || refinery.new_refinery_user_session_path
         end
       end
     

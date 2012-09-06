@@ -107,9 +107,11 @@ module Refinery
               if @page.skip_to_first_child and (first_live_child = @page.children.order('lft ASC').where(:draft=>false).first).present?
                 redirect_to first_live_child.url
               end
+            elsif current_refinery_user
+              redirect_to refinery.root_path
             else
               store_location
-              redirect_to refinery.send(::Refinery::Memberships.new_user_method_path)
+              redirect_to ::Refinery::Memberships.new_user_path || refinery.new_refinery_user_session_path
             end
           end
         end # PagesController.class_eval

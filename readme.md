@@ -19,7 +19,7 @@ __A role based membership engine for [refinerycms](http://refinerycms.com)__
 
 * In config/initializers/refinery/memberships.rb
  * Define admin_email config option. This will be the "from" when users get email.
- * Define new_user_method_path if you want to change the login page. You will have to create a controller, view and route for that page.
+ * Define new_user_path with a path, like '/login/new', if you want to change the login page. You will have to create a controller, view and route for that page.
  
 * In config/initializers/refinery/authentication.rb
  * Enable superuser_can_assign_roles if you want to create members from users tab.

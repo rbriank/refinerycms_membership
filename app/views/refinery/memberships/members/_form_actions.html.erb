@@ -16,7 +16,7 @@
     end
     cancel_button_id    ||= "cancel_button"
 
-    cancel_url          ||= (((back = url_for(:back)).include?('javascript') or action_name =~ /^(create|update)$/) ? send("#{f.object_name.to_s.pluralize}_url") : back)
+    cancel_url          ||= (((back = url_for(:back)).include?('javascript') or action_name =~ /^(create|update)$/) ? refinery.send("memberships_#{f.object_name.to_s.pluralize}_url") : back)
   end
 
   continue_editing = defined?(continue_editing) ? continue_editing : (f.object.present? and f.object.persisted?)
@@ -32,7 +32,7 @@
     delete_title        ||= nil
     delete_confirmation ||= nil
     delete_button_id    ||= "delete_button"
-    delete_url          ||= eval("#{f.object_name}_url(#{f.object.id})")
+    delete_url          ||= eval("refinery.memberships_#{f.object_name}_url(#{f.object.id})") 
   end
 -%>
 <% if from_dialog? %>

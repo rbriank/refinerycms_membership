@@ -62,11 +62,11 @@ module Refinery
         ActionView::Base.send :include, RailsDatatables
 
         ::Refinery::Role.class_eval do
-          has_and_belongs_to_many :pages, :class_name => '::Refinery::Page'
+          has_and_belongs_to_many :pages, :class_name => '::Refinery::Page', :join_table => 'refinery_pages_roles'
         end
 
         ::Refinery::Page.class_eval do
-          has_and_belongs_to_many :roles, :class_name => '::Refinery::Role'
+          has_and_belongs_to_many :roles, :class_name => '::Refinery::Role', :join_table => 'refinery_pages_roles'
 
           def user_allowed?(user)
             # if a page has no roles assigned, let everyone see it

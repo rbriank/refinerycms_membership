@@ -9,8 +9,10 @@ objects = []
       "\"#{link_to('Approve', refinery.memberships_admin_user_role_path(:id => member.id, :switch=>'approve'), :method => :put, :remote => :true).gsub(/"/, "'")}\",
       \"#{link_to('Reject', refinery.memberships_admin_user_role_path(:id => member.id, :switch=>'reject'), :method => :put, :remote => :true).gsub(/"/, "'")}\""
     end
+    user_name = "#{member.first_name} #{member.last_name}" 
+    user_name = member.username if user_name.blank?
     objects <<
-      "[\"#{link_to("#{member.first_name} #{member.last_name}", refinery.edit_memberships_member_path(:id => member.id)).gsub(/"/, "'")}\",
+      "[\"#{link_to(user_name, refinery.edit_memberships_member_path(:id => member.id)).gsub(/"/, "'")}\",
     \"#{member.organization || "--"}\",
     \"#{mail_to(member.email).gsub(/"/, "'")}\",
     \"#{member.created_at.strftime('%d/%m/%Y')}\",

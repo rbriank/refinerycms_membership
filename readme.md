@@ -5,11 +5,11 @@ __A role based membership engine for [refinerycms](http://refinerycms.com)__
 ## Installation
 
 * To your Gemfile add: 
-* gem 'refinerycms-memberships', '2.0'
+	* gem 'refinerycms-memberships', '2.0'
 * Then run:
-* bundle install
-* rails generate refinery:memberships
-* rake db:migrate
+	* bundle install
+	* rails generate refinery:memberships
+	* rake db:migrate
 
 * set up actionmailer in your environment file(s) the plugin will fail without it
  *  config.action_mailer.raise_delivery_errors = false

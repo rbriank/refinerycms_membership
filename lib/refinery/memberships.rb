@@ -111,7 +111,11 @@ module Refinery
               redirect_to refinery.root_path
             else
               store_location
-              redirect_to ::Refinery::Memberships.new_user_path || refinery.new_refinery_user_session_path
+              if ::Refinery::Memberships.new_user_path
+                redirect_to ::Refinery::Memberships.new_user_path + (::Refinery::I18n.frontend_locales.many? ? '?locale='+::I18n.locale.to_s : '') 
+              else
+                redirect_to refinery.new_refinery_user_session_path
+              end
             end
           end
         end # PagesController.class_eval

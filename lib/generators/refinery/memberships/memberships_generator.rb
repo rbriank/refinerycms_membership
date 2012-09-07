@@ -13,8 +13,8 @@ module Refinery
       append_file 'db/seeds.rb', :verbose => true do
         <<-EOH
 
-# Added by Refinery CMS Events extension
-Refinery::Events::Engine.load_seed
+        # Added by Refinery CMS Memberships extension
+        Refinery::Memberships::Engine.load_seed
         EOH
       end
     end

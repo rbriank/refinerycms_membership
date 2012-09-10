@@ -17,6 +17,10 @@ module Refinery
       after_create :set_default_rejected
       after_create :set_default_roles
 
+      def to_param
+          id
+      end
+
       def self.per_page
         12
       end

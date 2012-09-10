@@ -7,6 +7,11 @@ en:
     plugins:
       refinerycms_memberships:
         title: Memberships
+    members:
+      shared:
+        account: Account
+        profile: Profile
+        organization: Organization
     admin:
       memberships_settings: Settings
       memberships:
@@ -28,13 +33,6 @@ en:
           default_groups: Default groups for members
           assign_new_users_to_the_selected_groups: Assign new user to the selected group
           no_groups_found: "No groups found"
-    pages:
-      admin:
-        tabs:
-          roles:
-            allow_everyone: "Allow everyone"
-            allow_all_members: "Allow access all registered users"
-            allow_members_of: "Allow access to users in groups"
       roles:
         delete: Delete group
         no_roles_yet: No roles created yet
@@ -107,6 +105,13 @@ en:
           deliver_admin_notifications_to: Notify admins when
           email_delivery: Email delivery
           admin_notifications: Admin notifications
+    pages:
+      admin:
+        tabs:
+          roles:
+            allow_everyone: "Allow everyone"
+            allow_all_members: "Allow access all registered users"
+            allow_members_of: "Allow access to users in groups"
     memberships:
       show:
         other: Other Memberships
@@ -115,10 +120,6 @@ en:
           username: Username
           password: Password
           login: Login
-        shared:
-          account: Account
-          profile: Profile
-          organization: Organization
         error_messages:
           problems_in_following_fields: There were problems with the following fields
         form_actions:
@@ -131,10 +132,6 @@ en:
           instructions: Please complete information. You will be notified
             of your acceptance upon approval.
           submit_application: Submit Application
-        shared:
-          account: Account
-          profile: Profile
-          organization: Organization
     activerecord:
       attributes:
        user:

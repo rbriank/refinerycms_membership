@@ -2,11 +2,11 @@
   <legend><%=t('refinery.members.shared.profile')%></legend>
   <ol>
     <li>
-      <%= f.label :first_name %>
+      <%= f.required_label :first_name %>
       <%= f.text_field :first_name %>&nbsp;
     </li>
     <li>
-      <%= f.label :last_name %>
+      <%= f.required_label :last_name %>
       <%= f.text_field :last_name %>&nbsp;
     </li>
     <li>

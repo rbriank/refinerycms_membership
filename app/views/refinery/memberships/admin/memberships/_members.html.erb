@@ -1,7 +1,7 @@
 <% if @members.any? %>
 	<%= will_paginate @members %>
 <div class="<%= ['pagination_frame', pagination_css_class].compact.join(' ')%>">
-	<%= render :partial => 'admin/members/members_table' %>
+	<%= render :partial => '/refinery/memberships/admin/members/members_table' %>
 </div>
 <% else %>
 <p>

@@ -1,15 +1,20 @@
 <%= form_for Refinery::User.new, :as => 'refinery_user', :url => refinery_user_session_path do | f | %>
-<p>
-  <%= f.label :login, t('.username') %>
-  <%= f.text_field :login %>
-</p>
-<p>
-  <%= f.label :password, t('.password') %>
-  <%= f.password_field :password %>
-</p>
-<p>
-  <%= f.submit t('.login')%>
-</p>
-<%= hidden_field_tag :redirect, params[:redirect] %>
-<%= hidden_field_tag :member_login, true %>
+    <fieldset>
+        <ol>
+            <li>
+                  <%= f.label :login, t('.username') %>
+                  <%= f.text_field :login %>
+            </li>
+            <li>
+                  <%= f.label :password, t('.password') %>
+                  <%= f.password_field :password %>
+            </li>
+        </ol>
+        <%= hidden_field_tag :redirect, params[:redirect] %>
+        <%= hidden_field_tag :member_login, true %>
+    </fieldset>
+
+    <div class="form-actions">
+        <%= f.submit t('.login')%>
+    </div>
 <% end %>

@@ -7,7 +7,7 @@
                :include_object_name => false
              } %>
 
-  <%= render :partial => "admin/pages/locale_picker",
+  <%= render :partial => "/refinery/admin/pages/locale_picker",
              :locals => {
                :current_locale => Thread.current[:globalize_locale]
              } if defined?(::Refinery::I18n) %>

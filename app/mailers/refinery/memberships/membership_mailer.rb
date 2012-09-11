@@ -4,6 +4,9 @@ module Refinery
   module Memberships
     class MembershipMailer < ActionMailer::Base
 
+      # must set memberships_sender_address or Net/SMTP will complain
+      default :from => Refinery::Setting.find_or_set("memberships_sender_address", nil)
+
       class << self
         def deliver_member_created(member)
           member_email('member_created', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_created", true)
@@ -29,6 +32,10 @@ module Refinery
         def deliver_member_accepted(member)
           member_email('member_accepted', member).deliver if Refinery::Setting.find_or_set("memberships_deliver_mail_on_member_accepted", true)
         end
+
+        def deliver_member_profile_updated(member)
+          member_updated_admin(member).deliver
+        end
       end
 
       def member_email(email, member)
@@ -41,8 +48,7 @@ module Refinery
         html = extract_images(html)
         text = html_to_text(html)
 
-        mail(:from => Refinery::Setting.find_or_set("memberships_sender_address", nil),
-             :to => member.email, :subject => @email.subject) do |format|
+        mail(:to => member.email, :subject => @email.subject) do |format|
           format.text { render :text => text }
           format.html { render :text => html }
         end
@@ -52,10 +58,15 @@ module Refinery
       def member_created_admin(member)
         @member = member
 
-        mail(:from => Refinery::Setting.find_or_set("memberships_sender_address", nil),
-             :to => admins, :subject => "New user registration on #{Refinery::Setting::get('site_name')}") do |format|
-          format.text
-        end
+        mail :to => admins, :subject => "New user registration on #{Refinery::Core.site_name}"
+      end
+
+      def member_updated_admin(member)
+        @member = member
+
+        mail :to => admins,
+             :template_name => 'member_created_admin',
+             :subject => "Updated user profile on #{Refinery::Core.site_name}"
       end
 
       protected

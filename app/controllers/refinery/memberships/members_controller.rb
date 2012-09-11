@@ -30,13 +30,10 @@ module Refinery
           params[:member].delete(:password_confirmation)
         end
 
-
-
         if @member.update_attributes(params[:member])
           flash[:notice] = t('successful', :scope => 'members.update', :email => @member.email)
-          MembershipMailer.profile_update_notification_admin(@member).deliver unless is_admin?
+          MembershipMailer.deliver_member_profile_updated(@member).deliver unless @member.has_role?(:admin)
           redirect_to profile_members_path
-
         else
           render :action => 'edit'
         end
@@ -47,15 +44,11 @@ module Refinery
 
         if @member.save
           MembershipMailer::deliver_member_created(@member)
-
           redirect_to welcome_members_path
-
         else
           @member.errors.delete(:username) # this is set to email
           render :action => :new
-
         end
-
       end
 
       def searching?
@@ -81,6 +74,7 @@ module Refinery
       private
 
     protected
+
       def redirect?
         if current_refinery_user.nil?
           redirect_to new_user_session_path

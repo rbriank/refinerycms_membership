@@ -7,6 +7,7 @@ Refinery::Core::Engine.routes.draw do
         get :login
         get :welcome
         get :edit
+        put :update
         get :profile
         match '/activate/:confirmation_token' => 'members#activate', :as => :activate, :constraints => {:confirmation_token => /[a-zA-Z0-9]+/}, :via => :get
       end

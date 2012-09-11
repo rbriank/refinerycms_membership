@@ -7,7 +7,8 @@ module Refinery
           :singular_name => "membership_email",
           :plural_name => "membership_emails",
           :title_attribute => :title,
-          :order => "title ASC"
+          :order => "title ASC",
+          :redirect_to_url => "refinery.admin_membership_emails_path"
 
         def index
           find_all_membership_emails

@@ -6,10 +6,10 @@
 	<% else %>
 		<%= p %>
 	<% end %>
-	<%= render :partial => 'admin/members/members_filter' %>
+	<%= render :partial => 'members_filter' %>
 </div>
 <div class="<%= ['pagination_frame', pagination_css_class].compact.join(' ')%>">
-	<%= render :partial => 'admin/members/members_table' %>
+	<%= render :partial => 'members_table' %>
 </div>
 <% else %>
 <p>

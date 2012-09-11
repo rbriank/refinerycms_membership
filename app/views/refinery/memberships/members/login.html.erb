@@ -1,5 +1,5 @@
 <% content_for :body_content_left do %>
-  <%=raw @page.content_for(:body_above) if @page %>
+  <%= raw @page.content_for(:body_above) if @page %>
   <%= render :partial => 'message' %>
   <%= render :partial => 'login_form' %>
   <%=raw @page.content_for(:body_below) if @page %>

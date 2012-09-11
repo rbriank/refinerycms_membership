@@ -36,10 +36,10 @@ module Refinery
           step = Refinery::Setting.find_or_set("memberships_default_account_validity", 12)
           @activation_steps = []
           1.upto(11) do | n |
-            @activation_steps << [I18n.t('months', :count => n), n] if n%step.to_i == 0
+            @activation_steps << [t('months', :count => n), n] if n%step.to_i == 0
           end
           1.upto(10) do | n |
-            @activation_steps << [I18n.t('years', :count => n), n*12]
+            @activation_steps << [t('years', :count => n), n*12]
           end
         end
 

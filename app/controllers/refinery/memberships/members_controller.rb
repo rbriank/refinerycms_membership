@@ -62,9 +62,9 @@ module Refinery
         params[:search].present?
       end
 
-    	def login
+      def login
         find_page('/members/login')
-    	end
+      end
 
       def welcome
       end

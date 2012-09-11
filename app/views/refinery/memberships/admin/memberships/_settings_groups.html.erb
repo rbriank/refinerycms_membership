@@ -14,7 +14,7 @@
           <tr>
         <% end %>
         <td>
-          <% is_active = @memberships_default_roles.value.include?(role.title) %>
+          <% is_active = @memberships_default_roles.value.include?(role.id) %>
           <input id="role_cb_<%= role.id %>" type="checkbox" name="memberships_default_roles[value][]" value="<%= role.id %>" >
           <label for="role_cb_<%= role.id %>"><%= role.title %></label>
         </td>

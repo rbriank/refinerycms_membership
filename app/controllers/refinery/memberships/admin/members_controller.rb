@@ -70,7 +70,7 @@ module Refinery
 
           @members = [@member]
 
-          render :partial => 'admin/members/members_table', :layout => false
+          render :partial => 'members_table', :layout => false
         end
 
         def enable
@@ -84,7 +84,7 @@ module Refinery
 
           @members = [@member]
 
-          render :partial => 'admin/members/members_table', :layout => false
+          render :partial => 'members_table', :layout => false
         end
 
         def disable
@@ -97,7 +97,7 @@ module Refinery
           #MembershipMailer.extension_confirmation_admin(@member, current_refinery_user).deliver
 
           @members = [@member]
-          render :partial => 'admin/members/members_table', :layout => false
+          render :partial => 'members_table', :layout => false
         end
 
 
@@ -111,7 +111,7 @@ module Refinery
           MembershipMailer.deliver_member_accepted(@member) if old == 'UNDECIDED'
 
           @members = [@member]
-          render :partial => 'admin/members/members_table', :layout => false
+          render :partial => 'members_table', :layout => false
         end
 
         def reject
@@ -123,7 +123,7 @@ module Refinery
           MembershipMailer.deliver_member_rejected(@member) if old == 'UNDECIDED'
 
           @members = [@member]
-          render :partial => 'admin/members/members_table', :layout => false
+          render :partial => 'members_table', :layout => false
         end
 
         private

@@ -7,6 +7,7 @@ Refinery::Core::Engine.routes.draw do
         get :login
         #match '/new/welcome' => 'members#welcome', :as => :welcome
         get :welcome
+        get :edit
         get :new_password
         match '/new_password' => 'members#create_password', :as => :create_password
         match '/new_password/created' => 'members#new_password_created', :as => :new_password_created

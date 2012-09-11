@@ -97,9 +97,9 @@ en:
         email_body_help:
           email_body_help: "In the message body you can insert special tags that will be replaced by user properties (name, organization, etc)."
           available_tags: Available tags
-          user_data: User date
-          member_until: Registration remail active until
-          activation_url: "Url to follow to activate the registration"
+          user_data: User data
+          member_until: Registration remain active until
+          activation_url: "URL to follow to activate the registration"
         settings:
           deliver_notifications_on: Notify the user when
           deliver_admin_notifications_to: Notify admins when

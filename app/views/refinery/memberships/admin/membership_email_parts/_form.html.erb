@@ -1,4 +1,4 @@
-<h2><%= MembershipEmailPart.model_name.human %>: <%= t(@membership_email_part.title, :scope => 'refinery.admin.membership_email_parts') %></h2>
+<h2><%= Refinery::Memberships::MembershipEmailPart.model_name.human %>: <%= t(@membership_email_part.title, :scope => 'refinery.admin.membership_email_parts') %></h2>
 <%= form_for [:admin, @membership_email_part], :url => @url_override || @url do |f| -%>
 
   <%= render :partial => "/refinery/admin/error_messages",
@@ -7,7 +7,7 @@
                :include_object_name => false
              } %>
 
-  <%= render :partial => "admin/pages/locale_picker",
+  <%= render :partial => "/refinery/admin/pages/locale_picker",
              :locals => {
                :current_locale => Thread.current[:globalize_locale]
              } if defined?(::Refinery::I18n) %>

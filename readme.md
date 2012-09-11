@@ -5,14 +5,14 @@ __A role based membership engine for [refinerycms](http://refinerycms.com)__
 
 ## Requirements
 
-Refinery CMS version 2.0.0 or above.
+Refinery CMS version 2.0.3 or above.
 
 ## Install
 
 Open up your ``Gemfile`` and add at the bottom this line:
 
 ```ruby
-gem 'refinerycms-memberships', '~> 2.0.0'
+gem 'refinerycms-memberships', :git => 'git://github.com/sbeam/refinerycms_membership.git', :branch => '2.0-stable'
 ```
 
 Now, run ``bundle install``
@@ -43,6 +43,13 @@ Finally seed your database and you're done.
 * Could have different levels of membership
 
 ## Versions
+
+### 2.0.1
+* numerous bugfixes
+
+### 2.0.0
+* updated to Refinery 2.0
+* other changes?
 
 ### 0.9.9.13
 * Allows members to sign-up

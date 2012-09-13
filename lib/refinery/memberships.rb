@@ -6,7 +6,7 @@ module Refinery
   autoload :MembershipsGenerator, 'generators/refinery/memberships/memberships_generator'
    
   module Memberships
-    require 'refinery/Memberships/configuration'
+    require 'refinery/memberships/configuration'
     
     module Provinces
       CODES = %w(AB BC MB NB NL NT NS NU ON PE QC SK YT --

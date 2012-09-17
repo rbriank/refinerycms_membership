@@ -1,49 +1,50 @@
 en:
-  shared:
-    admin:
-      image_picker:
-        image: image
-  plugins:
-    memberships:
-      title: Memberships
-  admin:
-    memberships:
-      index:
+  refinery:
+    shared:
+      admin:
+        image_picker:
+          image: image
+    plugins:
+      memberships:
         title: Memberships
-        create_new: Add New Membership
-        reorder: Reorder Memberships
-        reorder_done: Done Reordering Memberships
-        sorry_no_results: Sorry! There are no results found.
-        no_items_yet: There are no Memberships yet. Click "Add New Membership" to add your first membership.
-      membership:
-        view_live_html: View this membership live <br/><em>(opens in a new window)</em>
-        edit: Edit this membership
-        delete: Remove this membership forever
-  memberships:
-    show:
-      other: Other Memberships
-  members:
-    shared:
-      account: Account
-      profile: Profile
-      organization: Organization
-    error_messages:
-      problems_in_following_fields: There were problems with the following fields
-    form_actions:
-      save: Save
-      cancel: Cancel
-    form:
-      blank_password_keeps_current: Leaving password blank keeps the current password
-    new:
-      title: Membership Application Form
-      instructions: Please complete information. You will be notified
-        of your acceptance upon approval.
-      submit_application: Submit Application
-    shared:
-      account: Account
-      profile: Profile
-      organization: Organization
-  activerecord:
-    attributes:
-     user:
-      membership_level: Membership level
+    admin:
+      memberships:
+        index:
+          title: Memberships
+          create_new: Add New Membership
+          reorder: Reorder Memberships
+          reorder_done: Done Reordering Memberships
+          sorry_no_results: Sorry! There are no results found.
+          no_items_yet: There are no Memberships yet. Click "Add New Membership" to add your first membership.
+        membership:
+          view_live_html: View this membership live <br/><em>(opens in a new window)</em>
+          edit: Edit this membership
+          delete: Remove this membership forever
+    memberships:
+      show:
+        other: Other Memberships
+    members:
+      shared:
+        account: Account
+        profile: Profile
+        organization: Organization
+      error_messages:
+        problems_in_following_fields: There were problems with the following fields
+      form_actions:
+        save: Save
+        cancel: Cancel
+      form:
+        blank_password_keeps_current: Leaving password blank keeps the current password
+      new:
+        title: Membership Application Form
+        instructions: Please complete information. You will be notified
+          of your acceptance upon approval.
+        submit_application: Submit Application
+      shared:
+        account: Account
+        profile: Profile
+        organization: Organization
+    activerecord:
+      attributes:
+       user:
+        membership_level: Membership level

@@ -4,15 +4,12 @@ __A role based membership engine for [refinerycms](http://refinerycms.com)__
 
 ## Installation
 
-* Clone this repo into vendor/engines/refinerycms-memberships
 * To your Gemfile add: 
-* gem 'refinerycms-memberships', '1.0', :path => 'vendor/engines'
+	* gem 'refinerycms-memberships', '2.0'
 * Then run:
-* bundle install
-* rails generate refinerycms_memberships
-* rake db:migrate
-* Via the rails console, add a membership role:
-* Role.create!(:id => 3, :title => 'Member')
+	* bundle install
+	* rails generate refinery:memberships
+	* rake db:migrate
 
 * set up actionmailer in your environment file(s) the plugin will fail without it
  *  config.action_mailer.raise_delivery_errors = false
@@ -20,9 +17,12 @@ __A role based membership engine for [refinerycms](http://refinerycms.com)__
  *  config.action_mailer.perform_deliveries = true
  *  config.action_mailer.default_url_options = { :host => "some.host.com" }
 
-* In vendor/engines/refinerycms_membership/config/initializers/membership_config.rb
- * Define ADMIN_EMAIL constant. This will be the "from" when users get email.
-
+* In config/initializers/refinery/memberships.rb
+ * Define admin_email config option. This will be the "from" when users get email.
+ * Define new_user_path with a path, like '/login/new', if you want to change the login page. You will have to create a controller, view and route for that page.
+ 
+* In config/initializers/refinery/authentication.rb
+ * Enable superuser_can_assign_roles if you want to create members from users tab.
 
 ## Notes
 
@@ -37,6 +37,10 @@ __A role based membership engine for [refinerycms](http://refinerycms.com)__
 * Could have different levels of membership
 
 ## Versions
+
+### 2.0
+* Add configuration for login page route.
+* Update to refinerycms 2.0
 
 ### 0.9.9.13
 * Allows members to sign-up

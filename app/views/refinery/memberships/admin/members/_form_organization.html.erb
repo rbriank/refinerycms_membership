@@ -17,13 +17,13 @@
   </p>
  
   <p class="field">
-      <%= f.label :province %>
-      <%= f.select :province, options_for_select(Provinces::CODES), :class => 'widest' %>
+      <%= f.label :province, t('members.form.state_province', :scope => 'refinery.memberships') %>
+      <%= f.text_field :province, :class => 'state_abbr', :size => 3 %>
   </p>
  
   <p class="field">
-      <%= f.label :postal_code %>
-      <%= f.text_field :postal_code, :class => 'widest' %>
+      <%= f.label :postal_code, t('members.form.postal_code', :scope => 'refinery.memberships')  %>
+      <%= f.text_field :postal_code, :class => 'postal_code', :size => 10 %>
   </p>
  
   <p class="field">

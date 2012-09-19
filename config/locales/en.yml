@@ -127,6 +127,8 @@ en:
           cancel: Cancel
         form:
           blank_password_keeps_current: Leaving password blank keeps the current password
+          state_province: "Province/State"
+          postal_code: "Postal Code/ZIP"
         new:
           title: Membership Application Form
           instructions: Please complete information. You will be notified

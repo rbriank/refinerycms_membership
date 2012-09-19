@@ -5,11 +5,11 @@ module Refinery
 
       acts_as_indexed :fields => [:first_name, :last_name]
 
-      validates :first_name, :last_name, :street_address, :city, :province, :postal_code, :presence => true
+      validates :first_name, :last_name, :presence => true
 
       attr_accessible :membership_level, :first_name, :last_name, :title, :organization,
-      :street_address, :city, :province, :postal_code, :phone, :fax, :website,
-      :enabled, :add_to_member_until, :role_ids
+                      :street_address, :city, :province, :postal_code, :phone, :fax, :website,
+                      :enabled, :add_to_member_until, :role_ids
 
       self.inheritance_column = :membership_level
 

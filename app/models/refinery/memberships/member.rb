@@ -17,6 +17,8 @@ module Refinery
       after_create :set_default_rejected
       after_create :set_default_roles
 
+      before_save :ensure_member_role       # always needs to be a Member or can't sign in, see is_member?
+
       def to_param
           id
       end

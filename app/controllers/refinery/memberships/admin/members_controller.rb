@@ -120,7 +120,7 @@ module Refinery
           @member.reject!
           @member.reload
 
-          MembershipMailer.deliver_member_rejected(@member) if old == 'UNDECIDED'
+          MembershipMailer.deliver_member_rejected(@member)
 
           @members = [@member]
           render :partial => 'members_table', :layout => false

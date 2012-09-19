@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
   s.name              = 'refinerycms-memberships'
-  s.version           = '2.0.1'
+  s.version           = '2.0.2'
   s.description       = 'Ruby on Rails Memberships engine for Refinery CMS'
   s.authors           = 'Brian Kierstad,Angelo Grossini,Juozas Gaigalis,Sam Beam,others'
   s.date              = '2012-09-09'

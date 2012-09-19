@@ -205,13 +205,12 @@ module Refinery
       end
 
       def set_default_roles
-        ids = Refinery::Setting::find_or_set('memberships_default_roles', [])
-        if ids.present?
-          Refinery::Role::find(:all, :conditions => {'id' => ids}).each do | role |
-            self.roles << role
-          end
+
+        if roles = Refinery::Setting.find_or_set('memberships_default_roles', [])
+          self.roles = Refinery::Role.where(:title => roles)
           save
         end
+
       end
 
       def extend_membership(amount = 1)

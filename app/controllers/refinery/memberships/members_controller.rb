@@ -60,6 +60,7 @@ module Refinery
       end
 
       def welcome
+        find_page('/members/welcome')
       end
 
       def activate

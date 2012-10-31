@@ -1,0 +1,35 @@
+<fieldset>
+  <h1><%=t('refinery.members.shared.profile')%></h1>
+  <ol>
+    <li>
+      <%= f.required_label :first_name %>
+      <%= f.text_field :first_name %>&nbsp;
+    </li>
+    <li>
+      <%= f.required_label :last_name %>
+      <%= f.text_field :last_name %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :title %>
+      <%= f.text_field :title %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :phone %>
+      <%= f.text_field :phone %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :fax %>
+      <%= f.text_field :fax %>&nbsp;
+    </li>
+    <% if !f.object.new_record? %>
+    <li>
+      <%= f.label :membership_level %>
+      <% if @is_admin %>
+        <%= f.text_field :membership_level %>&nbsp;
+      <% else %>
+        <%= @member.roles.collect(&:title).join(', ') %>&nbsp;
+      <% end %>
+    </li>
+    <% end %>
+  </ol>
+</fieldset>

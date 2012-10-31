@@ -1,0 +1,84 @@
+<% confirmation = Refinery::Setting::find_or_set('memberships_confirmation', 'admin') %>
+<% timed = Refinery::Setting::find_or_set('memberships_timed_accounts', true) %>
+
+<tr data-row-id="<%= member.id %>" class="record <%= cycle("on", "on-hover") %>">
+  <td><%= member.first_name %> <%= member.last_name %></td>
+  <td><%= member.organization %></td>
+  <td><%= member.email %></td>
+  <td><%= member.created_at.strftime('%d/%m/%Y') %></td>
+  <% if Refinery::Setting::find_or_set('memberships_timed_accounts', true) %>
+  <td><%= member.member_until.nil? ? '--' : member.member_until.strftime('%d/%m/%Y') %></td>
+  <% end %>
+  <td>
+
+
+    <% if member.disabled? && (confirmation != 'email' || member.confirmed?) %>
+
+      <%= image_tag 'refinery/icons/user_locked.png', :tooltip => t('account_disabled', :scope => 'refinery.admin.members') %>
+
+    <% elsif member.rejected? %>
+
+      <%= image_tag 'refinery/icons/cross.png', :tooltip => t('account_rejected', :scope => 'refinery.admin.members') %>
+
+    <% elsif timed && (member.lapsed? || member.never_member?) %>
+
+      <%= image_tag 'refinery/icons/clock_red.png', :tooltip => t('account_expired', :scope => 'refinery.admin.members') %>
+
+    <% elsif member.active? %>
+
+      <%= image_tag 'refinery/icons/tick.png', :tooltip => t('account_active', :scope => 'refinery.admin.members') %>
+
+    <% elsif confirmation == 'email' && member.unconfirmed? %>
+
+      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('account_not_activated', :scope => 'refinery.admin.members') %>
+
+    <% elsif member.undecided? %>
+
+      <%= image_tag 'refinery/icons/new_account.png', :tooltip => t('new_account', :scope => 'refinery.admin.members') %>
+
+    <% end %>
+  </td>
+  <td>
+		<span style="white-space:nowrap" class="actions row_actions">
+			<%= link_to image_tag('refinery/icons/cog_edit.png').html_safe, '#', :tooltip => t('member_actions', :scope => 'refinery.admin.members') %>
+		<span class="row_menu">
+    <% if confirmation == 'no' %>
+
+      <%= extend(member) if timed && (member.lapsed? || member.almost_lapsed? || member.never_member?) %>
+
+      <%= disable(member)   if member.enabled? %>
+      <%= enable(member) if member.disabled? %>
+
+      <%#= accept(member) if member.rejected? %>
+      <%#= reject(member) if member.accepted? %>
+
+    <% elsif confirmation == 'email' %>
+
+      <%= extend(member) if timed && member.confirmed? && (member.lapsed? || member.almost_lapsed? || member.never_member?) %>
+
+      <%= disable(member)   if member.confirmed? && member.enabled? %>
+      <%= enable(member) if member.confirmed? && member.disabled? %>
+
+      <%#= accept(member) if member.rejected? %>
+      <%#= reject(member) if member.accepted? %>
+
+    <% elsif confirmation == 'admin' %>
+
+      <%= extend(member) if timed && !member.undecided? && (member.lapsed? || member.almost_lapsed? || member.never_member?) %>
+
+      <%= disable(member)   if !member.undecided? && !member.rejected? && member.enabled? %>
+      <%= enable(member) if !member.undecided? && !member.rejected? && member.disabled? %>
+
+      <%= accept(member) if member.undecided? || member.rejected? %>
+      <%= reject(member) if member.undecided? %>
+
+    <% end %>
+
+    <%= edit(member) %>
+    <%= delete(member) %>
+
+    </span>
+    </span>
+  </td>
+
+</tr>

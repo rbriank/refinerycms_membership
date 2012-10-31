@@ -1,0 +1,8 @@
+<h2><%= t('roles_administration', :scope => 'refinery.admin.roles')%></h2>
+<div id='records'>
+  <%= render :partial => 'records' %>
+</div>
+<div id='actions'>
+  <%= render :partial => '/refinery/memberships/admin/shared/memberships_actions',
+              :locals => {:section => 'roles'} %>
+</div>

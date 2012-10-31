@@ -1,24 +1,140 @@
 en:
-  shared:
-    admin:
-      image_picker:
-        image: image
-  plugins:
-    memberships:
-      title: Memberships
-  admin:
-    memberships:
-      index:
+  refinery:
+    shared:
+      admin:
+        image_picker:
+          image: image
+    plugins:
+      refinerycms_memberships:
         title: Memberships
-        create_new: Add New Membership
-        reorder: Reorder Memberships
-        reorder_done: Done Reordering Memberships
-        sorry_no_results: Sorry! There are no results found.
-        no_items_yet: There are no Memberships yet. Click "Add New Membership" to add your first membership.
-      membership:
-        view_live_html: View this membership live <br/><em>(opens in a new window)</em>
-        edit: Edit this membership
-        delete: Remove this membership forever
-  memberships:
-    show:
-      other: Other Memberships
+    members:
+      shared:
+        account: Account
+        profile: Profile
+        organization: Organization
+    admin:
+      memberships_settings: Settings
+      memberships:
+        new_members: New users
+        no_new_members: No new users
+        settings_admin_notification:
+          example: "Enter your email address, for example: jack@work.com, jill@office.com"
+          hint: When a new user signs up, Refinery will send them a notification
+        settings:
+          signup_defaults: Defauls
+          signup_confirmation: Signup confirmation
+          no_confirmation: No confirmation
+          email_confirmation: Confirmation by email
+          admin_confirmation: Confirmation by admins
+          membership_expiration: Membership expiration
+          no_expiration: No expiration
+          timed_expiration: Timed expiration
+          default_expiration_in: "Default expiration for members"
+          default_groups: Default groups for members
+          assign_new_users_to_the_selected_groups: Assign new user to the selected group
+          no_groups_found: "No groups found"
+      roles:
+        delete: Delete group
+        no_roles_yet: No roles created yet
+        edit: Edit group
+        new_role: New group
+        roles_administration: Group administration
+      members:
+        accept: "Accept user registration"
+        reject: "Reject user registration"
+        edit: Edit user
+        delete: Delete user
+        member_until: Valid until
+        membership_expired: Registration expired on
+        not_yet_member: "Not activated yet"
+        activate_member_for: "Activate user"
+        account_active: Active user
+        new_account: New user
+        account_disabled: Disabled user
+        account_expired: Expired user
+        account_rejected: Rejected usr
+        account_not_activated: Registration not yet activated
+        disable: Disable user
+        enable: Enable user
+        delete: Delete user
+        no_members_yet: No users registered yet
+        all_members: All users
+        members_administration: User administration
+        account: Registration
+        organization: Organization
+        profile: Profile
+        activation: Activation
+        user_roles: "User's groups"
+        user_can_login: User can login
+        extend: Extend user registration
+        extend_membership_for: Extend user registration for
+        filter_by: Filter by
+        member_actions: User actions
+        filter:
+          all: All
+          active: Active
+          rejected: Rejected
+          disabled: Disabled
+          unconfirmed: Uncomfirmed
+      membership_email_parts:
+        email_header: Email header
+        email_footer: Email footer
+      membership_emails:
+        member_activated: User registration activate
+        member_accepted: User registration accepted
+        member_created: User created
+        member_deleted: User deleted
+        member_rejected: User rejected
+        membership_extended: User registration extended
+        edit: Edit email
+        no_emails_yet: No emails yet
+        emails_administration: Email administration
+        membership_email: Membership email
+        email_settings: Email settings
+        toggle_email_body_help: Toggle help
+        email_body_help_title: Email body help
+        shared_email_parts: Shared email parts
+        email_body_help:
+          email_body_help: "In the message body you can insert special tags that will be replaced by user properties (name, organization, etc)."
+          available_tags: Available tags
+          user_data: User data
+          member_until: Registration remain active until
+          activation_url: "URL to follow to activate the registration"
+        settings:
+          deliver_notifications_on: Notify the user when
+          deliver_admin_notifications_to: Notify admins when
+          email_delivery: Email delivery
+          admin_notifications: Admin notifications
+    pages:
+      admin:
+        tabs:
+          roles:
+            allow_everyone: "Allow everyone"
+            allow_all_members: "Allow access all registered users"
+            allow_members_of: "Allow access to users in groups"
+    memberships:
+      show:
+        other: Other Memberships
+      members:
+        login_form:
+          username: Username
+          password: Password
+          login: Login
+        error_messages:
+          problems_in_following_fields: There were problems with the following fields
+        form_actions:
+          save: Save
+          cancel: Cancel
+        form:
+          blank_password_keeps_current: Leaving password blank keeps the current password
+          state_province: "Province/State"
+          postal_code: "Postal Code/ZIP"
+        new:
+          title: Membership Application Form
+          instructions: Please complete information. You will be notified
+            of your acceptance upon approval.
+          submit_application: Submit Application
+    activerecord:
+      attributes:
+       user:
+        membership_level: Membership level

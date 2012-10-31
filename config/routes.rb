@@ -1,17 +1,52 @@
-Refinery::Application.routes.draw do
-  scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
-    resources :memberships, :only => :index
-    resources :page_roles, :only => [:index] do
+Refinery::Core::Engine.routes.draw do
+  scope :module => :memberships do
+
+    # Frontend routes
+    resources :members, :except => [:destroy] do
       collection do
-        post 'destroy_multiple'
-        post 'create_multiple'
+        get :login
+        get :welcome
+        get :edit
+        put :update
+        get :profile
+        match '/activate/:confirmation_token' => 'members#activate', :as => :activate, :constraints => {:confirmation_token => /[a-zA-Z0-9]+/}, :via => :get
       end
+
     end
-    resources :user_roles, :only => [:index] do
-      collection do
-        post 'destroy_multiple'
-        post 'create_multiple'
+
+
+
+    # Admin routes
+    namespace :admin, :path => 'refinery/memberships' do
+      resources :memberships, :only => :index do
+        collection do
+          get :settings
+          put :save_settings
+        end
       end
+
+      resources :roles
+      resources :members do
+        member do
+          put :extend
+
+          put :enable
+          put :disable
+
+          put :accept
+          put :reject
+        end
+      end
+
+      resources :membership_emails, :except => :show do
+        collection do
+          get :settings
+          put :save_settings
+        end
+      end
+
+      resources :membership_email_parts, :except => :index
     end
+
   end
 end

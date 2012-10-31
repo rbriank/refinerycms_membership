@@ -38,7 +38,7 @@ describe Admin::PageRolesController do
 
     before do
       @page = Page.create!(:title => 'My page')
-      @role = Role[:my_role]
+      @role = Refinery::Role[:my_role]
     end
 
     it 'should add roles to the page' do
@@ -69,8 +69,8 @@ describe Admin::PageRolesController do
         @pages = [Page.create!(:title => 'another one'),
           Page.create!(:title => 'and another'),
           Page.create!(:title => 'and the last')]
-        @roles = [Role[:one_more_role], Role[:yet_another_role],
-          Role[:please_no_more], Role[:ok_one_more]]
+        @roles = [Refinery::Role[:one_more_role], Refinery::Role[:yet_another_role],
+          Refinery::Role[:please_no_more], Refinery::Role[:ok_one_more]]
       end
 
       it 'should add many roles to one page' do
@@ -102,7 +102,7 @@ describe Admin::PageRolesController do
       @pages = [Page.create!(:title => 'My page'),
         Page.create!(:title => 'another page'),
         Page.create!(:title => 'wow - still more')]
-      @roles = [Role[:my_role], Role[:role_heaven], Role[:monster_truck]]
+      @roles = [Refinery::Role[:my_role], Refinery::Role[:role_heaven], Refinery::Role[:monster_truck]]
       @pages.each{|page| page.roles << @roles}
     end
 

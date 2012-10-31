@@ -1,0 +1,55 @@
+<div id="default_groups" class="dialog_area" style="display: none">
+  <h3><%= t('assign_new_users_to_the_selected_groups', :scope => 'refinery.admin.memberships.settings')%>:</h3>
+
+  <input type="hidden" name="memberships_default_roles[value][]" value="">
+    
+  <% if @roles.any? %>
+    <% cnt = 0 %>
+    <table>
+      <% @roles.each_with_index do | role, idx | %>
+        <% if idx % 4 == 0 %>
+          <% if idx > 4 %>
+           </tr>
+          <% end %>
+          <tr>
+        <% end %>
+        <td>
+          <% is_active = @memberships_default_roles.value.include?(role.title) %>
+          <input id="role_cb_<%= role.id %>" <%= is_active ? 'checked="checked"' : '' %> type="checkbox" name="memberships_default_roles[value][]" value="<%= role.title %>" >
+          <label for="role_cb_<%= role.id %>"><%= role.title %></label>
+        </td>
+        <% cnt += 1 %>
+      <% end %>
+      <% if cnt % 4 != 0 %>
+      <% while(cnt % 4 != 0) do %>
+        <td></td>
+        <% cnt += 1 %>
+      <% end %>
+      </tr>
+      <% end %>
+    </table>
+  <% else %>
+  <p>
+    <%= t('no_groups_found', :scope => 'refinery.admin.memberships.settings')%>
+  </p>
+  <% end %>
+  
+</div>
+
+<%= content_for :stylesheets do %>
+<style>
+
+  #default_groups table {
+    width: 100%;
+  }
+  
+  #default_groups td * {
+    vertical-align: middle;
+  }
+  
+  #default_groups td label {
+    display: inline;
+    margin: 3px;
+  }
+</style>
+<% end %>

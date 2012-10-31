@@ -1,0 +1,44 @@
+<div class='clearfix dialog_memberships_settings'>
+  <div id="dialog_menu_left">
+    <span id="on_registration_radio" class="radio">
+      <input type="radio" name="settings_page" value="signup_settings" id="page_on_registration" checked="true">
+      <label for="page_on_registration" class="stripped"><%= t('signup_defaults', :scope => 'refinery.admin.memberships.settings') %></label>
+    </span>
+    <span id="default_groups_radio" class="radio">
+      <input type="radio" name="settings_page" value="default_groups" id="page_default_groups">
+      <label for="page_default_groups" class="stripped"><%= t('default_groups', :scope => 'refinery.admin.memberships.settings') %></label>
+    </span>
+    <span id="email_delivery_radio" class="radio">
+      <input type="radio" name="settings_page" value="email_delivery" id="page_email_delivery">
+      <label for="page_email_delivery" class="stripped"><%= t('email_delivery', :scope => 'refinery.admin.membership_emails.settings') %></label>
+    </span>
+    <span id="admin_notifications_radio" class="radio">
+      <input type="radio" name="settings_page" value="admin_notifications" id="page_admin_notifications">
+      <label for="page_admin_notifications" class="stripped"><%= t('admin_notifications', :scope => 'refinery.admin.membership_emails.settings') %></label>
+    </span>
+  </div>
+  
+<%= form_tag save_settings_admin_memberships_path, :method => 'put' do %>
+  <div id="dialog_main">
+    <%= render :partial => 'settings_signup' %>
+    <%= render :partial => 'settings_groups' %>
+    <%= render :partial => 'settings_email_delivery' %>
+    <%= render :partial => 'settings_admin_notification' %>
+  </div>
+  
+
+  <%= render :partial => "/refinery/admin/form_actions",
+    :locals => {
+      :continue_editing => false,
+      :hide_cancel => false,
+      :hide_delete => true 
+  } %>
+<% end %>
+</div>
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'refinery/memberships/settings_dialog'%>
+<% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'refinery/memberships/settings_dialog'%>
+<% end %>

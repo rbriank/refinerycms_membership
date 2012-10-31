@@ -1,0 +1,9 @@
+<fieldset>
+  <legend><%=t('members.shared.account')%></legend>
+  <ol>
+    <li>
+      <label><%= @member.class.human_attribute_name :email %></label>
+      <%= @member.email %>&nbsp;
+    </li>
+  </ol>
+</fieldset>

@@ -1,0 +1,18 @@
+<% if @members.any? || (params['filter_by'].present?) %>
+<div class="pagination_and_filter">
+	<% p = will_paginate @members %>
+	<% if p.blank? %>
+		<div class="pagination"></div>
+	<% else %>
+		<%= p %>
+	<% end %>
+	<%= render :partial => 'members_filter' %>
+</div>
+<div class="<%= ['pagination_frame', pagination_css_class].compact.join(' ')%>">
+	<%= render :partial => 'members_table' %>
+</div>
+<% else %>
+<p>
+  <strong><%= t('no_members_yet', :scope => 'refinery.admin.members')%></strong>
+</p>
+<% end %>

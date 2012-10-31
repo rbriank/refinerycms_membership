@@ -1,0 +1,32 @@
+<div id="email_delivery" class="dialog_area" style="display: none;">
+  <h3><%= t('deliver_notifications_on', :scope => 'refinery.admin.membership_emails.settings')%>:</h3>
+
+  <%= fields_for :member_accepted, @member_accepted do | f | %>
+  <p id="email_member_accepted" class="field checkbox" style="<%= 'display: none' if @memberships_confirmation.value != 'admin' %>">
+    <%= f.check_box :value, {}, true, false %>
+    <%= f.label :value, t('member_accepted', :scope => 'refinery.admin.membership_emails') %>
+  </p>
+  <% end %>
+  
+  <%= fields_for :member_rejected, @member_rejected do | f | %>
+  <p id="email_member_rejected" class="field checkbox" style="<%= 'display: none' if @memberships_confirmation.value != 'admin' %>">
+    <%= f.check_box :value, {}, true, false %>
+    <%= f.label :value, t('member_rejected', :scope => 'refinery.admin.membership_emails') %>
+  </p>
+  <% end %>
+  
+  <%= fields_for :member_deleted, @member_deleted do | f | %>
+  <p id="email_member_deleted" class="field checkbox">
+    <%= f.check_box :value, {}, true, false %>
+    <%= f.label :value, t('member_deleted', :scope => 'refinery.admin.membership_emails') %>
+  </p>
+  <% end %>
+  
+  <%= fields_for :membership_extended, @membership_extended do | f | %>
+  <p id="email_membership_extended" class="field checkbox" style="<%= 'display: none' if @memberships_timed_accounts.value.to_s == 'true' %>">
+    <%= f.check_box :value, {}, true, false %>
+    <%= f.label :value, t('membership_extended', :scope => 'refinery.admin.membership_emails') %>
+  </p>
+  <% end %>
+  
+</div>

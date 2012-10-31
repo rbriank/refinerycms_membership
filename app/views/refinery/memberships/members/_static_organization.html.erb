@@ -1,0 +1,28 @@
+<fieldset>
+  <legend><%=t('members.shared.organization')%></legend>
+  <ol>
+    <li>
+      <label><%= @member.class.human_attribute_name :organization %></label>
+      <%= @member.organization %>&nbsp;
+    </li>
+    <li>
+      <label><%= @member.class.human_attribute_name :street_address %></label>
+      <%= @member.street_address %>&nbsp;
+    </li>
+    <li>
+      <label><%= @member.class.human_attribute_name :city %></label>
+      <%= @member.city %>&nbsp;
+    </li>
+    <li>
+      <label><%= @member.class.human_attribute_name :province %></label>
+      <%= @member.province %>&nbsp;
+    </li>
+    <li>
+      <label><%= @member.class.human_attribute_name :postal_code %></label>
+      <%= @member.postal_code %>&nbsp;
+    </li>
+    <li>
+      <%= link_to @member.class.human_attribute_name(:website), @member.website if @member.website %>
+    </li>
+  </ol>
+</fieldset>

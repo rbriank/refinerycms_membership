@@ -1,0 +1,15 @@
+<% f = 'all' %>
+<% f = params['filter_by'] if params['filter_by'].present? && %w(all active rejected disabled unconfirmed).include?(params['filter_by']) %>
+<div class="filter">
+	<label><%= t('filter_by', :scope => 'refinery.admin.members') %></label>:
+	<%
+		options = [
+				[t('all', :scope => 'refinery.admin.members.filter'), ''],
+				[t('active', :scope => 'refinery.admin.members.filter'), 'active'],
+				[t('disabled', :scope => 'refinery.admin.members.filter'), 'disabled'],
+		]
+		options << [t('rejected', :scope => 'refinery.admin.members.filter'), 'rejected'] if Refinery::Setting::find_or_set('memberships_confirmation', 'admin') == 'admin'
+		options << [t('unconfirmed', :scope => 'refinery.admin.members.filter'), 'unconfirmed'] if Refinery::Setting::find_or_set('memberships_confirmation', 'admin') == 'email' 
+	%>
+	<%= select_tag 'filter_by', options_for_select(options, f) %>
+</div>

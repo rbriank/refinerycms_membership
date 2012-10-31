@@ -1,0 +1,17 @@
+<%= controller.action_name =~ /created/ ? 'New' : 'Updated' %> user registration on <%= Refinery::Core.site_name %>
+
+Email: <%=@member.email%>
+
+Name: <%=@member.first_name%> <%=@member.last_name%>
+Organization: <%=@member.organization%>
+
+Address: <%=@member.street_address%>
+         <%=@member.postal_code%> <%=@member.city%> <%=@member.province%>
+
+
+Phone: <%=@member.phone%>
+Fax: <%=@member.fax%>
+Website: <%=@member.website%>
+
+
+Details at <%= admin_member_url(@member) %>

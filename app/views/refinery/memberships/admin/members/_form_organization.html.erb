@@ -1,0 +1,34 @@
+<fieldset id="member_organization_form">
+  <legend><%=t('organization', :scope => 'refinery.admin.members')%></legend>
+  
+  <p class="field">
+      <%= f.label :organization %>
+      <%= f.text_field :organization, :class => 'widest' %>  
+  </p>
+ 
+  <p class="field">    
+      <%= f.label :street_address %>
+      <%= f.text_field :street_address, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :city %>
+      <%= f.text_field :city, :class => 'widest' %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :province, t('members.form.state_province', :scope => 'refinery.memberships') %>
+      <%= f.text_field :province, :class => 'state_abbr', :size => 3 %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :postal_code, t('members.form.postal_code', :scope => 'refinery.memberships')  %>
+      <%= f.text_field :postal_code, :class => 'postal_code', :size => 10 %>
+  </p>
+ 
+  <p class="field">
+      <%= f.label :website %>
+      <%= f.text_field :website, :class => 'widest' %>
+  </p>
+ 
+</fieldset>

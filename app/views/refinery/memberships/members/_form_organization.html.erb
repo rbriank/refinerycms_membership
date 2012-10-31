@@ -1,0 +1,29 @@
+<fieldset>
+  <h1><%=t('refinery.members.shared.organization')%></h1>
+  <ol>
+    <li>
+      <%= f.label :organization %>
+      <%= f.text_field :organization %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :street_address %>
+      <%= f.text_field :street_address %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :city %>
+      <%= f.text_field :city %>&nbsp;
+    </li>
+    <li>
+      <%= f.label :province, t('members.form.state_province', :scope => 'refinery.memberships') %>
+      <%= f.text_field :province, :class => 'state_abbr', :size => 4 %>
+    </li>
+    <li>
+      <%= f.label :postal_code, t('members.form.postal_code', :scope => 'refinery.memberships')  %>
+      <%= f.text_field :postal_code, :class => 'postal_code', :size => 10 %>
+    </li>
+    <li>
+      <%= f.label :website %>
+      <%= f.text_field :website %>&nbsp;
+    </li>
+  </ol>
+</fieldset>

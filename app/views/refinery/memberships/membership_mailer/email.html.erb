@@ -1,0 +1,5 @@
+<%= Refinery::Memberships::MembershipEmailPart['email_header'].body.html_safe %>
+
+<%= @email.interpolated_body(@member).html_safe %>
+
+<%= Refinery::Memberships::MembershipEmailPart['email_footer'].body.html_safe %>

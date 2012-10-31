@@ -1,0 +1,12 @@
+<% content_for :body_content_left do %>
+  <%=raw @page.content_for(:body_above) if @page %>
+  <div id="edit-member-form">
+    <%= render :partial => 'form',
+      :locals => {
+      :url => members_path }%>
+  </div>
+  <%=raw @page.content_for(:body_below) if @page %>
+<% end %>
+
+<%= render :partial => "/refinery/content_page", :locals => {:hide_sections => [:bodybelow, :bodyabove]} %>
+

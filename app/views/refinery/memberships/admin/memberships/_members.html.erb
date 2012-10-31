@@ -1,0 +1,10 @@
+<% if @members.any? %>
+	<%= will_paginate @members %>
+<div class="<%= ['pagination_frame', pagination_css_class].compact.join(' ')%>">
+	<%= render :partial => '/refinery/memberships/admin/members/members_table' %>
+</div>
+<% else %>
+<p>
+  <strong><%= t('no_new_members', :scope => 'refinery.admin.memberships')%></strong>
+</p>
+<% end %>

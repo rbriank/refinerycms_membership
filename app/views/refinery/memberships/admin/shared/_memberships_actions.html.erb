@@ -1,0 +1,53 @@
+<ul>
+  <li>
+    <%= render :partial => "/refinery/admin/search", :locals => {:url => send("admin_#{section}_path")} %>
+  </li>
+
+  <% if section == 'roles' %>
+    <li>
+      <%= link_to t('new_role', :scope => 'refinery.admin.roles'),
+                  new_admin_role_url(:dialog => true, :width => 500, :height => 300),
+                  :class => "add_icon" %>
+    </li>
+  <% end %>
+  <!--
+  <% #if section == 'membership_emails' %>
+  <li>
+    <% #link_to t('email_settings', :scope => 'refinery.admin.membership_emails'), settings_admin_membership_emails_path(:dialog => true, :width => 650, :height => 400), :class => "options_icon" %>
+  </li>
+  <% #end %>
+  -->
+  <% unless section == 'memberships' %>
+    <li>
+      <%= link_to t('new_members', :scope => 'refinery.admin.memberships'), admin_memberships_path, :class => "new_members_icon" %>
+    </li>
+  <% end %>
+
+
+  <% unless section == 'members' %>
+    <li>
+      <%= link_to t('all_members', :scope => 'refinery.admin.members'), admin_members_path, :class => "members_icon" %>
+    </li>
+  <% end %>
+
+
+  <% unless section == 'membership_emails' %>
+    <li>
+      <%= link_to t('emails_administration', :scope => 'refinery.admin.membership_emails'), admin_membership_emails_path, :class => "email_icon" %>
+    </li>
+  <% end %>
+
+  <% unless section == 'roles' %>
+    <li>
+      <%= link_to t('roles_administration', :scope => 'refinery.admin.roles'), admin_roles_path, :class => "roles_icon" %>
+    </li>
+	<% end %>
+
+  <li>
+    <%= link_to t('memberships_settings', :scope => 'refinery.admin'), settings_admin_memberships_path(:dialog => true, :width => 650, :height => 400), :class => "options_icon" %>
+  </li>
+</ul>
+
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'refinery/memberships/memberships' %>
+<% end %>

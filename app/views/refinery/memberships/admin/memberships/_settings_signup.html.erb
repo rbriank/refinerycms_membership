@@ -1,0 +1,79 @@
+<div id="signup_settings" class="dialog_area">
+  <h3><%= t('signup_confirmation', :scope => 'refinery.admin.memberships.settings')%>:</h3>
+  
+  <%= fields_for :memberships_confirmation, @memberships_confirmation do | f | %>
+  <p class="field checkbox">
+    <%= f.radio_button :value, 'no' %>
+    <%= f.label :value, t('no_confirmation', :scope => 'refinery.admin.memberships.settings'), :value => 'no' %>
+  </p>
+  <p class="field checkbox">
+    <%= f.radio_button :value, 'email' %>
+    <%= f.label :value, t('email_confirmation', :scope => 'refinery.admin.memberships.settings'), :value => 'email' %>
+  </p>
+  <p class="field checkbox">
+    <%= f.radio_button :value, 'admin' %>
+    <%= f.label :value, t('admin_confirmation', :scope => 'refinery.admin.memberships.settings'), :value => 'admin' %>
+  </p>
+  <% end %>
+  <br />
+  
+  <h3><%= t('membership_expiration', :scope => 'refinery.admin.memberships.settings')%>:</h3>
+  
+  <%= fields_for :memberships_timed_accounts, @memberships_timed_accounts do | f | %>
+  <p class="field checkbox">
+    <%= f.radio_button :value, false %>
+    <%= f.label :value, t('no_expiration', :scope => 'refinery.admin.memberships.settings'), :value => false %>
+  </p>
+  <p class="field checkbox">
+    <%= f.radio_button :value, true %>
+    <%= f.label :value, t('timed_expiration', :scope => 'refinery.admin.memberships.settings'), :value => true %>
+  </p>
+  <% end %>
+  
+  <% is_timed = (@memberships_timed_accounts.value.to_s == 'true') %>
+  <%= fields_for :memberships_default_account_validity, @memberships_default_account_validity do | f | %>
+  <p class="field checkbox" <%= 'style="display: none;"'.html_safe unless is_timed %>>
+    <%= f.label :value, t('default_expiration_in', :scope => 'refinery.admin.memberships.settings') %>
+    <%= f.select :value, [
+      [t('months', :count => 1) ,1],
+      [t('months', :count => 2) ,2],
+      [t('months', :count => 3) ,3],
+      [t('months', :count => 4) ,4],
+      [t('months', :count => 6) ,6],
+      [t('years', :count => 1) ,12]
+    ], :disabled => (is_timed ? false : 'disabled') %>
+  </p>
+  <% end %>
+  
+</div>
+
+<%= content_for :stylesheets do %>
+<style>
+  #signup_settings p.field.checkbox input[type="text"] {
+    width: 80px;
+  }
+</style>
+<% end %>
+
+<% content_for :javascripts do %>
+<script type="text/javascript">
+  $(function(){
+    $('#signup_settings input[type="radio"][id^="memberships_timed_accounts"]').change(function(){
+      var is_enabled = ($(this).val() == 'true' && $(this).is(':checked'));
+      $('#memberships_default_account_validity_value').attr('disabled', is_enabled ? '' : 'disabled');
+      $('#memberships_default_account_validity_value').parent()[is_enabled ? 'show' : 'hide']();
+			$('#email_membership_extended')[is_enabled ? 'show' : 'hide']();
+			$('#email_membership_extended input').attr('disabled', is_enabled ? '' : 'disabled');
+		});
+
+		$('#signup_settings input[type="radio"][id*="memberships_confirmation"]').change(function(){
+			var val = $(this).val();
+			$('#email_member_accepted')[val == 'admin' ? 'show' : 'hide']();
+			$('#email_member_accepted input').attr('disabled', val == 'admin' ? '' : 'disabled');
+			$('#email_member_rejected')[val == 'admin' ? 'show' : 'hide']();
+			$('#email_member_rejected input').attr('disabled', val == 'admin' ? '' : 'disabled');
+		});
+
+  });
+</script>
+<% end %>
